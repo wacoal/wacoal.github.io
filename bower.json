@@ -1,0 +1,18 @@
+{
+  "name": "grunt_first_kit_1",
+  "version": "0.0.0",
+  "authors": [
+    "odego <oodegoo@yahoo.co.jp>"
+  ],
+  "moduleType": [
+    "node"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

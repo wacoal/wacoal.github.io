@@ -1,0 +1,20 @@
+<% block 'meta': %>
+<meta name="robots" content="noindex, nofollow" />
+<% end %>
+<% block 'title': %>
+インデックス
+<% end %>
+<% block 'css': %>
+<!--
+<link type="text/css" rel="stylesheet" href="個別css" media="screen" />
+-->
+<% end %>
+
+<% extend 'partials/layout.ect' %>
+<h1>タイトル</h1>
+<p>partialsにあるのは親テンプレート</p>
+<p>test</p>
+
+<% block 'scripts': %>
+特定のページだけで使うスクリプトとかを呼び出す。
+<% end %>

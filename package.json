@@ -1,0 +1,27 @@
+{
+  "name": "grunt_first_kit_1",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://odego@bitbucket.org/odego/grunt_first_kit_1.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "assemble": "^0.4.42",
+    "grunt": "^0.4.5",
+    "grunt-contrib-compass": "^1.0.3",
+    "grunt-contrib-concat": "^0.5.1",
+    "grunt-contrib-connect": "^0.10.1",
+    "grunt-contrib-cssmin": "^0.12.3",
+    "grunt-contrib-watch": "^0.6.1",
+    "grunt-ect": "^0.1.2",
+    "grunt-git": "^0.3.5",
+    "grunt-open": "^0.2.3"
+  }
+}
