@@ -204,7 +204,7 @@ body {
 	<div class="body-inner">
 	<div class="opp opp-right"><div class="chi"><div class="star">★</div></div></div>
 	<div class="opp opp-left"><div class="chi"><div class="star">★</div></div></div>
-    </div>div>
+    </div>
 </div>
 
 <script>
@@ -212,10 +212,17 @@ $(function(){
 		var norika = $('#js-body');
 		var win_width = $(window).width();
 		var win_height = $(window).height();
+		var norika_height;
 		
 		$(window).on('load,resize',function(){
 			win_height = $(window).height();
 			win_width = $(window).width();
+			
+			if(win_width<400){
+				win_height = (win_width * 0.7);
+				$(norika).css({height:win_height});
+			}
+			
 			console.log(win_height);
 		});
 		
