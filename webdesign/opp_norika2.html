@@ -24,6 +24,7 @@ body {
 	width: 100%;
 	height: 100%;
 	max-width: 400px;
+	height: 550px;
 	/*
 	min-height: 550px;
 	*/
@@ -226,10 +227,10 @@ $(function(){
 			win_height = $(window).height();
 			win_width = $(window).width();
 			
-			if(win_width<400){
+			//if(win_width<400){
 				win_height = (win_width * 0.7);
 				$(norika).css({'height':win_height});
-			}
+			//}
 			
 			console.log(win_height);
 		});
