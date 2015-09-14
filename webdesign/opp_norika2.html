@@ -36,21 +36,27 @@ body {
 .body-inner {
 	position: absolute;
 	bottom: 5%;
-	left: 10%;
+	left: 0;
 	display: block;
-	width: 60%;
+	width: 70%;
 	height: 20%;
 	margin: 0 15%;
 	
+}
+.body__item {
+	display: block;
+	float: left;
+	width: 50%;
+	height: 100%;
 }
 .opp {
 	/*
 	position: absolute;
 	*/
 	display: block;
-	float: left;
-	width: 50%;
-	height: 100%;
+	width: 90%;
+	height: 90%;
+	margin: 5%;
 	position: relative;
 	letter-spacing: normal;
 	vertical-align: top;
@@ -201,10 +207,10 @@ body {
 
 
 <div id="js-body" class="body">
-	<div class="body-inner">
-	<div class="opp opp-right"><div class="chi"><div class="star">★</div></div></div>
-	<div class="opp opp-left"><div class="chi"><div class="star">★</div></div></div>
-    </div>
+	<ul class="body-inner">
+		<li class="body__item"><div class="opp opp-right"><div class="chi"><div class="star">★</div></div></div></li>
+		<li class="body__item"><div class="opp opp-left"><div class="chi"><div class="star">★</div></div></div></li>
+    </ul>
 </div>
 
 <script>
