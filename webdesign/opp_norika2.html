@@ -210,10 +210,12 @@ body {
 <script>
 $(function(){
 		var norika = $('#js-body');
+		var win_width = $(window).width();
 		var win_height = $(window).height();
 		
-		$(window).on('resize',function(){
+		$(window).on('load,resize',function(){
 			win_height = $(window).height();
+			win_width = $(window).width();
 			console.log(win_height);
 		});
 		
