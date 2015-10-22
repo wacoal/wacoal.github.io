@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<!--[if lt IE 9]>
+<script src="../common/js/html5shiv.js"></script>
+<![endif]-->
+<meta name="viewport" content="width=device-width, maximum-scale=1, minimum-scale=1, user-scalable=no" />
+<meta name="format-detection" content="telephone=no">
+
+<title>mylazy
+</title>
+<link type="text/css" rel="stylesheet" href="common/css/common.css" media="screen" />
+<style>
+.main {
+display: block;
+}
+.lists {
+display: block;
+}
+.lists__item {
+display: block;
+margin: 0 auto 16px;
+}
+.pic {
+display: block;
+max-width: 100%;
+}
+</style>
+<script type="text/javascript" src="../common/js/zepto-2.1.min.js"></script>
+</head>
+
+<body>
+
+
+
+
+
+<div class="main">
+	<ul class="lists">
+		<li class="lists__item js-mylazy">
+			<img class="pic" data-pic="" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH/C1hNUCBEYXRhWE1QPD94cGFja2V0IGJlZ2luPSLvu78iIGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQiPz4gPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iQWRvYmUgWE1QIENvcmUgNS4zLWMwMTEgNjYuMTQ1NjYxLCAyMDEyLzAyLzA2LTE0OjU2OjI3ICAgICAgICAiPiA8cmRmOlJERiB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiPiA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtbG5zOnhtcE1NPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvbW0vIiB4bWxuczpzdFJlZj0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL3NUeXBlL1Jlc291cmNlUmVmIyIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M2IChXaW5kb3dzKSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDowMzBFQTVBRTdGODQxMUU0OEE0NkEzNDQyRDNCMTFDQSIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDowMzBFQTVBRjdGODQxMUU0OEE0NkEzNDQyRDNCMTFDQSI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOjAzMEVBNUFDN0Y4NDExRTQ4QTQ2QTM0NDJEM0IxMUNBIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjAzMEVBNUFEN0Y4NDExRTQ4QTQ2QTM0NDJEM0IxMUNBIi8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+Af/+/fz7+vn49/b19PPy8fDv7u3s6+rp6Ofm5eTj4uHg397d3Nva2djX1tXU09LR0M/OzczLysnIx8bFxMPCwcC/vr28u7q5uLe2tbSzsrGwr66trKuqqainpqWko6KhoJ+enZybmpmYl5aVlJOSkZCPjo2Mi4qJiIeGhYSDgoGAf359fHt6eXh3dnV0c3JxcG9ubWxramloZ2ZlZGNiYWBfXl1cW1pZWFdWVVRTUlFQT05NTEtKSUhHRkVEQ0JBQD8+PTw7Ojk4NzY1NDMyMTAvLi0sKyopKCcmJSQjIiEgHx4dHBsaGRgXFhUUExIREA8ODQwLCgkIBwYFBAMCAQAAIfkEAQAAAAAsAAAAAAEAAQAAAgJEAQA7" alt="">
+		</li>
+	</ul>
+</div>
+<script>
+$(function(){
+  var window_width = $(window).width();
+  var window_height = $(window).height();
+  var lazy_pic = (".js-mylazy img");
+
+  $(window).on("load resize scroll",function(){
+    window_width = $(window).width();
+    window_height = $(window).height();
+
+    if(lazy_pic){
+
+        $(lazy_pic).each(function() {
+
+          var lazy_pic_height = $(this).height();
+
+
+          console.log(lazy_pic_height);
+
+      	});
+    }
+
+  });
+});
+
+</script>
+
+<!-- Scripts -->
+
+
+
+
+</body>
+</html>
