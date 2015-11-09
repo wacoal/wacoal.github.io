@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<!--[if lt IE 9]>
+<script src="../common/js/html5shiv.js"></script>
+<![endif]-->
+<meta name="viewport" content="width=device-width, maximum-scale=1, minimum-scale=1, user-scalable=no" />
+<meta name="format-detection" content="telephone=no">
+
+<title>css_burger
+</title>
+<!--<link type="text/css" rel="stylesheet" href="common/css/common.css" media="screen" />-->
+<link type="text/css" rel="stylesheet" href="/common/css/webdesign_css_burger.css" media="screen" />
+<script type="text/javascript" src="../common/js/zepto-2.1.min.js"></script>
+</head>
+
+<body>
+
+
+
+
+
+<div id="js-burger-outer" class="burger-outer">
+	<nav class="global-nav">
+		<div class="global-nav-inner">
+			<ul class="lists">
+				<li class="lists__item">
+					<a href="javascript:;" class="btn-gl">nav_a</a>
+				</li>
+				<li class="lists__item">
+					<a href="javascript:;" class="btn-gl">nav_b</a>
+				</li>
+				<li class="lists__item">
+					<a href="javascript:;" class="btn-gl">nav_c</a>
+				</li>
+				<li class="lists__item">
+					<a href="javascript:;" class="btn-gl">nav_d</a>
+				</li>
+				<li class="lists__item">
+					<a href="javascript:;" class="btn-gl">nav_a</a>
+				</li>
+				<li class="lists__item">
+					<a href="javascript:;" class="btn-gl">nav_b</a>
+				</li>
+				<li class="lists__item">
+					<a href="javascript:;" class="btn-gl">nav_c</a>
+				</li>
+				<li class="lists__item">
+					<a href="javascript:;" class="btn-gl">nav_d</a>
+				</li>
+				<li class="lists__item">
+					<a href="javascript:;" class="btn-gl">nav_a</a>
+				</li>
+				<li class="lists__item">
+					<a href="javascript:;" class="btn-gl">nav_b</a>
+				</li>
+				<li class="lists__item">
+					<a href="javascript:;" class="btn-gl">nav_c</a>
+				</li>
+				<li class="lists__item">
+					<a href="javascript:;" class="btn-gl">nav_d</a>
+				</li>
+				<li class="lists__item">
+					<a href="javascript:;" class="btn-gl">nav_a</a>
+				</li>
+				<li class="lists__item">
+					<a href="javascript:;" class="btn-gl">nav_b</a>
+				</li>
+				<li class="lists__item">
+					<a href="javascript:;" class="btn-gl">nav_c</a>
+				</li>
+				<li class="lists__item">
+					<a href="javascript:;" class="btn-gl">nav_d</a>
+				</li>
+			</ul>
+		</div>
+	</nav>
+	<input type="checkbox" id="burger" class="burger-btn">
+	<div class="burger-inner">
+		<header class="global-header">
+			<label onclick="" class="btn-menu type_burger" for="burger">
+					メニュー
+			</label>
+			<a class="site-logo" href="javascript:;">
+				CSS BURGER
+			</a>
+		</header>
+		<article>
+			<h1>test</h1>
+			<p>
+				texttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttext
+			</p>
+			<p>
+				texttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttext
+			</p>
+			<p>
+				texttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttext
+			</p>
+		</article>
+		<footer class="global-footer">
+			<small class="copyright">
+				&copy; wacoal
+			</small>
+		</footer>
+	</div>
+</div>
+
+<script>
+$(function(){
+	var burgerBody = $("#js-burger-outer");
+	var burgerBtn  = $("#burger")
+	$(burgerBtn).prop('checked',false);
+	$(burgerBtn).on("click",function(){
+		 if($(burgerBtn).prop('checked')) {
+			$(burgerBody).addClass("active");
+		 } else {
+			$(burgerBody).removeClass("active");
+		 }
+	});
+});
+</script>
+
+<!-- Scripts -->
+
+
+
+
+</body>
+</html>
