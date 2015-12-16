@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<!--[if lt IE 9]>
+<script src="../common/js/html5shiv.js"></script>
+<![endif]-->
+<meta name="viewport" content="width=device-width, maximum-scale=1, minimum-scale=1, user-scalable=no" />
+<meta name="format-detection" content="telephone=no">
+
+<title>js-load
+</title>
+<!--<link type="text/css" rel="stylesheet" href="common/css/common.css" media="screen" />-->
+<link type="text/css" rel="stylesheet" href="/common/css/webdesign_js_load.css" media="screen" />
+<script type="text/javascript" src="../common/js/jquery-1.11.1.min.js"></script>
+</head>
+
+<body>
+
+
+
+
+
+<div id="js-load" class="main">
+	<ul class="lists">
+		<li class="lists__item js-load">11111</li>
+		<li class="lists__item js-load">txttxttxttxttxttxt</li>
+		<li class="lists__item js-load">11111</li>
+		<li class="lists__item js-load">txttxttxttxttxttxt</li>
+		<li class="lists__item js-load">11111</li>
+		<li class="lists__item js-load">txttxttxttxttxttxt</li>
+		<li class="lists__item js-load">11111</li>
+		<li class="lists__item js-load">txttxttxttxttxttxt</li>
+		<li class="lists__item js-load">11111</li>
+		<li class="lists__item js-load">txttxttxttxttxttxt</li>
+		<li class="lists__item js-load">11111</li>
+		<li class="lists__item js-load">txttxttxttxttxttxt</li>
+		<li class="lists__item js-load">11111</li>
+		<li class="lists__item js-load">txttxttxttxttxttxt</li>
+		<li class="lists__item js-load">11111</li>
+		<li class="lists__item js-load">txttxttxttxttxttxt</li>
+		<li class="lists__item js-load">11111</li>
+		<li class="lists__item js-load">txttxttxttxttxttxt</li>
+		<li class="lists__item js-load">11111</li>
+		<li class="lists__item js-load">txttxttxttxttxttxt</li>
+		<li class="lists__item js-load">11111</li>
+		<li class="lists__item js-load">txttxttxttxttxttxt</li>
+		<li class="lists__item js-load">11111</li>
+		<li class="lists__item js-load">txttxttxttxttxttxt</li>
+		<li class="lists__item js-load">11111</li>
+		<li class="lists__item js-load">txttxttxttxttxttxt</li>
+		<li class="lists__item js-load">11111</li>
+		<li class="lists__item js-load">txttxttxttxttxttxt</li>
+		<li class="lists__item js-load">11111</li>
+		<li class="lists__item js-load">txttxttxttxttxttxt</li>
+		<li class="lists__item js-load">11111</li>
+		<li class="lists__item js-load">txttxttxttxttxttxt</li>
+		<li class="lists__item js-load">11111</li>
+		<li class="lists__item js-load">txttxttxttxttxttxt</li>
+		<li class="lists__item js-load">11111</li>
+		<li class="lists__item js-load">txttxttxttxttxttxt</li>
+		<li class="lists__item js-load">11111</li>
+		<li class="lists__item js-load">txttxttxttxttxttxt</li>
+		<li class="lists__item js-load">11111</li>
+		<li class="lists__item js-load">txttxttxttxttxttxt</li>
+		<li class="lists__item js-load">11111</li>
+		<li class="lists__item js-load">txttxttxttxttxttxt</li>
+	</ul>
+	<div id="js-btn-wrap" class="btn-wrap">
+		<a href="javascript:;" class="btn">もっと見る</a>
+	</div>
+</div>
+<script>
+$(window).on('load', function(){
+		load('#js-load','6');
+		$("#js-btn-wrap .btn").on("click",function(){
+			load('#js-load','12','#js-btn-wrap');
+		})
+	});
+	function load(id,cnt,btn){
+		var girls_list   = id + " .js-load:not(.active)";
+		var girls_length = $(girls_list).length;
+		var girls_total_cnt;
+		if( cnt < girls_length ){
+			girls_total_cnt = cnt;
+		} else {
+			girls_total_cnt = girls_length;
+			$(btn).hide();
+		}
+		$(girls_list + ":lt(" + girls_total_cnt +")").addClass("active");
+	}
+
+</script>
+
+
+<!-- Scripts -->
+
+
+
+
+</body>
+</html>
