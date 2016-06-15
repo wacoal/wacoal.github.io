@@ -133,6 +133,12 @@ em {
   display: block;
   margin-bottom: 4px;
 }
+.contents-inner ul {
+  list-style-type: disc;
+}
+.contents-inner li {
+  margin-bottom: 4px;
+}
 
 .title.lv_1 {
   display: block;
