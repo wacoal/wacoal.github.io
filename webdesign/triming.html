@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<!--[if lt IE 9]>
+<script src="../common/js/html5shiv.js"></script>
+<![endif]-->
+<meta name="viewport" content="width=device-width, maximum-scale=1, minimum-scale=1, user-scalable=no" />
+<meta name="format-detection" content="telephone=no">
+
+<title>triming
+</title>
+<!--<link type="text/css" rel="stylesheet" href="common/css/common.css" media="screen" />-->
+<link type="text/css" rel="stylesheet" href="/common/css/webdesign_triming.css" media="screen" />
+<script type="text/javascript" src="../common/js/zepto-2.1.min.js"></script>
+</head>
+
+<body>
+
+
+
+
+
+<div id="pageBottom" class="case">
+	<h3 class="titLv2">画像の投稿はコチラ</h3>
+
+	<form method="post" action="URL" enctype="multipart/form-data" id="fileUpForm">
+		<div class="wrapFile">
+			<label class="bttn type_a" for="open-prof">ファイルを選択 </label>
+			<!--
+			<input type="file" name="picture" size="25" accept="image, image/*;capture=camera" class="fileForm" id="elmFile" onchange="selectFile()" />
+			-->
+		</div>
+		<input type="hidden" name="category" value="category" />
+		<input type="hidden" name="pickind" value="pickupid" />
+
+		<input type="checkbox" onchange="this.checked ? $('#selfile').click() : false;" id="open-prof">
+		<div class="trimming-wrap-content">
+			<div class="trimming-wrap">
+					<div class="trimming-wrap-head"><!-- ファイル選択とアナウンス -->
+							<!-- <label class="trimming-wrap-file bttn">
+								<input class="trimming-wrap-file__input bttn__input" type="file" name="file" id="selfile" />
+								<span class="trimming-wrap-file__txt">写真を選択</span>
+							</label> -->
+							<p class="trimming-move__txt">写真を切り取る範囲を選択して下さい。<br>白線内を指でずらすことで調整できます。</p>
+					</div>
+
+					<div class="trimming-move">
+							<label class="trimming-move-label">
+									<input id="js_btn_rotate" type="button" class="bttn__input" value="回転">
+							</label>
+					</div>
+
+					<div class="trimming-wrap-canvas">
+							<div id="imageBox">
+								<canvas id="canvas"></canvas>
+								<div id="thumbBox"></div>
+								<canvas id="canvas2"></canvas>
+							</div>
+					</div>
+					<ul class="lists has_2 box trimming-wrap-button">
+							<li class="lists__item ">
+								<label class="bttn" for="open-prof">閉じる</label>
+							</li>
+							<li class="lists__item">
+								<label class="trimming-label disabled bttn">
+									<input type="submit" name="rebutton" value="この位置で切り取る" id="js_btn_upload" class="bttn__input" />
+								</label>
+							</li>
+					</ul>
+					<div class="loading">
+							<div class="load-container load5">
+									<div class="loader">Loading...</div>
+							</div>
+					</div>
+			</div>
+	</div>
+	</form>
+
+</div>
+
+
+<script>
+$(function(){
+	$(window).on("load",function(){
+		main("/common/img/download1.jpg");
+	});
+});
+</script>
+<script type="text/javascript" src="/common/js/triming.js"></script>
+
+<!-- Scripts -->
+
+
+
+
+</body>
+</html>
