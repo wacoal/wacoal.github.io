@@ -77,6 +77,7 @@ function main(dataUrl) {
 }
 
 var isTouch = ('ontouchstart' in window);
+var mousewheelevent = 'onwheel' in document ? 'wheel' : 'onmousewheel' in document ? 'mousewheel' : 'DOMMouseScroll';
 $('#imageBox').on({
 		'touchstart mousedown': function(e) {
 				if (!ctx) return;
@@ -125,7 +126,24 @@ $('#imageBox').on({
 				trimRestore();
 				if (!this.touched) return;
 				this.touched = false;
+		},
+		'gestureChange': function(e) {
+				//this.scale    = e.scale;
+				alert(e.scale);
+		},
+		'mousewheelevent': function(e) {
+				var delta = e.originalEvent.deltaY ? -(e.originalEvent.deltaY) : e.originalEvent.wheelDelta ? e.originalEvent.wheelDelta : -(e.originalEvent.detail);
+				if (delta < 0){
+					e.preventDefault();
+					this.scale    = delta;
+					//下にスクロールした場合の処理
+				} else if (delta > 0){
+					e.preventDefault();
+					this.scale    = delta;
+					//上にスクロールした場合の処理
+				}
 		}
+
 });
 
 function translate(x, y){
