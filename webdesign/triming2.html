@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<!--[if lt IE 9]>
+<script src="../common/js/html5shiv.js"></script>
+<![endif]-->
+<meta name="viewport" content="width=device-width, maximum-scale=1, minimum-scale=1, user-scalable=no" />
+<meta name="format-detection" content="telephone=no">
+
+<title>triming
+</title>
+<!--<link type="text/css" rel="stylesheet" href="common/css/common.css" media="screen" />-->
+<!--
+<link type="text/css" rel="stylesheet" href="/common/css/webdesign_triming.css" media="screen" />
+-->
+<style>
+html {
+    width: 100%;
+    height: 100%;
+}
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    font-size: 13px;
+}
+h1, ol, li {
+    margin: 0;
+    padding: 0;
+}
+li {
+    list-style-type: none;
+}
+#target {
+    margin: 20px;
+    width: 200px;
+    height: 200px;
+    background: #eee;
+}
+
+/* ========== console ========== */
+.logTrace {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    padding: 2%;
+    width: 96%;
+    height: 100px;
+    border-top: 1px solid #aaa;
+    background-color: #fff;
+    box-shadow: 0 -2px 5px #ddd;
+    overflow: auto;
+    z-index: 9999;
+    -webkit-overflow-scrolling: touch;
+}
+.logTrace ol > li {
+    padding: 0.4em 0;
+    border-bottom: 1px solid #ccc;
+    line-height: 1em;
+    color: #000;
+}
+.logTrace ol ul ul {
+    margin: 0 0 0 0.5em;
+}
+
+/* color setting */
+.logTrace .typeString      { color: #c41a16; }
+.logTrace .typeNumber      { color: #1c00cf; }
+.logTrace .typeObject      { color: #881391; }
+.logTrace .typeObjectProto { color: #f00; }
+.logTrace .typeFunction    { color: #aaa; }
+.logTrace .typeBoolean     { color: #000; }
+</style>
+<script type="text/javascript" src="../common/js/zepto-2.1.min.js"></script>
+</head>
+
+<body>
+
+
+
+
+
+<h1>Touch &amp; Gesture Event</h1>
+<div id="target"></div>
+
+<script>
+/* console for mobile */
+(function(d,a){var e=Object.prototype.toString,c="ontouchstart" in d,b=navigator.userAgent.toLowerCase(),f=function(g){this.config={triggerY:100,padding:10,height:80,maxHeight:d.innerHeight-50,minHeight:50};this.traceWrap=a.createElement("div");this.logList=a.createElement("ol");this.count=0;this.init(g)};f.prototype={init:function(g){if(g){for(var h in g){if(!h in this.config){break}this.config[h]=g[h]}}this.traceWrap.className="logTrace";this.setSize();this.traceWrap.style.height=this.config.height+"px";this.currentHeight=this.config.height;a.body.insertBefore(this.traceWrap,null);this.bind()},setSize:function(){this.traceWrap.style.padding=this.config.padding+"px";this.traceWrap.style.width=d.innerWidth-(this.config.padding*2)+"px"},log:function(h){var g=a.createElement("li");if(!this.count){this.traceWrap.insertBefore(this.logList,null)}if(this.isString(h)||this.isNumber(h)){g.innerHTML=this.checkObjType(h)}else{if(this.isArray(h)){g.innerHTML=this.traceObject(h,"Array")}else{if(this.isObject(h)){g.innerHTML=this.traceObject(h,"Object")}}}this.logList.insertBefore(g,null);this.count++},clear:function(){this.count=0;this.logList.innerHTML=""},traceObject:function(j,h){var k=[],i=0;k.push("<ul>");for(var g in j){if(j.hasOwnProperty(g)){k.push('<li><span class="typeObject">'+g+"</span>: "+this.checkObjType(j[g])+"</li>")}else{k.push('<li><span class="typeObjectProto">'+g+"</span>: "+this.checkObjType(j[g])+"</li>")}i++}k.push("</ul>");return["<ul>",!i?"<li>"+h+(h==="Array"?"[0]":"{}")+"</li>":"<li>"+h+" {"+k.join("")+"</li><li>}</li>","</ul>"].join("")},checkObjType:function(g){switch(typeof g){case"string":g='<span class="typeString">"'+g+'"</span>';break;case"number":g='<span class="typeNumber">'+g+"</span>";break;case"object":if(this.isArray(g)){g=this.traceObject(g,"Array")}else{if(this.isObject(g)){if(g.nodeType===1){}else{g=this.traceObject(g,"Object")}}}break;case"function":g='<span class="typeFunction">(function)</span>';break;case"boolean":g='<span class="typeBoolean">'+g+"</span>";break}return g},isString:function(g){return e.call(g)=="[object String]"},isNumber:function(g){return e.call(g)=="[object Number]"},isArray:Array.prototype.isArray||function(g){return e.call(g)=="[object Array]"},isObject:function(g){return g===Object(g)},isElement:function(g){return !!(g&&g.nodeType===1)},handleEvent:function(g){switch(g.type){case"touchstart":this.touchStart(g);break;case"touchmove":this.touchMove(g);break;case"resize":this.resize(g);break}},bind:function(){d.addEventListener("resize",this,false);this.traceWrap.addEventListener("touchstart",this,false);this.traceWrap.addEventListener("touchmove",this,false)},touchStart:function(g){this.swipeReady=undefined;this.touchStartY=c?g.changedTouches[0].pageY:g.pageY},touchMove:function(h){var g=c?h.changedTouches[0].pageY:h.pageY;h.stopPropagation();if(this.swipeReady){this.update(this.swipeStartY-g)}if(this.swipeReady===undefined){if(Math.abs(g-this.touchStartY)>this.config.triggerY){this.swipeReady=true;this.swipeStartY=g}}},update:function(g){if(g){this.currentHeight+=g/10}if(this.currentHeight>this.config.maxHeight){this.currentHeight=this.config.maxHeight}else{if(this.currentHeight<this.config.minHeight){this.currentHeight=this.config.minHeight}}this.traceWrap.style.height=this.currentHeight+"px"},resize:function(i){var h=this,g;clearTimeout(g);g=setTimeout(function(){h.setSize()},200)}};d.console=new f()}(this,document));
+
+(function( window, document ) {
+
+window.addEventListener( 'load', function() {
+    var hoge = new gesture( document.getElementById( 'target' ) );
+    hoge.init();
+}, false );
+
+var gesture = function( elem ) {
+    this.elem       = elem;
+    this.posX       = { 'move': 0, 'stop': 0 };
+    this.posY       = { 'move': 0, 'stop': 0 };
+    this.startX     = 0;
+    this.startY     = 0;
+    this.scale      = 1;
+    this.rotation   = 0;
+    this.touchCount = 0;
+};
+gesture.prototype = {
+    init: function() {
+        this.elem.addEventListener( 'touchstart', this, false );
+        this.elem.addEventListener( 'touchmove',  this, false );
+        this.elem.addEventListener( 'touchend',   this, false );
+
+        this.elem.addEventListener( 'gesturestart',  this, false );
+        this.elem.addEventListener( 'gesturechange', this, false );
+        this.elem.addEventListener( 'gestureend',    this, false );
+
+        //document.addEventListener( 'touchmove', function( e ) {
+        //    e.preventDefault();
+        //}, false );
+    },
+    handleEvent: function( e ) {
+        switch( e.type ) {
+            case 'touchstart':
+                this.touchStart( e );
+                break;
+            case 'touchmove':
+                this.touchMove( e );
+                break;
+            case 'touchend':
+                this.touchEnd( e );
+                break;
+            case 'gesturestart':
+                this.gestureStart( e );
+                break;
+            case 'gesturechange':
+                this.gestureChange( e );
+                break;
+            case 'gestureend':
+                this.gestureEnd( e );
+                break;
+        }
+    },
+    touchStart: function( e ) {
+        console.log( 'touch start' );
+
+        e.preventDefault();
+        e.stopPropagation();
+
+        this.touchCount++;
+
+        if ( this.touchCount === 1 ) {
+            this.startX   = e.changedTouches[0].pageX;
+            this.startY   = e.changedTouches[0].pageY;
+        }
+    },
+    touchMove: function( e ) {
+        console.log( 'touch move' );
+
+        if ( this.touchCount !== 1 ) { return; }
+
+        this.posX.move = this.posX.stop + ( e.changedTouches[0].pageX - this.startX );
+        this.posY.move = this.posY.stop + ( e.changedTouches[0].pageY - this.startY );
+
+        // transform
+        this.transform();
+    },
+    touchEnd: function( e ) {
+        console.log( 'touch end' );
+
+        this.posX.stop = this.posX.move;
+        this.posY.stop = this.posY.move;
+
+        this.touchCount = 0;
+    },
+    gestureStart: function( e ) {
+        console.log( 'gesture start' );
+
+        this.touchCount++;
+    },
+    gestureChange: function( e ) {
+        console.log( 'gesture change' );
+
+        this.scale    = e.scale;
+        this.rotation = ( this.rotation + e.rotation ) % 360;
+
+        // transform
+        this.transform();
+    },
+    gestureEnd: function( e ) {
+        console.log( 'gesture end' );
+    },
+    transform: function() {
+        var prop = [];
+
+        if ( this.scale !== 1 ) {
+            prop.push( 'scale(' + this.scale + ')' );
+        }
+        if ( this.posX !== 0 ) {
+            prop.push( 'translate(' + this.posX.move + 'px,' + this.posY.move + 'px)' );
+        }
+        if ( this.rotate !== 0 ) {
+            prop.push( 'rotate(' + this.rotation + 'deg)' );
+        }
+
+        this.elem.style.webkitTransform = prop.join( ' ' );
+    }
+};
+
+}( this, document ));
+</script>
+<script type="text/javascript" src="/common/js/triming.js"></script>
+
+<!-- Scripts -->
+
+
+
+
+</body>
+</html>
