@@ -60,6 +60,8 @@ function main(dataUrl) {
 
 						elmMaxSize = repWidth < repHeight ? repWidth / 240 : repHeight / 240;
 
+						$("#x").html(elmMaxSize);
+
 				}, false);
 
 		}
@@ -78,6 +80,9 @@ $(function(){
 	$(window).on("load",function(){
 		canvas = document.getElementById('canvas');
 		canvas2 = document.getElementById('canvas2');
+
+
+
 	});
 
 
@@ -195,10 +200,14 @@ $(function(){
           $jqIdTrimingArea
               .data("preScale", preScale)
               .data("scale", event.scale);
-					$("#x").html(preScale, elmMaxSize);
+					$("#x").html(preScale);
       } else { //move
           if($pinchTimer) clearTimeout($pinchTimer);
-          $jqIdTrimingElm.css("transform", "scale(" + ($jqIdTrimingArea.data("preScale") + (event.scale - $jqIdTrimingArea.data("scale"))) + ")");
+					var scaleSize = ($jqIdTrimingArea.data("preScale") + (event.scale - $jqIdTrimingArea.data("scale")));
+					if( scaleSize > elmMaxSize ){
+						scaleSize = elmMaxSize
+					}
+          $jqIdTrimingElm.css("transform", "scale(" + scaleSize + ")");
           $pinchTimer = setTimeout(function() { //end
               pinchTime = false;
           }, 100);
