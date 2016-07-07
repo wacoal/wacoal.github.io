@@ -1,5 +1,5 @@
+document.createElement('main');
 $(function(){
-
 		//ライブラリの初期設定
 		var $tgPanPinchArea = document.getElementById("panPinch"),
 				$jqTgPanPinchArea = $($tgPanPinchArea),
@@ -35,7 +35,7 @@ $(function(){
 			// 	positionY = rect.top + window.pageYOffset;
 			// }
 		}
-		
+
 	$hammerObj.on("pan",function(event) {
       if(event.isFinal) { //end
 
