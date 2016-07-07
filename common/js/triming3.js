@@ -1,21 +1,84 @@
-document.createElement('main');
+//document.createElement('main');
+
+var angle = 0;
+var repWidth = 1;
+var repHeight = false;
+var minWidth = 320;
+var minHeight = 240;
+var imageWidth;
+var imageHeight;
+var trimX;
+var trimY;
+
+var posX = 0;
+var posY = 0;
+var blobX = 0;
+var blobY = 0;
+
+var dataUrl="";
+var ctx;
+var ctx2
+var image = new Image();
+
+var canvas;
+var canvas2;
+
+var preventEvent = true;
+var srcImgPost;
+
+
+function main(dataUrl) {
+		if (canvas.getContext) {
+				ctx = canvas.getContext('2d');
+				ctx2 = canvas2.getContext('2d');
+				image.src = dataUrl;
+				image.addEventListener('load', function(){
+						//$(".loading").hide();
+						imageWidth = image.width;
+						imageHeight = image.height;
+						repWidth = imageWidth < imageHeight ? minWidth : minHeight / imageHeight * imageWidth;
+						repHeight = imageHeight < imageWidth ? minHeight : minWidth / imageWidth * imageHeight;
+
+						canvas.width = repWidth;
+						canvas.height = repHeight;
+						ctx.drawImage(image, 0, 0, repWidth, repHeight);
+						ctx.save();
+
+						trimRestore();
+				}, false);
+		}
+}
+//トリミング位置の初期化
+function trimRestore(){
+		var tbPos = $( "#thumbBox" ).offset();
+		var cvPos = $( "#canvas" ).offset();
+		trimX = tbPos.left - cvPos.left;
+		trimY = tbPos.top - cvPos.top;
+}
 
 $(function(){
+
+	$(window).on("load",function(){
+		canvas = document.getElementById('canvas');
+		canvas2 = document.getElementById('canvas2');
+	});
+
+
 	//ライブラリの初期設定
-	var $tgPanPinchArea = document.getElementById("panPinch"),
-			$jqTgPanPinchArea = $($tgPanPinchArea),
-			$tgPanPinchElm = document.getElementById("panPinchElm"),
-			$jqTgPanPinchElm = $($tgPanPinchElm),
-			$hammerObj = new Hammer($tgPanPinchElm),
-			$hammerObj2 = new Hammer($tgPanPinchArea),
+	var $idTrimingArea = document.getElementById("js_triming_area"),
+			$jqIdTrimingArea = $($idTrimingArea),
+			$idTrimingElm = document.getElementById("js_triming_element"),
+			$jqIdTrimingElm = $($idTrimingElm),
+			$hammerObj = new Hammer($idTrimingElm),
+			$hammerObj2 = new Hammer($idTrimingArea),
 			panTime = false,
 			pinchTime = false,
 			$pinchTimer = {};
 	$hammerObj.get("pan").set({ enable: true });
 	$hammerObj.get("pinch").set({ enable: true });
-	$jqTgPanPinchElm.css("transform", "scale(1)");
+	$jqIdTrimingElm.css("transform", "scale(1)");
 
-	//var obj = $($tgPanPinchElm);
+	//var obj = $($idTrimingElm);
 	//var rect = obj.getBoundingClientRect();
 
 	// 座標を計算する
@@ -37,38 +100,65 @@ $(function(){
 	// 	// }
 	// }
 
+
+
+	var $idAreaImage = $("#js_triming_areaImage");
+	$idAreaImage.load(function() {
+      //console.log('読み込み完了');
+			//var element = document.getElementById('js_triming_areaImage');
+			var originalWidth  = $(this).width();
+			var originalHeight = $(this).height();
+	    var originalTop    = $(this).offset().top;
+			var originalLeft   = $(this).offset().left;
+
+	    console.log(originalTop,originalLeft,originalWidth,originalHeight);   // x座標(絶対座標)
+	    // console.log(rect.top);    // y座標(絶対座標)
+	    // console.log(rect.width);  // 幅
+	    // console.log(rect.height); // 高さ
+  });
+
+	// window.onload = function() {
+	// 	var element = document.getElementById('js_triming_areaImage');
+  //   var rect = element.getBoundingClientRect();
+	//
+  //   console.log(rect.left);   // x座標(絶対座標)
+  //   console.log(rect.top);    // y座標(絶対座標)
+  //   console.log(rect.width);  // 幅
+  //   console.log(rect.height); // 高さ
+	// }
+
 	$hammerObj.on("pan",function(event) {
       if(event.isFinal) { //end
 
           panTime = false;
-          $jqTgPanPinchArea.data("down", false);
-          if(Number(String($jqTgPanPinchElm.css("left")).replace("px", "")) < 0)
-              $jqTgPanPinchElm.css("left", "0px");
-          if(Number(String($jqTgPanPinchElm.css("left")).replace("px", "")) > ($jqTgPanPinchArea.width() - $jqTgPanPinchElm.width()))
-              $jqTgPanPinchElm.css("left", ($jqTgPanPinchArea.width() - $jqTgPanPinchElm.width()) + "px");
-          if(Number(String($jqTgPanPinchElm.css("top")).replace("px", "")) < 0)
-              $jqTgPanPinchElm.css("top", "0px");
-          if(Number(String($jqTgPanPinchElm.css("top")).replace("px", "")) > ($jqTgPanPinchArea.outerHeight() - $jqTgPanPinchElm.height()))
-              $jqTgPanPinchElm.css("top", ($jqTgPanPinchArea.outerHeight() - $jqTgPanPinchElm.height()) + "px");
+          $jqIdTrimingArea.data("down", false);
+          if(Number(String($jqIdTrimingElm.css("left")).replace("px", "")) < 0)
+              $jqIdTrimingElm.css("left", "0px");
+          if(Number(String($jqIdTrimingElm.css("left")).replace("px", "")) > ($jqIdTrimingArea.width() - $jqIdTrimingElm.width()))
+              $jqIdTrimingElm.css("left", ($jqIdTrimingArea.width() - $jqIdTrimingElm.width()) + "px");
+          if(Number(String($jqIdTrimingElm.css("top")).replace("px", "")) < 0)
+              $jqIdTrimingElm.css("top", "0px");
+          if(Number(String($jqIdTrimingElm.css("top")).replace("px", "")) > ($jqIdTrimingArea.outerHeight() - $jqIdTrimingElm.height()))
+              $jqIdTrimingElm.css("top", ($jqIdTrimingArea.outerHeight() - $jqIdTrimingElm.height()) + "px");
       } else {
           if(!panTime) { //start
               panTime = event.timeStamp;
 
-              $jqTgPanPinchArea
+              $jqIdTrimingArea
                   .data("down", true)
                   .data("x", event.center.x)
                   .data("y", event.center.y)
-                  .data("elmPosX", Number(String($jqTgPanPinchElm.css("left")).replace("px", "")))
-                  .data("elmPosY", Number(String($jqTgPanPinchElm.css("top")).replace("px", "")));
+                  .data("elmPosX", Number(String($jqIdTrimingElm.css("left")).replace("px", "")))
+                  .data("elmPosY", Number(String($jqIdTrimingElm.css("top")).replace("px", "")));
 
-							var test = $jqTgPanPinchArea.data("x");
+							var test = $jqIdTrimingArea.data("x");
 							console.log(test);
 
           } else { //move
-              if ($jqTgPanPinchArea.data("down") == true) {
-                  $jqTgPanPinchElm.css({
-                      "left": ($jqTgPanPinchArea.data("elmPosX") - ($jqTgPanPinchArea.data("x") - event.center.x)) + "px",
-                      "top": ($jqTgPanPinchArea.data("elmPosY") - ($jqTgPanPinchArea.data("y") - event.center.y)) + "px"
+              if ($jqIdTrimingArea.data("down") == true) {
+                  $jqIdTrimingElm.css({
+                      "left": ($jqIdTrimingArea.data("elmPosX") - ($jqIdTrimingArea.data("x") - event.center.x)) + "px",
+                      "top": ($jqIdTrimingArea.data("elmPosY") - ($jqIdTrimingArea.data("y") - event.center.y)) + "px"
                   });
               }
           }
@@ -80,16 +170,16 @@ $(function(){
       event.preventDefault ? event.preventDefault() : (event.returnValue = false);
       if(!pinchTime) { //start
           pinchTime = event.timeStamp;
-          var preScale = String($jqTgPanPinchElm.css("transform")).replace("matrix(", "");
+          var preScale = String($jqIdTrimingElm.css("transform")).replace("matrix(", "");
           preScale = preScale.replace(")", "");
           preScale = preScale.split(",");
           preScale = Math.sqrt(preScale[0] * preScale[0] + preScale[1] * preScale[1]);
-          $jqTgPanPinchArea
+          $jqIdTrimingArea
               .data("preScale", preScale)
               .data("scale", event.scale);
       } else { //move
           if($pinchTimer) clearTimeout($pinchTimer);
-          $jqTgPanPinchElm.css("transform", "scale(" + ($jqTgPanPinchArea.data("preScale") + (event.scale - $jqTgPanPinchArea.data("scale"))) + ")");
+          $jqIdTrimingElm.css("transform", "scale(" + ($jqIdTrimingArea.data("preScale") + (event.scale - $jqIdTrimingArea.data("scale"))) + ")");
           $pinchTimer = setTimeout(function() { //end
               pinchTime = false;
           }, 100);

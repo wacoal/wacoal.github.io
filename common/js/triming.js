@@ -24,7 +24,11 @@ var canvas2;
 var preventEvent = true;
 var srcImgPost;
 
+
+
+
 $(function(){
+		
 		canvas = document.getElementById('canvas');
 		canvas2 = document.getElementById('canvas2');
 
@@ -86,75 +90,135 @@ function testWrite(){
 	$("#nowsize").html(repWidth);
 }
 
-var isTouch = ('ontouchstart' in window);
-var mousewheelevent = 'onwheel' in document ? 'wheel' : 'onmousewheel' in document ? 'mousewheel' : 'DOMMouseScroll';
-$('#imageBox').on({
-		'touchstart mousedown': function(e) {
-				if (!ctx) return;
-				e.preventDefault();
-				this.pageX = (isTouch ? event.changedTouches[0].pageX : e.pageX);
-				this.pageY = (isTouch ? event.changedTouches[0].pageY : e.pageY);
-				this.left = $(this).position().left;
-				this.top = $(this).position().top;
-				this.touched = true;
-		},
-		'touchmove mousemove': function(e) {
-				if (!this.touched) return;
-				e.preventDefault();
-				this.left =  -(this.pageX - (isTouch ? event.changedTouches[0].pageX : e.pageX) );
-				this.top =  -(this.pageY - (isTouch ? event.changedTouches[0].pageY : e.pageY) );
 
-				var transX = this.left;
-				var transY = this.top;
-				if(angle == 90){
-						transX = this.top;
-						transY = -this.left;
-				}else if(angle == 180){
-						transX = -this.left;
-						transY = -this.top;
-				}else if(angle == 270){
-						transX = -this.top;
-						transY = this.left;
-				}
-				bufPosX = posX;
-				bufPosY = posY;
-				transX = repWidth < repHeight ? 0 : transX;
-				transY = repWidth > repHeight ? 0 : transY;
-				posX += angle % 180 ? transY : transX;
-				posY += angle % 180 ? transX : transY;
-				var res = ambit();
-				if(res){
-						posX = bufPosX;
-						posY = bufPosY;
-						transX = transY = 0;
-				}
-				translate(transX, transY);
-				this.pageX = (isTouch ? event.changedTouches[0].pageX : e.pageX);
-				this.pageY = (isTouch ? event.changedTouches[0].pageY : e.pageY);
-		},
-		'touchend mouseup mouseout': function(e) {
-				trimRestore();
-				if (!this.touched) return;
-				this.touched = false;
-		},
-		'gestureChange': function(e) {
-				//this.scale    = e.scale;
-				alert(e.scale);
-		},
-		'mousewheelevent': function(e) {
-				var delta = e.originalEvent.deltaY ? -(e.originalEvent.deltaY) : e.originalEvent.wheelDelta ? e.originalEvent.wheelDelta : -(e.originalEvent.detail);
-				if (delta < 0){
-					e.preventDefault();
-					this.scale    = delta;
-					//下にスクロールした場合の処理
-				} else if (delta > 0){
-					e.preventDefault();
-					this.scale    = delta;
-					//上にスクロールした場合の処理
-				}
-		}
+	$hammerObj.on("pan",function(event) {
+      if(event.isFinal) { //end
 
-});
+          panTime = false;
+          $jqTgPanPinchArea.data("down", false);
+          if(Number(String($jqTgPanPinchElm.css("left")).replace("px", "")) < 0)
+              $jqTgPanPinchElm.css("left", "0px");
+          if(Number(String($jqTgPanPinchElm.css("left")).replace("px", "")) > ($jqTgPanPinchArea.width() - $jqTgPanPinchElm.width()))
+              $jqTgPanPinchElm.css("left", ($jqTgPanPinchArea.width() - $jqTgPanPinchElm.width()) + "px");
+          if(Number(String($jqTgPanPinchElm.css("top")).replace("px", "")) < 0)
+              $jqTgPanPinchElm.css("top", "0px");
+          if(Number(String($jqTgPanPinchElm.css("top")).replace("px", "")) > ($jqTgPanPinchArea.outerHeight() - $jqTgPanPinchElm.height()))
+              $jqTgPanPinchElm.css("top", ($jqTgPanPinchArea.outerHeight() - $jqTgPanPinchElm.height()) + "px");
+      } else {
+          if(!panTime) { //start
+              panTime = event.timeStamp;
+
+              $jqTgPanPinchArea
+                  .data("down", true)
+                  .data("x", event.center.x)
+                  .data("y", event.center.y)
+                  .data("elmPosX", Number(String($jqTgPanPinchElm.css("left")).replace("px", "")))
+                  .data("elmPosY", Number(String($jqTgPanPinchElm.css("top")).replace("px", "")));
+
+							var test = $jqTgPanPinchArea.data("x");
+							console.log(test);
+
+          } else { //move
+              if ($jqTgPanPinchArea.data("down") == true) {
+                  $jqTgPanPinchElm.css({
+                      "left": ($jqTgPanPinchArea.data("elmPosX") - ($jqTgPanPinchArea.data("x") - event.center.x)) + "px",
+                      "top": ($jqTgPanPinchArea.data("elmPosY") - ($jqTgPanPinchArea.data("y") - event.center.y)) + "px"
+                  });
+              }
+          }
+      }
+  });
+
+	//pinch event
+  $hammerObj2.on("pinch",function(event) {
+      event.preventDefault ? event.preventDefault() : (event.returnValue = false);
+      if(!pinchTime) { //start
+          pinchTime = event.timeStamp;
+          var preScale = String($jqTgPanPinchElm.css("transform")).replace("matrix(", "");
+          preScale = preScale.replace(")", "");
+          preScale = preScale.split(",");
+          preScale = Math.sqrt(preScale[0] * preScale[0] + preScale[1] * preScale[1]);
+          $jqTgPanPinchArea
+              .data("preScale", preScale)
+              .data("scale", event.scale);
+      } else { //move
+          if($pinchTimer) clearTimeout($pinchTimer);
+          $jqTgPanPinchElm.css("transform", "scale(" + ($jqTgPanPinchArea.data("preScale") + (event.scale - $jqTgPanPinchArea.data("scale"))) + ")");
+          $pinchTimer = setTimeout(function() { //end
+              pinchTime = false;
+          }, 100);
+      }
+  });
+
+// var isTouch = ('ontouchstart' in window);
+// var mousewheelevent = 'onwheel' in document ? 'wheel' : 'onmousewheel' in document ? 'mousewheel' : 'DOMMouseScroll';
+// $('#imageBox').on({
+// 		'touchstart mousedown': function(e) {
+// 				if (!ctx) return;
+// 				e.preventDefault();
+// 				this.pageX = (isTouch ? event.changedTouches[0].pageX : e.pageX);
+// 				this.pageY = (isTouch ? event.changedTouches[0].pageY : e.pageY);
+// 				this.left = $(this).position().left;
+// 				this.top = $(this).position().top;
+// 				this.touched = true;
+// 		},
+// 		'touchmove mousemove': function(e) {
+// 				if (!this.touched) return;
+// 				e.preventDefault();
+// 				this.left =  -(this.pageX - (isTouch ? event.changedTouches[0].pageX : e.pageX) );
+// 				this.top =  -(this.pageY - (isTouch ? event.changedTouches[0].pageY : e.pageY) );
+//
+// 				var transX = this.left;
+// 				var transY = this.top;
+// 				if(angle == 90){
+// 						transX = this.top;
+// 						transY = -this.left;
+// 				}else if(angle == 180){
+// 						transX = -this.left;
+// 						transY = -this.top;
+// 				}else if(angle == 270){
+// 						transX = -this.top;
+// 						transY = this.left;
+// 				}
+// 				bufPosX = posX;
+// 				bufPosY = posY;
+// 				transX = repWidth < repHeight ? 0 : transX;
+// 				transY = repWidth > repHeight ? 0 : transY;
+// 				posX += angle % 180 ? transY : transX;
+// 				posY += angle % 180 ? transX : transY;
+// 				var res = ambit();
+// 				if(res){
+// 						posX = bufPosX;
+// 						posY = bufPosY;
+// 						transX = transY = 0;
+// 				}
+// 				translate(transX, transY);
+// 				this.pageX = (isTouch ? event.changedTouches[0].pageX : e.pageX);
+// 				this.pageY = (isTouch ? event.changedTouches[0].pageY : e.pageY);
+// 		},
+// 		'touchend mouseup mouseout': function(e) {
+// 				trimRestore();
+// 				if (!this.touched) return;
+// 				this.touched = false;
+// 		},
+// 		'gestureChange': function(e) {
+// 				//this.scale    = e.scale;
+// 				alert(e.scale);
+// 		},
+// 		'mousewheelevent': function(e) {
+// 				var delta = e.originalEvent.deltaY ? -(e.originalEvent.deltaY) : e.originalEvent.wheelDelta ? e.originalEvent.wheelDelta : -(e.originalEvent.detail);
+// 				if (delta < 0){
+// 					e.preventDefault();
+// 					this.scale    = delta;
+// 					//下にスクロールした場合の処理
+// 				} else if (delta > 0){
+// 					e.preventDefault();
+// 					this.scale    = delta;
+// 					//上にスクロールした場合の処理
+// 				}
+// 		}
+//
+// });
 
 function translate(x, y){
 		ctx.fillStyle = "rgb(0, 0, 0)";

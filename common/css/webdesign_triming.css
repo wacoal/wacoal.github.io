@@ -567,3 +567,37 @@ a.bttn:hover,
 .trimming-label.disabled .bttn__input {
   color: #777;
 }
+
+.triming-area {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+  position: relative;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  background: #000;
+  text-align: center;
+  cursor: move;
+  -moz-transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+}
+
+.triming-element {
+  box-sizing: border-box;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 240px;
+  height: 240px;
+  background: none;
+  box-shadow: 0 0 0 1000px rgba(0, 0, 0, 0.5);
+  -moz-transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+}
