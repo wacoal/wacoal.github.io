@@ -1,40 +1,41 @@
 document.createElement('main');
+
 $(function(){
-		//ライブラリの初期設定
-		var $tgPanPinchArea = document.getElementById("panPinch"),
-				$jqTgPanPinchArea = $($tgPanPinchArea),
-				$tgPanPinchElm = document.getElementById("panPinchElm"),
-				$jqTgPanPinchElm = $($tgPanPinchElm),
-				$hammerObj = new Hammer($tgPanPinchElm),
-				$hammerObj2 = new Hammer($tgPanPinchArea),
-				panTime = false,
-				pinchTime = false,
-				$pinchTimer = {};
-		$hammerObj.get("pan").set({ enable: true });
-		$hammerObj.get("pinch").set({ enable: true });
-		$jqTgPanPinchElm.css("transform", "scale(1)");
+	//ライブラリの初期設定
+	var $tgPanPinchArea = document.getElementById("panPinch"),
+			$jqTgPanPinchArea = $($tgPanPinchArea),
+			$tgPanPinchElm = document.getElementById("panPinchElm"),
+			$jqTgPanPinchElm = $($tgPanPinchElm),
+			$hammerObj = new Hammer($tgPanPinchElm),
+			$hammerObj2 = new Hammer($tgPanPinchArea),
+			panTime = false,
+			pinchTime = false,
+			$pinchTimer = {};
+	$hammerObj.get("pan").set({ enable: true });
+	$hammerObj.get("pinch").set({ enable: true });
+	$jqTgPanPinchElm.css("transform", "scale(1)");
 
-		//var obj = $($tgPanPinchElm);
-		//var rect = obj.getBoundingClientRect();
+	//var obj = $($tgPanPinchElm);
+	//var rect = obj.getBoundingClientRect();
 
-		// 座標を計算する
-		var positionX;
-		var positionY;
+	// 座標を計算する
+	// var positionX;
+	// var positionY;
 
-		window.onload = function() {
-	    var element = document.getElementById('panPinchElm');
-	    var rect = element.getBoundingClientRect();
-
-	    console.log(rect.left);   // x座標(絶対座標)
-	    console.log(rect.top);    // y座標(絶対座標)
-	    console.log(rect.width);  // 幅
-	    console.log(rect.height); // 高さ
-
-			// function getRect(){
-			// 	positionX = rect.left + window.pageXOffset;
-			// 	positionY = rect.top + window.pageYOffset;
-			// }
-		}
+	// window.onload = function() {
+  //   var element = document.getElementById('panPinchElm');
+  //   var rect = element.getBoundingClientRect();
+	//
+  //   console.log(rect.left);   // x座標(絶対座標)
+  //   console.log(rect.top);    // y座標(絶対座標)
+  //   console.log(rect.width);  // 幅
+  //   console.log(rect.height); // 高さ
+	//
+	// 	// function getRect(){
+	// 	// 	positionX = rect.left + window.pageXOffset;
+	// 	// 	positionY = rect.top + window.pageYOffset;
+	// 	// }
+	// }
 
 	$hammerObj.on("pan",function(event) {
       if(event.isFinal) { //end
