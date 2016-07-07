@@ -189,6 +189,7 @@ $(function(){
           $jqIdTrimingArea
               .data("preScale", preScale)
               .data("scale", event.scale);
+					$("#x").html(preScale);
       } else { //move
           if($pinchTimer) clearTimeout($pinchTimer);
           $jqIdTrimingElm.css("transform", "scale(" + ($jqIdTrimingArea.data("preScale") + (event.scale - $jqIdTrimingArea.data("scale"))) + ")");
