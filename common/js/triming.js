@@ -60,7 +60,7 @@ function main(dataUrl) {
 				ctx2 = canvas2.getContext('2d');
 				image.src = dataUrl;
 				image.addEventListener('load', function(){
-						$(".loading").hide();
+						//$(".loading").hide();
 						imageWidth = image.width;
 						imageHeight = image.height;
 						repWidth = imageWidth < imageHeight ? minWidth : minHeight / imageHeight * imageWidth;
@@ -72,8 +72,18 @@ function main(dataUrl) {
 						ctx.save();
 
 						trimRestore();
+						testWrite();
 				}, false);
+
+
 		}
+}
+
+
+function testWrite(){
+	$("#xxx").html("test");
+	$("#originsize").html(imageWidth);
+	$("#nowsize").html(repWidth);
 }
 
 var isTouch = ('ontouchstart' in window);

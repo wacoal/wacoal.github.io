@@ -43,7 +43,10 @@
 								<input class="trimming-wrap-file__input bttn__input" type="file" name="file" id="selfile" />
 								<span class="trimming-wrap-file__txt">写真を選択</span>
 							</label> -->
-							<p class="trimming-move__txt">写真を切り取る範囲を選択して下さい。<br>白線内を指でずらすことで調整できます。</p>
+							<p class="trimming-move__txt">
+								写真を切り取る範囲を選択して下さい。<br>白線内を指でずらすことで調整できます。<br>
+								x=<span id="xxx"></span>.Y=<span id="yyy"></span>.originSize=<span id="originsize"></span>..originSize=<span id="nowsize"></span>
+							</p>
 					</div>
 
 					<div class="trimming-move">
@@ -84,7 +87,7 @@
 <script>
 $(function(){
 	$(window).on("load",function(){
-		main("/common/img/download1.jpg");
+		main("/common/img/download2.jpg");
 	});
 });
 </script>
