@@ -203,7 +203,7 @@ $(function(){
 					$("#x").html(preScale);
       } else { //move
           if($pinchTimer) clearTimeout($pinchTimer);
-					var scaleSize = ($jqIdTrimingArea.data("preScale") + (event.scale - $jqIdTrimingArea.data("scale")));
+					var scaleSize = $jqIdTrimingArea.data("preScale") + (event.scale - $jqIdTrimingArea.data("scale"));
 					if( scaleSize > elmMaxSize ){
 						scaleSize = elmMaxSize
 					}
