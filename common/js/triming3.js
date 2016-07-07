@@ -51,7 +51,9 @@ function main(dataUrl) {
 						});
 						$("#js_triming_element").css({
 							top: (repHeight / 2) - 120,
-							left: (repWidth /2) - 120
+							left: (repWidth /2) - 120,
+							maxWidth: repWidth,
+							maxHeight: repHeight
 						})
 
 				}, false);
