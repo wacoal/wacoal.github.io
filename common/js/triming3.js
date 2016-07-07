@@ -26,6 +26,8 @@ var canvas2;
 var preventEvent = true;
 var srcImgPost;
 
+var elmMaxSize;
+
 
 function main(dataUrl) {
 		if (canvas.getContext) {
@@ -52,9 +54,11 @@ function main(dataUrl) {
 						$("#js_triming_element").css({
 							top: (repHeight / 2) - 120,
 							left: (repWidth /2) - 120,
-							maxWidth: repWidth,
-							maxHeight: repHeight
-						})
+							// maxWidth: repWidth,
+							// maxHeight: repHeight
+						});
+
+						elmMaxSize = repWidth < repHeight ? repWidth / 240 : repHeight / 240;
 
 				}, false);
 
@@ -191,7 +195,7 @@ $(function(){
           $jqIdTrimingArea
               .data("preScale", preScale)
               .data("scale", event.scale);
-					$("#x").html(preScale);
+					$("#x").html(preScale, elmMaxSize);
       } else { //move
           if($pinchTimer) clearTimeout($pinchTimer);
           $jqIdTrimingElm.css("transform", "scale(" + ($jqIdTrimingArea.data("preScale") + (event.scale - $jqIdTrimingArea.data("scale"))) + ")");
