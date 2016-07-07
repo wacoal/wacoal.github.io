@@ -141,6 +141,8 @@ function testWrite(){
           $jqTgPanPinchArea
               .data("preScale", preScale)
               .data("scale", event.scale);
+
+					$("#x").html(preScale);
       } else { //move
           if($pinchTimer) clearTimeout($pinchTimer);
           $jqTgPanPinchElm.css("transform", "scale(" + ($jqTgPanPinchArea.data("preScale") + (event.scale - $jqTgPanPinchArea.data("scale"))) + ")");
