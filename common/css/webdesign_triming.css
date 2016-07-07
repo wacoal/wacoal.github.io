@@ -579,5 +579,5 @@ a.bttn:hover,
   width: 240px;
   height: 240px;
   background: none;
-  box-shadow: 0 0 0 2000px rgba(0, 0, 0, 0.5);
+  border: solid 1px #ff0000;
 }
