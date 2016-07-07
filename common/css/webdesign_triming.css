@@ -596,8 +596,4 @@ a.bttn:hover,
   height: 240px;
   background: none;
   box-shadow: 0 0 0 1000px rgba(0, 0, 0, 0.5);
-  -moz-transform: translate(-50%, -50%);
-  -webkit-transform: translate(-50%, -50%);
-  -o-transform: translate(-50%, -50%);
-  -ms-transform: translate(-50%, -50%);
 }

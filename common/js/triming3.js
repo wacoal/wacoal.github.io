@@ -44,16 +44,27 @@ function main(dataUrl) {
 						ctx.drawImage(image, 0, 0, repWidth, repHeight);
 						ctx.save();
 
-						trimRestore();
+						//trimRestore();
+						$("#js_triming_area").css({
+							width: repWidth,
+							height: repHeight
+						});
+						$("#js_triming_element").css({
+							top: (repHeight / 2) - 120,
+							left: (repWidth /2) - 120
+						})
+
 				}, false);
+
 		}
 }
 //トリミング位置の初期化
 function trimRestore(){
-		var tbPos = $( "#thumbBox" ).offset();
+		var tbPos = $( "#js_triming_element" ).offset();
 		var cvPos = $( "#canvas" ).offset();
 		trimX = tbPos.left - cvPos.left;
 		trimY = tbPos.top - cvPos.top;
+		console.log(tbPos,cvPos);
 }
 
 $(function(){
@@ -65,15 +76,16 @@ $(function(){
 
 
 	//ライブラリの初期設定
-	var $idTrimingArea = document.getElementById("js_triming_area"),
-			$jqIdTrimingArea = $($idTrimingArea),
-			$idTrimingElm = document.getElementById("js_triming_element"),
-			$jqIdTrimingElm = $($idTrimingElm),
-			$hammerObj = new Hammer($idTrimingElm),
-			$hammerObj2 = new Hammer($idTrimingArea),
-			panTime = false,
-			pinchTime = false,
-			$pinchTimer = {};
+	var $idTrimingArea = document.getElementById("js_triming_area");
+	//var $idTrimingArea = document.getElementById("canvas");
+	var $jqIdTrimingArea = $($idTrimingArea);
+	var $idTrimingElm = document.getElementById("js_triming_element");
+	var $jqIdTrimingElm = $($idTrimingElm);
+	var $hammerObj = new Hammer($idTrimingElm);
+	var $hammerObj2 = new Hammer($idTrimingArea);
+	var panTime = false;
+	var pinchTime = false;
+	var $pinchTimer = {};
 	$hammerObj.get("pan").set({ enable: true });
 	$hammerObj.get("pinch").set({ enable: true });
 	$jqIdTrimingElm.css("transform", "scale(1)");
@@ -86,7 +98,7 @@ $(function(){
 	// var positionY;
 
 	// window.onload = function() {
-  //   var element = document.getElementById('panPinchElm');
+  //   var element = document.getElementById('canvas');
   //   var rect = element.getBoundingClientRect();
 	//
   //   console.log(rect.left);   // x座標(絶対座標)

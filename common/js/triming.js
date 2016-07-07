@@ -28,7 +28,7 @@ var srcImgPost;
 
 
 $(function(){
-		
+
 		canvas = document.getElementById('canvas');
 		canvas2 = document.getElementById('canvas2');
 
