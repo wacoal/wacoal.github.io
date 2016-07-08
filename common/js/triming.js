@@ -56,8 +56,6 @@ $(function(){
 // 		main();
 // }, false);
 
-
-
 function main(dataUrl) {
 		if (canvas.getContext) {
 				ctx = canvas.getContext('2d');

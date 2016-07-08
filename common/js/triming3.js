@@ -27,6 +27,10 @@ var preventEvent = true;
 var srcImgPost;
 
 var elmMaxSize;
+var topOffset;
+var leftOffset;
+var elmX;
+var elmY;
 
 
 function main(dataUrl) {
@@ -60,12 +64,35 @@ function main(dataUrl) {
 
 						elmMaxSize = repWidth < repHeight ? repWidth / 240 : repHeight / 240;
 
-						$("#x").html(elmMaxSize);
+						//TODO function化したい
+						topOffset =  $("#js_triming_area").offset().top;
+						leftOffset = $("#js_triming_area").offset().left;
+						$("#o-size").html(imageWidth);
+						$('#now-size').html(parseInt(repWidth));
+						$("#x").html(leftOffset);
+						$("#y").html(topOffset);
+
+						elmX = ( ( repWidth/ 2) - 120 ) + leftOffset;
+						elmY = ( (repHeight / 2) - 120 ) + topOffset;
+						elmX = parseInt(elmX);
+						elmY = parseInt(elmY);
+						$("#x_now").html(elmX);
+						$("#y_now").html(elmY);
+
+						var ratio = figureScale(imageWidth,repWidth);
+
+						console.log(ratio);
 
 				}, false);
 
 		}
 }
+
+function figureScale(original,now){
+	var scale = original / now;
+  return scale;
+}
+
 //トリミング位置の初期化
 function trimRestore(){
 		var tbPos = $( "#js_triming_element" ).offset();
@@ -75,14 +102,68 @@ function trimRestore(){
 		console.log(tbPos,cvPos);
 }
 
+function rotate(){
+		if (!ctx) return;
+		restore();
+		angle = angle >= 270 ? 0 : angle + 90;
+		if(angle % 180) {
+				repWidth = imageWidth < imageHeight ? minHeight : minWidth / imageHeight * imageWidth;
+				repHeight = imageHeight < imageWidth ? minWidth : minHeight / imageWidth * imageHeight;
+		} else {
+				repWidth = imageWidth < imageHeight ? minWidth : minHeight / imageHeight * imageWidth;
+				repHeight = imageHeight < imageWidth ? minHeight : minWidth / imageWidth * imageHeight;
+		}
+		var rotateWidth  = angle % 180 ? repHeight : repWidth;
+		var rotateHeight = angle % 180 ? repWidth : repHeight;
+		canvas.width  = rotateWidth;
+		canvas.height = rotateHeight;
+		ctx.fillRect(0,0,canvas.width + 1,canvas.height + 1);
+		ctx.rotate(angle * Math.PI / 180);
+		ctx.translate( -( angle == 180 || angle == 270 ? repWidth : 0), -( angle == 90|| angle == 180  ? repHeight : 0) );
+		ctx.drawImage(image, 0, 0, repWidth, repHeight);
+
+		$("#js_triming_area").css({
+			width: rotateWidth,
+			height: rotateHeight
+		});
+		$("#js_triming_element").css({
+			top: (rotateHeight / 2) - 120,
+			left: (rotateWidth /2) - 120,
+		});
+
+		elmMaxSize = repWidth < repHeight ? repWidth / 240 : repHeight / 240;
+
+		//TODO function1 回転したとき横は縦の値を入れるべきか
+		// topOffset =  $(canvas).offset().top;
+		// leftOffset = $(canvas).offset().left;
+		// $("#o-size").html(imageWidth);
+		// $('#now-size').html(parseInt(repWidth));
+		// $("#x").html(leftOffset);
+		// $("#y").html(topOffset);
+
+		trimRestore();
+}
+//canvasの初期化
+function restore(){
+		posX = 0;
+		posY = 0;
+		canvas.width = repWidth;
+		canvas.height = repHeight;
+		ctx.restore();
+		ctx.drawImage(image, 0, 0, repWidth, repHeight);
+		ctx.save();
+
+
+}
+
 $(function(){
 
 	$(window).on("load",function(){
 		canvas = document.getElementById('canvas');
 		canvas2 = document.getElementById('canvas2');
-
-
-
+		$("#js_btn_rotate").on('click',function(){
+			rotate();
+		});
 	});
 
 
@@ -152,7 +233,6 @@ $(function(){
 
 	$hammerObj.on("pan",function(event) {
       if(event.isFinal) { //end
-
           panTime = false;
           $jqIdTrimingArea.data("down", false);
           if(Number(String($jqIdTrimingElm.css("left")).replace("px", "")) < 0)
@@ -163,6 +243,7 @@ $(function(){
               $jqIdTrimingElm.css("top", "0px");
           if(Number(String($jqIdTrimingElm.css("top")).replace("px", "")) > ($jqIdTrimingArea.outerHeight() - $jqIdTrimingElm.height()))
               $jqIdTrimingElm.css("top", ($jqIdTrimingArea.outerHeight() - $jqIdTrimingElm.height()) + "px");
+
       } else {
           if(!panTime) { //start
               panTime = event.timeStamp;
@@ -174,8 +255,7 @@ $(function(){
                   .data("elmPosX", Number(String($jqIdTrimingElm.css("left")).replace("px", "")))
                   .data("elmPosY", Number(String($jqIdTrimingElm.css("top")).replace("px", "")));
 
-							var test = $jqIdTrimingArea.data("x");
-							console.log(test);
+
 
           } else { //move
               if ($jqIdTrimingArea.data("down") == true) {
@@ -183,6 +263,14 @@ $(function(){
                       "left": ($jqIdTrimingArea.data("elmPosX") - ($jqIdTrimingArea.data("x") - event.center.x)) + "px",
                       "top": ($jqIdTrimingArea.data("elmPosY") - ($jqIdTrimingArea.data("y") - event.center.y)) + "px"
                   });
+
+
+									elmX = ( ($jqIdTrimingArea.data("elmPosX") - ($jqIdTrimingArea.data("x") - event.center.x)) ) + leftOffset;
+									elmY = ($jqIdTrimingArea.data("elmPosY") - ($jqIdTrimingArea.data("y") - event.center.y))  + topOffset;;
+									elmX = parseInt(elmX);
+									elmY = parseInt(elmY);
+									$("#x_now").html(elmX);
+									$("#y_now").html(elmY);
               }
           }
       }
@@ -211,8 +299,61 @@ $(function(){
           $pinchTimer = setTimeout(function() { //end
               pinchTime = false;
           }, 100);
+
+					elmX = ( ($jqIdTrimingArea.data("elmPosX") - ($jqIdTrimingArea.data("x") - event.center.x)) ) + leftOffset;
+					elmY = ($jqIdTrimingArea.data("elmPosY") - ($jqIdTrimingArea.data("y") - event.center.y))  + topOffset;;
+					elmX = parseInt(elmX);
+					elmY = parseInt(elmY);
+					$("#x_now").html(elmX);
+					$("#y_now").html(elmY);
+
       }
   });
 
-	//$("#target").hammer(options).bind("pan", myPanHandler);
+
+});
+
+function sendImage(){
+		if (!ctx) return;
+		//$(".loading").show();
+		//console.log(blobX, blobY);
+		//var imageData = ctx.getImageData(trimX, trimY, minWidth, minHeight);
+		//TODO
+}
+
+$('#js_btn_upload').off("click").on("click",function(e){
+	if (!ctx) return false;
+	srcImgPost = $(this).closest("form").attr("action");
+	if(preventEvent){
+		e.preventDefault();
+		var this_id = ("#")+$(this).attr("id");
+		var tit1 = ("ご注意ください");
+		$.alerts.btnOk1 = ("画像を送信する");
+		$.alerts.btnNg1 = ("キャンセルする");
+		var txt1 = ('\
+			<div class="caution"><div class="caution__cont">\
+				<ul class="listDott">\
+					<li><p>アナタがこれから投稿する画像は、身分証を元に事務局で日々チェックを行っています</p></li>\
+					<li><p>本人が撮影したものでない画像は、<strong class="note">すぐにバレます</strong></p></li>\
+					<li><p><strong class="note">ネットで拾った画像を利用する行為</strong>は絶対にやめてください</p></li>\
+					<li><p>そのような方は、<strong class="note">サイトの利用を停止します</strong></p></li>\
+				</ul>\
+			</div></div>\
+		');
+
+		(function () {
+			jConfirm2( txt1, tit1, function(r) {
+				if( r == true){
+					preventEvent = false;
+					//$(this_id)[0].click();
+					sendImage();
+				} else {
+					return false;
+				}
+			});
+		}());
+
+	} else {
+		preventEvent = true;
+	}
 });
