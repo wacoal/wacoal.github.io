@@ -1,0 +1,221 @@
+/*********************************************
+* Theme Name : wacoal
+* Theme url  :
+* Description:
+* Auter      : ode
+* varsion    : 2016.07.11
+*********************************************/
+/****************
+
+reset
+
+******************/
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font: inherit;
+  font-size: 100%;
+  vertical-align: baseline;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  line-height: 1;
+}
+
+body {
+  background: #fcfafb;
+  line-height: 1.4;
+  color: #212121;
+  font-family: 'Lucida Grande', Meiryo, sans-serif;
+  font-size: 14px;
+  letter-spacing: 1px;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+caption, th, td {
+  text-align: left;
+  font-weight: normal;
+  vertical-align: middle;
+}
+
+q, blockquote {
+  quotes: none;
+}
+
+q:before, q:after, blockquote:before, blockquote:after {
+  content: "";
+  content: none;
+}
+
+a {
+  text-decoration: none;
+  color: #0f61b5;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+a img {
+  border: none;
+}
+
+article, aside, details, figcaption, figure, footer, header, hgroup, main, menu, nav, section, summary {
+  display: block;
+}
+
+/*
+input, textarea, select {
+	font-family: inherit;
+	font-size: inherit;
+	font-weight: inherit;
+}
+input, textarea, select { *font-size: 100%; }
+*/
+textarea {
+  font-size: 16px;
+}
+
+legend {
+  color: #212121;
+}
+
+em {
+  font-weight: bold;
+}
+
+/****************
+lists
+******************/
+.lists:after {
+  content: "";
+  display: block;
+  clear: both;
+  width: 100%;
+}
+
+.lists__item {
+  display: block;
+  float: left;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+.has_1 .lists__item {
+  width: 100%;
+}
+
+.has_2 .lists__item {
+  width: 50%;
+}
+
+.has_3 .lists__item {
+  width: 33.33%;
+}
+
+.has_4 .lists__item {
+  width: 25%;
+}
+
+.has_5 .lists__item {
+  width: 20%;
+}
+
+.has_6 .lists__item {
+  width: 16.66%;
+}
+
+/* fade
+***************************/
+@-o-keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@-ms-keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@-webkit-keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+.box {
+  display: block;
+  padding: 16px;
+  text-align: center;
+}
+
+.model {
+  position: relative;
+  display: block;
+  padding: 80px 8px 8px;
+  font-size: 36px;
+}
+.model:before {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  display: block;
+  width: 80px;
+  height: 80px;
+  margin: 0 0 0 -40px;
+  color: #212121;
+  font-size: 64px;
+  text-align: center;
+}
+.model.type_a:before {
+  content: "A";
+}
+.model.type_b:before {
+  content: "B";
+}
+
+.score {
+  position: relative;
+  display: inline-block;
+  height: 1em;
+  line-height: 1em;
+}

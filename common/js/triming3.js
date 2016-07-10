@@ -32,7 +32,6 @@ var leftOffset;
 var elmX;
 var elmY;
 
-
 function main(dataUrl) {
 		if (canvas.getContext) {
 				ctx = canvas.getContext('2d');
