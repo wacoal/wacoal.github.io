@@ -268,6 +268,12 @@ $(function(){
 									elmY = ($jqIdTrimingArea.data("elmPosY") - ($jqIdTrimingArea.data("y") - event.center.y))  + topOffset;;
 									elmX = parseInt(elmX);
 									elmY = parseInt(elmY);
+									if( elmX < 0){
+										elmX = 0;
+									}
+									if( elmY < 0){
+										elmY = 0;
+									}
 									$("#x_now").html(elmX);
 									$("#y_now").html(elmY);
               }
