@@ -295,6 +295,12 @@ $(function(){
       }
   });
 
+	// 小数点n位までを残す関数 (四捨五入)
+	function floatFormat( number, n ) {
+		var _pow = Math.pow( 10 , n ) ;
+		return Math.round( number * _pow ) / _pow ;
+	}
+
 	//pinch event
   $hammerObj2.on("pinch",function(event) {
       event.preventDefault ? event.preventDefault() : (event.returnValue = false);
@@ -315,12 +321,12 @@ $(function(){
 					scaleRatio = floatFormat( scaleSize, 3 );
 					scaleElmSize = elmSize * scaleRatio;
 
-					if( scaleSize > elmMaxSize ){
+					if( scaleElmSize > elmMaxSize ){
 						scaleSize = elmMaxSize
 					}
-					if( scaleElmSize > elmMaxSize ){
-						scaleElmSize = elmMaxSize;
-					}
+					// if( scaleElmSize > elmMaxSize ){
+					// 	scaleElmSize = elmMaxSize;
+					// }
           $jqIdTrimingElm.css("transform", "scale(" + scaleSize + ")");
           $pinchTimer = setTimeout(function() { //end
               pinchTime = false;
@@ -350,11 +356,7 @@ function sendImage(){
 		//TODO
 }
 
-// 小数点n位までを残す関数 (四捨五入)
-function floatFormat( number, n ) {
-	var _pow = Math.pow( 10 , n ) ;
-	return Math.round( number * _pow ) / _pow ;
-}
+
 
 $('#js_btn_upload').off("click").on("click",function(e){
 	if (!ctx) return false;
