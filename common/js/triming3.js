@@ -337,7 +337,11 @@ $(function(){
 					// if( scaleElmSize > elmMaxSize ){
 					// 	scaleElmSize = elmMaxSize;
 					// }
-          $jqIdTrimingElm.css("transform", "scale(" + scaleSize + ")");
+          $jqIdTrimingElm.css({
+						width: scaleElmSize,
+						height: scaleElmSize,
+						//"transform", "scale(" + scaleSize + ")"
+					});
           $pinchTimer = setTimeout(function() { //end
               pinchTime = false;
           }, 100);
