@@ -365,8 +365,8 @@ $(function(){
 					// 	elmY = repHeight - scaleElmSize;
 					// }
 
-					$("#x_now").html(elmX);
-					$("#y_now").html(elmY);
+					// $("#x_now").html(elmX);
+					// $("#y_now").html(elmY);
 					$("#scale").html(scaleRatio);
 					$('#now-size').html(scaleElmSize);
 
