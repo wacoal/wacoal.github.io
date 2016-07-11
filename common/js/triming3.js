@@ -32,6 +32,7 @@ var leftOffset;
 var elmX;
 var elmY;
 var targetSize = 240;
+var elmSize;
 var ratio = 1;
 
 function main(dataUrl) {
@@ -71,8 +72,9 @@ function main(dataUrl) {
 						//TODO function化したい
 						topOffset =  $("#js_triming_area").offset().top;
 						leftOffset = $("#js_triming_area").offset().left;
+						elmSize = repWidth;
 						$("#o-size").html(imageWidth);
-						$('#now-size').html(parseInt(repWidth));
+						$('#now-size').html(elmSize);
 						$("#x").html(leftOffset);
 						$("#y").html(topOffset);
 
@@ -322,9 +324,13 @@ $(function(){
 					elmY = ($jqIdTrimingArea.data("elmPosY") - ($jqIdTrimingArea.data("y") - event.center.y))  + topOffset;;
 					elmX = parseInt(elmX);
 					elmY = parseInt(elmY);
+
+					elmSize = elmSize * scaleSize;
+
 					$("#x_now").html(elmX);
 					$("#y_now").html(elmY);
 					$("#scale").html(scaleSize);
+					$('#now-size').html(elmSize);
 
       }
   });
