@@ -329,6 +329,9 @@ $(function(){
       } else { //move
           if($pinchTimer) clearTimeout($pinchTimer);
 					var scaleSize = $jqIdTrimingArea.data("preScale") + (event.scale - $jqIdTrimingArea.data("scale"));
+					if( scaleSize > maxScale ){
+						scaleSize = maxScale
+					}
 					//scaleRatio = floatFormat( scaleSize, 3 );
 					scaleRatio = floatFormat( scaleSize, 3 );
 					scaleElmSize = elmSize * scaleRatio;
