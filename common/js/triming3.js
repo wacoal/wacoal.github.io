@@ -352,7 +352,7 @@ function sendImage(){
 }
 
 // 小数点n位までを残す関数 (四捨五入)
-function floatFormat1( number, n ) {
+function floatFormat( number, n ) {
 	var _pow = Math.pow( 10 , n ) ;
 	return Math.round( number * _pow ) / _pow ;
 }
