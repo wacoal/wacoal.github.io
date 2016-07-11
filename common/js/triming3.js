@@ -313,7 +313,6 @@ $(function(){
           $jqIdTrimingArea
               .data("preScale", preScale)
               .data("scale", event.scale);
-					$("#x").html(preScale);
       } else { //move
           if($pinchTimer) clearTimeout($pinchTimer);
 					var scaleSize = $jqIdTrimingArea.data("preScale") + (event.scale - $jqIdTrimingArea.data("scale"));
@@ -322,7 +321,7 @@ $(function(){
 					scaleElmSize = elmSize * scaleRatio;
 
 					if( scaleElmSize > elmMaxSize ){
-						scaleSize = elmMaxSize
+						scaleElmSize = elmMaxSize
 					}
 					// if( scaleElmSize > elmMaxSize ){
 					// 	scaleElmSize = elmMaxSize;
