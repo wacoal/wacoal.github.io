@@ -32,6 +32,7 @@ var leftOffset;
 var elmX;
 var elmY;
 var targetSize = 240;
+var scaleElmSize = targetSize;
 var elmSize;
 var ratio = 1;
 var scaleRatio = 1;
@@ -54,8 +55,8 @@ function main(dataUrl) {
 						repWidth  = parseInt(repWidth);
 						repHeight = parseInt(repHeight);
 
-						scaleMaxWidth = repWidth / targetSize;
-						scaleMaxHeight = repHeight / targetSize;
+						scaleMaxWidth = repWidth / scaleElmSize;
+						scaleMaxHeight = repHeight / scaleElmSize;
 
 						scaleMaxWidth = parseInt(scaleMaxWidth);
 						scaleMaxHeight = parseInt(scaleMaxHeight);
@@ -75,26 +76,26 @@ function main(dataUrl) {
 							height: repHeight
 						});
 						$("#js_triming_element").css({
-							top: (repHeight / 2) - (targetSize / 2),
-							left: (repWidth /2) - (targetSize / 2),
+							top: (repHeight / 2) - (scaleElmSize / 2),
+							left: (repWidth /2) - (scaleElmSize / 2),
 							// maxWidth: repWidth,
 							// maxHeight: repHeight
 						});
 
-						elmMaxSize = repWidth < repHeight ? repWidth / targetSize : repHeight / targetSize;
+						elmMaxSize = repWidth < repHeight ? repWidth / scaleElmSize : repHeight / scaleElmSize;
 
 						//TODO function化したい
 						topOffset =  $("#js_triming_area").offset().top;
 						leftOffset = $("#js_triming_area").offset().left;
-						elmSize = targetSize;
+						elmSize = scaleElmSize;
 						$("#o-size").html(imageWidth);
 						$('#now-size').html(elmSize);
 						$("#x").html(leftOffset);
 						$("#y").html(topOffset);
 
-						elmX = ( ( repWidth/ 2) - (targetSize / 2) ) + leftOffset;
+						elmX = ( ( repWidth/ 2) - (scaleElmSize / 2) ) + leftOffset;
 						//elmY = ( (repHeight / 2) - (targetSize / 2) ) + topOffset;
-						elmY = ( (repHeight / 2) - (targetSize / 2) );
+						elmY = ( (repHeight / 2) - (scaleElmSize / 2) );
 						elmX = parseInt(elmX);
 						elmY = parseInt(elmY);
 						$("#x_now").html(elmX);
@@ -280,23 +281,27 @@ $(function(){
                   });
 
 									//座業の決定
-									//elmX = ( ($jqIdTrimingArea.data("elmPosX") - ($jqIdTrimingArea.data("x") - event.center.x)) ) + leftOffset;
-									//elmY = ($jqIdTrimingArea.data("elmPosY") - ($jqIdTrimingArea.data("y") - event.center.y))  + topOffset;
-									elmX = ( ($jqIdTrimingArea.data("elmPosX") - ($jqIdTrimingArea.data("x") - event.center.x)) );
-									elmY = ($jqIdTrimingArea.data("elmPosY") - ($jqIdTrimingArea.data("y") - event.center.y));
-									elmX = parseInt(elmX);
-									elmY = parseInt(elmY);
+									elmX = ( ($jqIdTrimingArea.data("elmPosX") - ($jqIdTrimingArea.data("x") - event.center.x)) ) + leftOffset;
+									elmY = ($jqIdTrimingArea.data("elmPosY") - ($jqIdTrimingArea.data("y") - event.center.y))  + topOffset;
+									// elmX = ( ($jqIdTrimingArea.data("elmPosX") - ($jqIdTrimingArea.data("x") - event.center.x)) );
+									// elmY = ($jqIdTrimingArea.data("elmPosY") - ($jqIdTrimingArea.data("y") - event.center.y));
+									// elmX = ( ( repWidth/ 2) - (scaleElmSize / 2) ) + leftOffset;
+									// elmY = ( (repHeight / 2) - (scaleElmSize / 2) );
+									// elmX =  $("#js_triming_area").offset().top;
+									// elmY = $("#js_triming_area").offset().left;
+									elmX = parseInt(topOffset);
+									elmY = parseInt(leftOffset);
 									if( elmX < 0){
 										elmX = 0;
 									}
-									if( elmX > repWidth - targetSize ){
-										elmX = repWidth - targetSize;
+									if( elmX > repWidth - scaleElmSize ){
+										elmX = repWidth - scaleElmSize;
 									}
 									if( elmY < 0){
 										elmY = 0;
 									}
-									if( elmY > repHeight - targetSize ){
-										elmY = repHeight - targetSize;
+									if( elmY > repHeight - scaleElmSize ){
+										elmY = repHeight - scaleElmSize;
 									}
 									$("#x_now").html(elmX);
 									$("#y_now").html(elmY);
@@ -346,9 +351,8 @@ $(function(){
 					// elmX = ($jqIdTrimingArea.data("elmPosX"));
 					// elmY = ($jqIdTrimingArea.data("elmPosY"));
 
-					elmX = ( ( repWidth/ 2) - (scaleElmSize / 2) ) + leftOffset;
-					elmY = ( (repHeight / 2) - (scaleElmSize / 2) );
-
+					elmX =  $("#js_triming_area").offset().top;
+					elmY = $("#js_triming_area").offset().left;
 					elmX = parseInt(elmX);
 					elmY = parseInt(elmY);
 
