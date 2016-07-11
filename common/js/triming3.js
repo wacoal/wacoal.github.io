@@ -338,9 +338,9 @@ $(function(){
 					// 	scaleElmSize = elmMaxSize;
 					// }
           $jqIdTrimingElm.css({
-						width: scaleElmSize,
-						height: scaleElmSize,
-						//"transform", "scale(" + scaleSize + ")"
+						// width: scaleElmSize,
+						// height: scaleElmSize,
+						"transform": "scale(" + scaleSize + ")"
 					});
           $pinchTimer = setTimeout(function() { //end
               pinchTime = false;
@@ -378,6 +378,16 @@ $(function(){
   });
 
 	$hammerObj2.on("pinchend",function(event) {
+
+		$jqIdTrimingElm.css({
+			width: scaleElmSize,
+			height: scaleElmSize,
+			"left": elmX * scaleRatio,
+			"top": elmY * scaleRatio,
+			"transform": "scale(none)"
+		});
+
+
 		elmX =  ($("#js_triming_element").position().left);
 		elmY = ($("#js_triming_element").offset().top) - topOffset;
 
