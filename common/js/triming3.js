@@ -377,6 +377,10 @@ $(function(){
       }
   });
 
+	$hammerObj2.on("pinchend",function(event) {
+		alert("tae")
+	});
+
 });
 
 function sendImage(){
