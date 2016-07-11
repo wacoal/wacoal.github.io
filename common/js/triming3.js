@@ -345,11 +345,23 @@ $(function(){
               pinchTime = false;
           }, 100);
 
-					elmX = ( ($jqIdTrimingArea.data("elmPosX") - ($jqIdTrimingArea.data("x") - event.center.x)) ) + leftOffset;
-					elmY = ($jqIdTrimingArea.data("elmPosY") - ($jqIdTrimingArea.data("y") - event.center.y))  + topOffset;;
+					elmX = ( ($jqIdTrimingArea.data("elmPosX") - ($jqIdTrimingArea.data("x") - event.center.x)) );
+					elmY = ($jqIdTrimingArea.data("elmPosY") - ($jqIdTrimingArea.data("y") - event.center.y));;
 					elmX = parseInt(elmX);
 					elmY = parseInt(elmY);
 
+					if( elmX < 0){
+						elmX = 0;
+					}
+					if( elmX > repWidth - targetSize ){
+						elmX = repWidth - targetSize;
+					}
+					if( elmY < 0){
+						elmY = 0;
+					}
+					if( elmY > repHeight - targetSize ){
+						elmY = repHeight - targetSize;
+					}
 
 					$("#x_now").html(elmX);
 					$("#y_now").html(elmY);
