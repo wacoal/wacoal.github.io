@@ -152,12 +152,12 @@ function rotate(){
 		elmMaxSize = repWidth < repHeight ? repWidth / 240 : repHeight / 240;
 
 		//TODO function1 回転したとき横は縦の値を入れるべきか
-		// topOffset =  $(canvas).offset().top;
+		//  =  $(canvas).offset().top;
 		// leftOffset = $(canvas).offset().left;
 		// $("#o-size").html(imageWidth);
 		// $('#now-size').html(parseInt(repWidth));
 		// $("#x").html(leftOffset);
-		// $("#y").html(topOffset);
+		// $("#y").html();
 
 		trimRestore();
 }
@@ -278,7 +278,7 @@ $(function(){
 
 									//座業の決定
 									// elmX = ( ($jqIdTrimingArea.data("elmPosX") - ($jqIdTrimingArea.data("x") - event.center.x)) ) + leftOffset;
-									// elmY = ($jqIdTrimingArea.data("elmPosY") - ($jqIdTrimingArea.data("y") - event.center.y))  + topOffset;
+									// elmY = ($jqIdTrimingArea.data("elmPosY") - ($jqIdTrimingArea.data("y") - event.center.y))  + ;
 									elmX = ( ($jqIdTrimingArea.data("elmPosX") - ($jqIdTrimingArea.data("x") - event.center.x)) );
 									elmY = ( ($jqIdTrimingArea.data("elmPosY") - ($jqIdTrimingArea.data("y") - event.center.y)) );
 									// elmX = ( ( repWidth/ 2) - (scaleElmSize / 2) ) + leftOffset;
@@ -374,8 +374,9 @@ $(function(){
   });
 
 	$hammerObj2.on("pinchend",function(event) {
-		elmX =  $("#js_triming_element").offset().top;
-		elmY = $("#js_triming_element").offset().left;
+		elmX =  ($("#js_triming_element").offset().left) - leftOffset;
+		elmY = ($("#js_triming_element").offset().top) - ;
+
 		elmX = parseInt(elmX);
 		elmY = parseInt(elmY);
 		$("#x_now").html(elmX);
