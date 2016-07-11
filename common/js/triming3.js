@@ -318,9 +318,8 @@ $(function(){
 					if( scaleSize > elmMaxSize ){
 						scaleSize = elmMaxSize
 					}
-					if( elmSize > elmMaxSize ){
-						elmSize = elmMaxSize;
-						scaleSize
+					if( scaleElmSize > elmMaxSize ){
+						scaleElmSize = elmMaxSize;
 					}
           $jqIdTrimingElm.css("transform", "scale(" + scaleSize + ")");
           $pinchTimer = setTimeout(function() { //end
