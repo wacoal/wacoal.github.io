@@ -347,6 +347,7 @@ $(function(){
 					// elmY = ($jqIdTrimingArea.data("elmPosY"));
 
 					elmX = ( ( repWidth/ 2) - (scaleElmSize / 2) ) + leftOffset;
+					elmY = ( (repHeight / 2) - (scaleElmSize / 2) );
 
 					elmX = parseInt(elmX);
 					elmY = parseInt(elmY);
