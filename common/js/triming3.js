@@ -281,16 +281,16 @@ $(function(){
                   });
 
 									//座業の決定
-									elmX = ( ($jqIdTrimingArea.data("elmPosX") - ($jqIdTrimingArea.data("x") - event.center.x)) ) + leftOffset;
-									elmY = ($jqIdTrimingArea.data("elmPosY") - ($jqIdTrimingArea.data("y") - event.center.y))  + topOffset;
-									// elmX = ( ($jqIdTrimingArea.data("elmPosX") - ($jqIdTrimingArea.data("x") - event.center.x)) );
-									// elmY = ($jqIdTrimingArea.data("elmPosY") - ($jqIdTrimingArea.data("y") - event.center.y));
+									// elmX = ( ($jqIdTrimingArea.data("elmPosX") - ($jqIdTrimingArea.data("x") - event.center.x)) ) + leftOffset;
+									// elmY = ($jqIdTrimingArea.data("elmPosY") - ($jqIdTrimingArea.data("y") - event.center.y))  + topOffset;
+									elmX = ( ($jqIdTrimingArea.data("elmPosX") - ($jqIdTrimingArea.data("x") - event.center.x)) );
+									elmY = ( ($jqIdTrimingArea.data("elmPosY") - ($jqIdTrimingArea.data("y") - event.center.y)) );
 									// elmX = ( ( repWidth/ 2) - (scaleElmSize / 2) ) + leftOffset;
 									// elmY = ( (repHeight / 2) - (scaleElmSize / 2) );
 									// elmX =  $("#js_triming_area").offset().top;
 									// elmY = $("#js_triming_area").offset().left;
-									elmX = parseInt(topOffset);
-									elmY = parseInt(leftOffset);
+									elmX = parseInt(elmX);
+									elmY = parseInt(elmY);
 									if( elmX < 0){
 										elmX = 0;
 									}
