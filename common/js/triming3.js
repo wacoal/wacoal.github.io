@@ -324,7 +324,7 @@ $(function(){
 					elmY = parseInt(elmY);
 					$("#x_now").html(elmX);
 					$("#y_now").html(elmY);
-					$("#scale").html(scale);
+					$("#scale").html(scaleSize);
 
       }
   });
