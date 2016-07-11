@@ -39,14 +39,6 @@ var scaleMaxWidth;
 var scaleMaxHeight;
 var maxScale;
 
-
-// 小数点n位までを残す関数 (四捨五入)
-function floatFormat( number, n ) {
-	var _pow = Math.pow( 10 , n ) ;
-	return Math.round( number * _pow ) / _pow ;
-}
-
-
 function main(dataUrl) {
 		if (canvas.getContext) {
 				ctx = canvas.getContext('2d');
@@ -64,6 +56,10 @@ function main(dataUrl) {
 
 						scaleMaxWidth = repWidth / targetSize;
 						scaleMaxHeight = repHeight / targetSize;
+
+						scaleMaxWidth = parseInt(scaleMaxWidth);
+						scaleMaxHeight = parseInt(scaleMaxHeight);
+
 						maxScale = scaleMaxWidth < scaleMaxHeight ? scaleMaxWidth : scaleMaxHeight;
 
 						console.log(maxScale);
@@ -178,13 +174,6 @@ function restore(){
 		ctx.drawImage(image, 0, 0, repWidth, repHeight);
 		ctx.save();
 }
-
-
-
-
-
-
-
 
 $(function(){
 
@@ -318,6 +307,12 @@ $(function(){
           }
       }
   });
+
+	// 小数点n位までを残す関数 (四捨五入)
+	function floatFormat( number, n ) {
+		var _pow = Math.pow( 10 , n ) ;
+		return Math.round( number * _pow ) / _pow ;
+	}
 
 	//pinch event
   $hammerObj2.on("pinch",function(event) {
