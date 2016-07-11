@@ -160,8 +160,6 @@ function restore(){
 		ctx.restore();
 		ctx.drawImage(image, 0, 0, repWidth, repHeight);
 		ctx.save();
-
-
 }
 
 $(function(){
@@ -314,9 +312,15 @@ $(function(){
           if($pinchTimer) clearTimeout($pinchTimer);
 					var scaleSize = $jqIdTrimingArea.data("preScale") + (event.scale - $jqIdTrimingArea.data("scale"));
 					//scaleRatio = floatFormat( scaleSize, 3 );
-					scaleRatio = scaleSize;
+					scaleRatio = floatFormat( scaleSize, 3 );
+					elmSize = elmSize * scaleRatio;
+
 					if( scaleSize > elmMaxSize ){
 						scaleSize = elmMaxSize
+					}
+					if( elmSize > elmMaxSize ){
+						elmSize = elmMaxSize;
+						scaleSize
 					}
           $jqIdTrimingElm.css("transform", "scale(" + scaleSize + ")");
           $pinchTimer = setTimeout(function() { //end
@@ -328,7 +332,6 @@ $(function(){
 					elmX = parseInt(elmX);
 					elmY = parseInt(elmY);
 
-					elmSize = elmSize * scaleRatio;
 
 					$("#x_now").html(elmX);
 					$("#y_now").html(elmY);
@@ -348,7 +351,8 @@ function sendImage(){
 		//TODO
 }
 
-function floatFormat( number, n ) {
+// 小数点n位までを残す関数 (四捨五入)
+function floatFormat1( number, n ) {
 	var _pow = Math.pow( 10 , n ) ;
 	return Math.round( number * _pow ) / _pow ;
 }
