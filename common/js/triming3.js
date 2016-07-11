@@ -31,6 +31,8 @@ var topOffset;
 var leftOffset;
 var elmX;
 var elmY;
+var targetSize = 240;
+var ratio = 1;
 
 function main(dataUrl) {
 		if (canvas.getContext) {
@@ -41,8 +43,11 @@ function main(dataUrl) {
 						//$(".loading").hide();
 						imageWidth = image.width;
 						imageHeight = image.height;
-						repWidth = imageWidth < imageHeight ? minWidth : minHeight / imageHeight * imageWidth;
+						repWidth  = imageWidth < imageHeight ? minWidth : minHeight / imageHeight * imageWidth;
 						repHeight = imageHeight < imageWidth ? minHeight : minWidth / imageWidth * imageHeight;
+
+						repWidth  = parseInt(repWidth);
+						repHeight = parseInt(repHeight);
 
 						canvas.width = repWidth;
 						canvas.height = repHeight;
@@ -55,13 +60,13 @@ function main(dataUrl) {
 							height: repHeight
 						});
 						$("#js_triming_element").css({
-							top: (repHeight / 2) - 120,
-							left: (repWidth /2) - 120,
+							top: (repHeight / 2) - (targetSize / 2),
+							left: (repWidth /2) - (targetSize / 2),
 							// maxWidth: repWidth,
 							// maxHeight: repHeight
 						});
 
-						elmMaxSize = repWidth < repHeight ? repWidth / 240 : repHeight / 240;
+						elmMaxSize = repWidth < repHeight ? repWidth / targetSize : repHeight / targetSize;
 
 						//TODO function化したい
 						topOffset =  $("#js_triming_area").offset().top;
@@ -71,14 +76,15 @@ function main(dataUrl) {
 						$("#x").html(leftOffset);
 						$("#y").html(topOffset);
 
-						elmX = ( ( repWidth/ 2) - 120 ) + leftOffset;
-						elmY = ( (repHeight / 2) - 120 ) + topOffset;
+						elmX = ( ( repWidth/ 2) - (targetSize / 2) ) + leftOffset;
+						//elmY = ( (repHeight / 2) - (targetSize / 2) ) + topOffset;
+						elmY = ( (repHeight / 2) - (targetSize / 2) );
 						elmX = parseInt(elmX);
 						elmY = parseInt(elmY);
 						$("#x_now").html(elmX);
 						$("#y_now").html(elmY);
 
-						var ratio = figureScale(imageWidth,repWidth);
+						ratio = figureScale(imageWidth,repWidth);
 
 						console.log(ratio);
 
@@ -164,7 +170,6 @@ $(function(){
 			rotate();
 		});
 	});
-
 
 	//ライブラリの初期設定
 	var $idTrimingArea = document.getElementById("js_triming_area");
@@ -263,16 +268,24 @@ $(function(){
                       "top": ($jqIdTrimingArea.data("elmPosY") - ($jqIdTrimingArea.data("y") - event.center.y)) + "px"
                   });
 
-
-									elmX = ( ($jqIdTrimingArea.data("elmPosX") - ($jqIdTrimingArea.data("x") - event.center.x)) ) + leftOffset;
-									elmY = ($jqIdTrimingArea.data("elmPosY") - ($jqIdTrimingArea.data("y") - event.center.y))  + topOffset;;
+									//座業の決定
+									//elmX = ( ($jqIdTrimingArea.data("elmPosX") - ($jqIdTrimingArea.data("x") - event.center.x)) ) + leftOffset;
+									//elmY = ($jqIdTrimingArea.data("elmPosY") - ($jqIdTrimingArea.data("y") - event.center.y))  + topOffset;
+									elmX = ( ($jqIdTrimingArea.data("elmPosX") - ($jqIdTrimingArea.data("x") - event.center.x)) );
+									elmY = ($jqIdTrimingArea.data("elmPosY") - ($jqIdTrimingArea.data("y") - event.center.y));
 									elmX = parseInt(elmX);
 									elmY = parseInt(elmY);
 									if( elmX < 0){
 										elmX = 0;
 									}
+									if( elmX > repWidth - targetSize ){
+										elmX = repWidth - targetSize;
+									}
 									if( elmY < 0){
 										elmY = 0;
+									}
+									if( elmY > repHeight - targetSize ){
+										elmY = repHeight - targetSize;
 									}
 									$("#x_now").html(elmX);
 									$("#y_now").html(elmY);
@@ -311,6 +324,7 @@ $(function(){
 					elmY = parseInt(elmY);
 					$("#x_now").html(elmX);
 					$("#y_now").html(elmY);
+					$("#scale").html(scale);
 
       }
   });
