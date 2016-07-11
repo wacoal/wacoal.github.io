@@ -86,7 +86,7 @@ function main(dataUrl) {
 						//TODO function化したい
 						topOffset =  $("#js_triming_area").offset().top;
 						leftOffset = $("#js_triming_area").offset().left;
-						elmSize = repWidth;
+						elmSize = targetSize;
 						$("#o-size").html(imageWidth);
 						$('#now-size').html(elmSize);
 						$("#x").html(leftOffset);
@@ -346,18 +346,18 @@ $(function(){
 					elmX = parseInt(elmX);
 					elmY = parseInt(elmY);
 
-					if( elmX < 0){
-						elmX = 0;
-					}
-					if( elmX > repWidth - scaleElmSize ){
-						elmX = repWidth - scaleElmSize;
-					}
-					if( elmY < 0){
-						elmY = 0;
-					}
-					if( elmY > repHeight - scaleElmSize ){
-						elmY = repHeight - scaleElmSize;
-					}
+					// if( elmX < 0){
+					// 	elmX = 0;
+					// }
+					// if( elmX > repWidth - scaleElmSize ){
+					// 	elmX = repWidth - scaleElmSize;
+					// }
+					// if( elmY < 0){
+					// 	elmY = 0;
+					// }
+					// if( elmY > repHeight - scaleElmSize ){
+					// 	elmY = repHeight - scaleElmSize;
+					// }
 
 					$("#x_now").html(elmX);
 					$("#y_now").html(elmY);
