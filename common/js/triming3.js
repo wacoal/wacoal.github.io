@@ -385,11 +385,14 @@ $(function(){
 
 	$hammerObj2.on("pinchend",function(event) {
 
+		elmX = scaleElmSize * scaleRatio;
+		elmY = scaleElmSize * scaleRatio;
+
 		$jqIdTrimingElm.css({
 			width: scaleElmSize,
 			height: scaleElmSize,
-			"left": elmX * scaleRatio,
-			"top": elmY * scaleRatio,
+			"left": elmX,
+			"top": elmY,
 			"transform": "scale(none)"
 		});
 
