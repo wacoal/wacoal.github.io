@@ -271,20 +271,10 @@ $(function(){
                   .data("elmPosY", Number(String($jqIdTrimingElm.css("top")).replace("px", "")));
           } else { //move
               if ($jqIdTrimingArea.data("down") == true) {
-                  $jqIdTrimingElm.css({
-                      "left": ($jqIdTrimingArea.data("elmPosX") - ($jqIdTrimingArea.data("x") - event.center.x)) + "px",
-                      "top": ($jqIdTrimingArea.data("elmPosY") - ($jqIdTrimingArea.data("y") - event.center.y)) + "px"
-                  });
 
-									//座業の決定
-									// elmX = ( ($jqIdTrimingArea.data("elmPosX") - ($jqIdTrimingArea.data("x") - event.center.x)) ) + leftOffset;
-									// elmY = ($jqIdTrimingArea.data("elmPosY") - ($jqIdTrimingArea.data("y") - event.center.y))  + ;
+
 									elmX = ( ($jqIdTrimingArea.data("elmPosX") - ($jqIdTrimingArea.data("x") - event.center.x)) );
 									elmY = ( ($jqIdTrimingArea.data("elmPosY") - ($jqIdTrimingArea.data("y") - event.center.y)) );
-									// elmX = ( ( repWidth/ 2) - (scaleElmSize / 2) ) + leftOffset;
-									// elmY = ( (repHeight / 2) - (scaleElmSize / 2) );
-									// elmX =  $("#js_triming_area").offset().top;
-									// elmY = $("#js_triming_area").offset().left;
 									elmX = parseInt(elmX);
 									elmY = parseInt(elmY);
 									if( elmX < 0){
@@ -299,6 +289,22 @@ $(function(){
 									if( elmY > repHeight - scaleElmSize ){
 										elmY = repHeight - scaleElmSize;
 									}
+
+                  $jqIdTrimingElm.css({
+                      "left": elmX + "px",
+                      "top": elmY + "px"
+                  });
+
+									//座業の決定
+									// elmX = ( ($jqIdTrimingArea.data("elmPosX") - ($jqIdTrimingArea.data("x") - event.center.x)) ) + leftOffset;
+									// elmY = ($jqIdTrimingArea.data("elmPosY") - ($jqIdTrimingArea.data("y") - event.center.y))  + ;
+
+									// elmX = ( ( repWidth/ 2) - (scaleElmSize / 2) ) + leftOffset;
+									// elmY = ( (repHeight / 2) - (scaleElmSize / 2) );
+									// elmX =  $("#js_triming_area").offset().top;
+									// elmY = $("#js_triming_area").offset().left;
+
+
 									$("#x_now").html(elmX);
 									$("#y_now").html(elmY);
               }
