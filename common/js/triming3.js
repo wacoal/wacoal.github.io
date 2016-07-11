@@ -374,8 +374,8 @@ $(function(){
   });
 
 	$hammerObj2.on("pinchend",function(event) {
-		elmX =  $("#js_triming_area").offset().top;
-		elmY = $("#js_triming_area").offset().left;
+		elmX =  $("#js_triming_element").offset().top;
+		elmY = $("#js_triming_element").offset().left;
 		elmX = parseInt(elmX);
 		elmY = parseInt(elmY);
 		$("#x_now").html(elmX);
