@@ -272,9 +272,6 @@ $(function(){
                   .data("y", event.center.y)
                   .data("elmPosX", Number(String($jqIdTrimingElm.css("left")).replace("px", "")))
                   .data("elmPosY", Number(String($jqIdTrimingElm.css("top")).replace("px", "")));
-
-
-
           } else { //move
               if ($jqIdTrimingArea.data("down") == true) {
                   $jqIdTrimingElm.css({
@@ -336,7 +333,6 @@ $(function(){
 					scaleRatio = floatFormat( scaleSize, 3 );
 					scaleElmSize = elmSize * scaleRatio;
 
-
 					// if( scaleElmSize > elmMaxSize ){
 					// 	scaleElmSize = elmMaxSize;
 					// }
@@ -353,14 +349,14 @@ $(function(){
 					if( elmX < 0){
 						elmX = 0;
 					}
-					if( elmX > repWidth - targetSize ){
-						elmX = repWidth - targetSize;
+					if( elmX > repWidth - scaleElmSize ){
+						elmX = repWidth - scaleElmSize;
 					}
 					if( elmY < 0){
 						elmY = 0;
 					}
-					if( elmY > repHeight - targetSize ){
-						elmY = repHeight - targetSize;
+					if( elmY > repHeight - scaleElmSize ){
+						elmY = repHeight - scaleElmSize;
 					}
 
 					$("#x_now").html(elmX);
