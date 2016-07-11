@@ -313,7 +313,8 @@ $(function(){
       } else { //move
           if($pinchTimer) clearTimeout($pinchTimer);
 					var scaleSize = $jqIdTrimingArea.data("preScale") + (event.scale - $jqIdTrimingArea.data("scale"));
-					scaleRatio = floatFormat( scaleSize, 3 );
+					//scaleRatio = floatFormat( scaleSize, 3 );
+					scaleRatio = scaleSize;
 					if( scaleSize > elmMaxSize ){
 						scaleSize = elmMaxSize
 					}
@@ -336,7 +337,6 @@ $(function(){
 
       }
   });
-
 
 });
 
