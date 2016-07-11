@@ -313,7 +313,7 @@ $(function(){
       } else { //move
           if($pinchTimer) clearTimeout($pinchTimer);
 					var scaleSize = $jqIdTrimingArea.data("preScale") + (event.scale - $jqIdTrimingArea.data("scale"));
-					scaleRatio = parseInt(scaleSize);
+					scaleRatio = floatFormat( scaleSize, 3 );
 					if( scaleSize > elmMaxSize ){
 						scaleSize = elmMaxSize
 					}
@@ -346,6 +346,11 @@ function sendImage(){
 		//console.log(blobX, blobY);
 		//var imageData = ctx.getImageData(trimX, trimY, minWidth, minHeight);
 		//TODO
+}
+
+function floatFormat( number, n ) {
+	var _pow = Math.pow( 10 , n ) ;
+	return Math.round( number * _pow ) / _pow ;
 }
 
 $('#js_btn_upload').off("click").on("click",function(e){
