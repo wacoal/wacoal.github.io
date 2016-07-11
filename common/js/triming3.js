@@ -313,7 +313,7 @@ $(function(){
 					var scaleSize = $jqIdTrimingArea.data("preScale") + (event.scale - $jqIdTrimingArea.data("scale"));
 					//scaleRatio = floatFormat( scaleSize, 3 );
 					scaleRatio = floatFormat( scaleSize, 3 );
-					elmSize = elmSize * scaleRatio;
+					scaleElmSize = elmSize * scaleRatio;
 
 					if( scaleSize > elmMaxSize ){
 						scaleSize = elmMaxSize
@@ -336,7 +336,7 @@ $(function(){
 					$("#x_now").html(elmX);
 					$("#y_now").html(elmY);
 					$("#scale").html(scaleRatio);
-					$('#now-size').html(elmSize);
+					$('#now-size').html(scaleElmSize);
 
       }
   });
