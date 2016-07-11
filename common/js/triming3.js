@@ -63,8 +63,6 @@ function main(dataUrl) {
 
 						maxScale = scaleMaxWidth < scaleMaxHeight ? scaleMaxWidth : scaleMaxHeight;
 
-						console.log(maxScale);
-
 						canvas.width = repWidth;
 						canvas.height = repHeight;
 						ctx.drawImage(image, 0, 0, repWidth, repHeight);
@@ -94,7 +92,6 @@ function main(dataUrl) {
 						$("#y").html(topOffset);
 
 						elmX = ( ( repWidth/ 2) - (scaleElmSize / 2) ) + leftOffset;
-						//elmY = ( (repHeight / 2) - (targetSize / 2) ) + topOffset;
 						elmY = ( (repHeight / 2) - (scaleElmSize / 2) );
 						elmX = parseInt(elmX);
 						elmY = parseInt(elmY);
@@ -103,8 +100,6 @@ function main(dataUrl) {
 
 						ratio = figureScale(imageWidth,repWidth);
 
-						console.log(ratio);
-
 				}, false);
 
 		}
@@ -112,6 +107,7 @@ function main(dataUrl) {
 
 function figureScale(original,now){
 	var scale = original / now;
+	//scale = parseInt(scale);
   return scale;
 }
 
@@ -378,7 +374,14 @@ $(function(){
   });
 
 	$hammerObj2.on("pinchend",function(event) {
-		alert("tae")
+		elmX =  $("#js_triming_area").offset().top;
+		elmY = $("#js_triming_area").offset().left;
+		elmX = parseInt(elmX);
+		elmY = parseInt(elmY);
+		$("#x_now").html(elmX);
+		$("#y_now").html(elmY);
+		$("#scale").html(scaleRatio);
+		$('#now-size').html(scaleElmSize);
 	});
 
 });
@@ -389,43 +392,49 @@ function sendImage(){
 		//console.log(blobX, blobY);
 		//var imageData = ctx.getImageData(trimX, trimY, minWidth, minHeight);
 		//TODO
+
 }
 
 
 
 $('#js_btn_upload').off("click").on("click",function(e){
 	if (!ctx) return false;
-	srcImgPost = $(this).closest("form").attr("action");
-	if(preventEvent){
-		e.preventDefault();
-		var this_id = ("#")+$(this).attr("id");
-		var tit1 = ("ご注意ください");
-		$.alerts.btnOk1 = ("画像を送信する");
-		$.alerts.btnNg1 = ("キャンセルする");
-		var txt1 = ('\
-			<div class="caution"><div class="caution__cont">\
-				<ul class="listDott">\
-					<li><p>アナタがこれから投稿する画像は、身分証を元に事務局で日々チェックを行っています</p></li>\
-					<li><p>本人が撮影したものでない画像は、<strong class="note">すぐにバレます</strong></p></li>\
-					<li><p><strong class="note">ネットで拾った画像を利用する行為</strong>は絶対にやめてください</p></li>\
-					<li><p>そのような方は、<strong class="note">サイトの利用を停止します</strong></p></li>\
-				</ul>\
-			</div></div>\
-		');
-
-		(function () {
-			jConfirm2( txt1, tit1, function(r) {
-				if( r == true){
-					preventEvent = false;
-					//$(this_id)[0].click();
-					sendImage();
-				} else {
-					return false;
-				}
-			});
-		}());
-
-	} else {
-		preventEvent = true;
-	}
+	test  = elmSize * ratio;
+	testX = elmX * ratio;
+	testY = elmY * ratio;
+	console.log(test,testX,testY);
+	console.log();
+	// srcImgPost = $(this).closest("form").attr("action");
+	// if(preventEvent){
+	// 	e.preventDefault();
+	// 	var this_id = ("#")+$(this).attr("id");
+	// 	var tit1 = ("ご注意ください");
+	// 	$.alerts.btnOk1 = ("画像を送信する");
+	// 	$.alerts.btnNg1 = ("キャンセルする");
+	// 	var txt1 = ('\
+	// 		<div class="caution"><div class="caution__cont">\
+	// 			<ul class="listDott">\
+	// 				<li><p>アナタがこれから投稿する画像は、身分証を元に事務局で日々チェックを行っています</p></li>\
+	// 				<li><p>本人が撮影したものでない画像は、<strong class="note">すぐにバレます</strong></p></li>\
+	// 				<li><p><strong class="note">ネットで拾った画像を利用する行為</strong>は絶対にやめてください</p></li>\
+	// 				<li><p>そのような方は、<strong class="note">サイトの利用を停止します</strong></p></li>\
+	// 			</ul>\
+	// 		</div></div>\
+	// 	');
+	//
+	// 	(function () {
+	// 		jConfirm2( txt1, tit1, function(r) {
+	// 			if( r == true){
+	// 				preventEvent = false;
+	// 				//$(this_id)[0].click();
+	// 				sendImage();
+	// 			} else {
+	// 				return false;
+	// 			}
+	// 		});
+	// 	}());
+	//
+	// } else {
+	// 	preventEvent = true;
+	// }
 });
