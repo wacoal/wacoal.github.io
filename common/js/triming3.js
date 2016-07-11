@@ -34,6 +34,7 @@ var elmY;
 var targetSize = 240;
 var elmSize;
 var ratio = 1;
+var scaleRatio = 1;
 
 function main(dataUrl) {
 		if (canvas.getContext) {
@@ -312,7 +313,7 @@ $(function(){
       } else { //move
           if($pinchTimer) clearTimeout($pinchTimer);
 					var scaleSize = $jqIdTrimingArea.data("preScale") + (event.scale - $jqIdTrimingArea.data("scale"));
-					scaleSize = parseInt(scaleSize);
+					scaleRatio = parseInt(scaleSize);
 					if( scaleSize > elmMaxSize ){
 						scaleSize = elmMaxSize
 					}
@@ -326,11 +327,11 @@ $(function(){
 					elmX = parseInt(elmX);
 					elmY = parseInt(elmY);
 
-					elmSize = elmSize * scaleSize;
+					elmSize = elmSize * scaleRatio;
 
 					$("#x_now").html(elmX);
 					$("#y_now").html(elmY);
-					$("#scale").html(scaleSize);
+					$("#scale").html(scaleRatio);
 					$('#now-size').html(elmSize);
 
       }
