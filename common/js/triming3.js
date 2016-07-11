@@ -343,8 +343,8 @@ $(function(){
 
 					//elmX = ( ($jqIdTrimingArea.data("elmPosX") - ($jqIdTrimingArea.data("x") - event.center.x)) );
 					//elmY = ( ($jqIdTrimingArea.data("elmPosY") - ($jqIdTrimingArea.data("y") - event.center.y)) );
-					elmX = ($jqIdTrimingArea.data("elmPosX");
-					elmY = ($jqIdTrimingArea.data("elmPosY");
+					elmX = ($jqIdTrimingArea.data("elmPosX"));
+					elmY = ($jqIdTrimingArea.data("elmPosY"));
 					elmX = parseInt(elmX);
 					elmY = parseInt(elmY);
 
