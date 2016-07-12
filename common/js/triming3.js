@@ -321,7 +321,7 @@ $(function(){
 					//
 					// scaleMaxWidth = repWidth / scaleElmSize;
 					// scaleMaxHeight = repHeight / scaleElmSize;
-					// maxScale = scaleMaxWidth < scaleMaxHeight ? scaleMaxWidth : scaleMaxHeight;
+					maxScale = elmSize / scaleElmSize;
 					//
 					// elmX = elmX + ( scaleElmSize * scaleRatio );
 					// elmY = elmY + ( scaleElmSize * scaleRatio );
@@ -340,6 +340,7 @@ $(function(){
 
 					$("#scale").html(scaleRatio);
 					$('#now-size').html(scaleElmSize);
+					$('#x').html(maxScale);
       }
   });
 
@@ -360,8 +361,6 @@ $(function(){
 		// scaleMaxWidth = repWidth / scaleElmSize;
 		// scaleMaxHeight = repHeight / scaleElmSize;
 		// maxScale = scaleMaxWidth < scaleMaxHeight ? scaleMaxWidth : scaleMaxHeight;
-
-		alert(elmSize);
 
 		//alert(maxScale);
 
