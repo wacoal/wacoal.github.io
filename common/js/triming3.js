@@ -343,10 +343,16 @@ $(function(){
 					// if( scaleElmSize > elmMaxSize ){
 					// 	scaleElmSize = elmMaxSize;
 					// }
+
+					elmX = elmX + ( scaleElmSize * scaleRatio );
+					elmY = elmY + ( scaleElmSize * scaleRatio );
+
           $jqIdTrimingElm.css({
-						// width: scaleElmSize,
-						// height: scaleElmSize,
-						"transform": "scale(" + scaleSize + ")"
+						width: scaleElmSize,
+						height: scaleElmSize,
+						top: elmX,
+						left: elmY,
+						//"transform": "scale(" + scaleSize + ")"
 					});
           $pinchTimer = setTimeout(function() { //end
               pinchTime = false;
@@ -357,10 +363,10 @@ $(function(){
 					// elmX = ($jqIdTrimingArea.data("elmPosX"));
 					// elmY = ($jqIdTrimingArea.data("elmPosY"));
 
-					elmX =  $("#js_triming_area").offset().top;
-					elmY = $("#js_triming_area").offset().left;
-					elmX = parseInt(elmX);
-					elmY = parseInt(elmY);
+					// elmX =  $("#js_triming_area").offset().top;
+					// elmY = $("#js_triming_area").offset().left;
+					// elmX = parseInt(elmX);
+					// elmY = parseInt(elmY);
 
 					// if( elmX < 0){
 					// 	elmX = 0;
@@ -389,27 +395,27 @@ $(function(){
 		// 	scaleRatio = 1 - scaleRatio;
 		// }
 
-		elmX = elmX + ( scaleElmSize * scaleRatio );
-		elmY = elmY + ( scaleElmSize * scaleRatio );
+		// elmX = elmX + ( scaleElmSize * scaleRatio );
+		// elmY = elmY + ( scaleElmSize * scaleRatio );
 
-		$jqIdTrimingElm.css({
-			width: scaleElmSize,
-			height: scaleElmSize,
-			"left": elmX,
-			"top": elmY,
-			"transform": "scale(none)"
-		});
+		// $jqIdTrimingElm.css({
+		// 	width: scaleElmSize,
+		// 	height: scaleElmSize,
+		// 	"left": elmX,
+		// 	"top": elmY,
+		// 	"transform": "scale(none)"
+		// });
 
 
-		elmX =  ($("#js_triming_element").position().left);
-		elmY = ($("#js_triming_element").offset().top) - topOffset;
-
-		elmX = parseInt(elmX);
-		elmY = parseInt(elmY);
-		$("#x_now").html(elmX);
-		$("#y_now").html(elmY);
-		$("#scale").html(scaleRatio);
-		$('#now-size').html(scaleElmSize);
+		// elmX =  ($("#js_triming_element").position().left);
+		// elmY = ($("#js_triming_element").offset().top) - topOffset;
+		//
+		// elmX = parseInt(elmX);
+		// elmY = parseInt(elmY);
+		// $("#x_now").html(elmX);
+		// $("#y_now").html(elmY);
+		// $("#scale").html(scaleRatio);
+		// $('#now-size').html(scaleElmSize);
 	});
 
 });
