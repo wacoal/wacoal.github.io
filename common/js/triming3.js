@@ -420,12 +420,14 @@ $(function(){
 		elmX = elmX + ( scaleElmSize - ( scaleElmSize * scaleRatio ) );
 		elmY = elmY + ( scaleElmSize - ( scaleElmSize * scaleRatio ) );
 
-		$jqIdTrimingElm.css({
+		//$jqIdTrimingElm.css({
+		$("#dammy").css({
 			width: scaleElmSize,
 			height: scaleElmSize,
 			"left": elmX,
 			"top": elmY,
-			"transform": "scale(1)"
+			"transform": "scale(1)",
+			border: 'solid 2px blue'
 		});
 	}
 
