@@ -411,8 +411,8 @@ $(function(){
 		//$("#dammy").css({
 			width: scaleElmSize,
 			height: scaleElmSize,
-			"left": elmX,
-			"top": elmY,
+			// "left": elmX,
+			// "top": elmY,
 			"transform": "scale(1)",
 			//"border": 'solid 2px blue'
 		});
