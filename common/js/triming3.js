@@ -407,8 +407,8 @@ $(function(){
 		//elmX = elmX + ( scaleElmSize - ( scaleElmSize * scaleRatio ) );
 		//elmY = elmY + ( scaleElmSize - ( scaleElmSize * scaleRatio ) );
 
-		//$jqIdTrimingElm.css({
-		$("#dammy").css({
+		$jqIdTrimingElm.css({
+		//$("#dammy").css({
 			width: scaleElmSize,
 			height: scaleElmSize,
 			"left": elmX,
