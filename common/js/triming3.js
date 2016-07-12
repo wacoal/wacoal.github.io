@@ -336,6 +336,9 @@ $(function(){
 					if( scaleSize > maxScale ){
 						scaleSize = maxScale
 					}
+					if( scaleSize < 0.4 ){
+						scaleSize = 0.4
+					}
 					//scaleRatio = floatFormat( scaleSize, 3 );
 					scaleRatio = floatFormat( scaleSize, 3 );
 					scaleElmSize = elmSize * scaleRatio;
@@ -398,8 +401,8 @@ $(function(){
 		scaleRatio = floatFormat( scaleSize, 3 );
 		scaleElmSize = elmSize * scaleRatio;
 
-		elmX = ($("#js_triming_element").position().left);
-		elmY = ($("#js_triming_element").offset().top) - topOffset;
+		elmX = ($jqIdTrimingElm.position().left);
+		elmY = ($jqIdTrimingElm.offset().top) - topOffset;
 
 		elmX = elmX + ( scaleElmSize - ( scaleElmSize * scaleRatio ) );
 		elmY = elmY + ( scaleElmSize - ( scaleElmSize * scaleRatio ) );
