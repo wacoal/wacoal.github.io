@@ -195,25 +195,25 @@ $(function(){
 	$hammerObj.get("pinch").set({ enable: true });
 	$jqIdTrimingElm.css("transform", "scale(1)");
 
-	var obj = $idTrimingElm;
-	var rect = obj.getBoundingClientRect();
-	//座標を計算する
-	var positionX;
-	var positionY;
-	window.onload = function() {
-    var element = document.getElementById('canvas');
-    var rect = element.getBoundingClientRect();
-
-    console.log(rect.left);   // x座標(絶対座標)
-    console.log(rect.top);    // y座標(絶対座標)
-    console.log(rect.width);  // 幅
-    console.log(rect.height); // 高さ
-
-		function getRect(){
-			positionX = rect.left + window.pageXOffset;
-			positionY = rect.top + window.pageYOffset;
-		}
-	}
+	// var obj = $idTrimingElm;
+	// var rect = obj.getBoundingClientRect();
+	// //座標を計算する
+	// var positionX;
+	// var positionY;
+	// window.onload = function() {
+  //   var element = document.getElementById('canvas');
+  //   var rect = element.getBoundingClientRect();
+	//
+  //   console.log(rect.left);   // x座標(絶対座標)
+  //   console.log(rect.top);    // y座標(絶対座標)
+  //   console.log(rect.width);  // 幅
+  //   console.log(rect.height); // 高さ
+	//
+	// 	function getRect(){
+	// 		positionX = rect.left + window.pageXOffset;
+	// 		positionY = rect.top + window.pageYOffset;
+	// 	}
+	// }
 
 	// var $idAreaImage = $("#js_triming_areaImage");
 	// $idAreaImage.load(function() {
@@ -316,10 +316,6 @@ $(function(){
 					//scaleRatio = floatFormat( scaleSize, 3 );
 					scaleRatio = floatFormat( scaleSize, 3 );
 					scaleElmSize = elmSize * scaleRatio;
-
-					// if( scaleElmSize > elmMaxSize ){
-					// 	scaleElmSize = elmMaxSize;
-					// }
 
 					elmX = elmX + ( scaleElmSize * scaleRatio );
 					elmY = elmY + ( scaleElmSize * scaleRatio );
