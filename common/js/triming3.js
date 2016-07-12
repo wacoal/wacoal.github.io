@@ -62,7 +62,7 @@ function main(dataUrl) {
 						scaleMaxHeight = parseInt(scaleMaxHeight);
 
 						maxScale = scaleMaxWidth < scaleMaxHeight ? scaleMaxWidth : scaleMaxHeight;
-ß
+
 						canvas.width = repWidth;
 						canvas.height = repHeight;
 						ctx.drawImage(image, 0, 0, repWidth, repHeight);
