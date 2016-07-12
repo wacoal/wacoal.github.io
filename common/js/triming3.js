@@ -361,7 +361,7 @@ $(function(){
 		// scaleMaxHeight = repHeight / scaleElmSize;
 		// maxScale = scaleMaxWidth < scaleMaxHeight ? scaleMaxWidth : scaleMaxHeight;
 
-		alert(scaleElmSize);
+		alert(elmSize);
 
 		//alert(maxScale);
 
