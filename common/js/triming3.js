@@ -299,8 +299,7 @@ $(function(){
       }
   });
 
-	var isClicked = true;
-	var originScale = 1;
+
 	//pinch event
   $hammerObj2.on("pinch",function(event) {
 
@@ -326,13 +325,8 @@ $(function(){
 					// }
 					//scaleRatio = floatFormat( scaleSize, 3 );
 
-					if (isClicked) {
-            originScale = scaleRatio;
-	        }
-	        isClicked = false;
 
 					scaleRatio = floatFormat( scaleSize, 1 );
-					scaleRatio = scaleRatio * originScale;
 
 					if( scaleRatio < 1 ){
 						scaleElmSize = elmSize * scaleRatio;
@@ -341,8 +335,13 @@ $(function(){
 					} else {
 
 					}
+
+					// elmSize : scaleElmSize = 1 : x;
+					// scaleElmSize = elmSize * x;
+					// x= scaleElmSize / elmSize;
+
 					$("#x").html(scaleSize);
-					$("#y").html(scaleRatio);
+					$("#y").html(elmSize);
 					//
 					// scaleMaxWidth = repWidth / scaleElmSize;
 					// scaleMaxHeight = repHeight / scaleElmSize;
