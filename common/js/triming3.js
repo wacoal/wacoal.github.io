@@ -215,8 +215,6 @@ $(function(){
 		}
 	}
 
-
-
 	// var $idAreaImage = $("#js_triming_areaImage");
 	// $idAreaImage.load(function() {
   //     //console.log('読み込み完了');
@@ -342,24 +340,15 @@ $(function(){
 
 	$hammerObj2.on("pinchend",function(event) {
 
-		// // if( scaleRatio < 1 ) {
-		// // 	scaleRatio = 1 - scaleRatio;
-		// // }
-		//alert(scaleElmSize);
-
+		// var scaleSize = $jqIdTrimingArea.data("preScale") + (event.scale - $jqIdTrimingArea.data("scale"));
+		// if( scaleSize > maxScale ){
+		// 	scaleSize = maxScale
+		// }
+		// if( scaleSize < 0.4 ){
+		// 	scaleSize = 0.4
+		// }
 		// scaleRatio = floatFormat( scaleSize, 3 );
 		// scaleElmSize = elmSize * scaleRatio;
-		var scaleSize = $jqIdTrimingArea.data("preScale") + (event.scale - $jqIdTrimingArea.data("scale"));
-		if( scaleSize > maxScale ){
-			scaleSize = maxScale
-		}
-		if( scaleSize < 0.4 ){
-			scaleSize = 0.4
-		}
-		//scaleRatio = floatFormat( scaleSize, 3 );
-		scaleRatio = floatFormat( scaleSize, 3 );
-		scaleElmSize = elmSize * scaleRatio;
-
 
 		elmX = ($jqIdTrimingElm.position().left);
 		elmY = ($jqIdTrimingElm.offset().top) - topOffset;
