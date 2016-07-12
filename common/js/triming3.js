@@ -417,6 +417,7 @@ $(function(){
 			"border": 'solid 2px blue'
 		});
 
+		alert(elmX);
 
 		// elmX =  ($("#js_triming_element").position().left);
 		// elmY = ($("#js_triming_element").offset().top) - topOffset;
