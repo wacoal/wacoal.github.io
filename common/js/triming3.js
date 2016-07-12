@@ -41,70 +41,65 @@ var scaleMaxHeight;
 var maxScale;
 
 function main(dataUrl) {
-		if (canvas.getContext) {
-				ctx = canvas.getContext('2d');
-				ctx2 = canvas2.getContext('2d');
-				image.src = dataUrl;
-				image.addEventListener('load', function(){
-						//$(".loading").hide();
-						imageWidth = image.width;
-						imageHeight = image.height;
-						repWidth  = imageWidth < imageHeight ? minWidth : minHeight / imageHeight * imageWidth;
-						repHeight = imageHeight < imageWidth ? minHeight : minWidth / imageWidth * imageHeight;
+	if (canvas.getContext) {
+		ctx = canvas.getContext('2d');
+		ctx2 = canvas2.getContext('2d');
+		image.src = dataUrl;
+		image.addEventListener('load', function(){
+			//$(".loading").hide();
+			imageWidth = image.width;
+			imageHeight = image.height;
+			repWidth  = imageWidth < imageHeight ? minWidth : minHeight / imageHeight * imageWidth;
+			repHeight = imageHeight < imageWidth ? minHeight : minWidth / imageWidth * imageHeight;
 
-						repWidth  = parseInt(repWidth);
-						repHeight = parseInt(repHeight);
+			repWidth  = parseInt(repWidth);
+			repHeight = parseInt(repHeight);
 
+			scaleMaxWidth = repWidth / scaleElmSize;
+			scaleMaxHeight = repHeight / scaleElmSize;
 
+			maxScale = scaleMaxWidth < scaleMaxHeight ? scaleMaxWidth : scaleMaxHeight;
 
-						scaleMaxWidth = repWidth / scaleElmSize;
-						scaleMaxHeight = repHeight / scaleElmSize;
+			canvas.width = repWidth;
+			canvas.height = repHeight;
+			ctx.drawImage(image, 0, 0, repWidth, repHeight);
+			ctx.save();
 
-						// scaleMaxWidth = parseInt(scaleMaxWidth);
-						// scaleMaxHeight = parseInt(scaleMaxHeight);
+			//trimRestore();
+			$("#js_triming_area").css({
+				width: repWidth,
+				height: repHeight
+			});
+			$("#js_triming_element").css({
+				top: (repHeight / 2) - (scaleElmSize / 2),
+				left: (repWidth /2) - (scaleElmSize / 2),
+				// maxWidth: repWidth,
+				// maxHeight: repHeight
+			});
 
-						maxScale = scaleMaxWidth < scaleMaxHeight ? scaleMaxWidth : scaleMaxHeight;
+			elmMaxSize = repWidth < repHeight ? repWidth / scaleElmSize : repHeight / scaleElmSize;
 
-						canvas.width = repWidth;
-						canvas.height = repHeight;
-						ctx.drawImage(image, 0, 0, repWidth, repHeight);
-						ctx.save();
+			//TODO function化したい
+			topOffset =  $jqIdTrimingArea.offset().top;
+			leftOffset = $jqIdTrimingArea.offset().left;
+			elmSize = scaleElmSize;
+			$("#o-size").html(imageWidth);
+			$('#now-size').html(elmSize);
+			$("#x").html(leftOffset);
+			$("#y").html(topOffset);
 
-						//trimRestore();
-						$("#js_triming_area").css({
-							width: repWidth,
-							height: repHeight
-						});
-						$("#js_triming_element").css({
-							top: (repHeight / 2) - (scaleElmSize / 2),
-							left: (repWidth /2) - (scaleElmSize / 2),
-							// maxWidth: repWidth,
-							// maxHeight: repHeight
-						});
+			elmX = ( ( repWidth/ 2) - (scaleElmSize / 2) ) + leftOffset;
+			elmY = ( (repHeight / 2) - (scaleElmSize / 2) );
+			elmX = parseInt(elmX);
+			elmY = parseInt(elmY);
+			$("#x_now").html(elmX);
+			$("#y_now").html(elmY);
 
-						elmMaxSize = repWidth < repHeight ? repWidth / scaleElmSize : repHeight / scaleElmSize;
+			ratio = figureScale(imageWidth,repWidth);
 
-						//TODO function化したい
-						topOffset =  $("#js_triming_area").offset().top;
-						leftOffset = $("#js_triming_area").offset().left;
-						elmSize = scaleElmSize;
-						$("#o-size").html(imageWidth);
-						$('#now-size').html(elmSize);
-						$("#x").html(leftOffset);
-						$("#y").html(topOffset);
+		}, false);
 
-						elmX = ( ( repWidth/ 2) - (scaleElmSize / 2) ) + leftOffset;
-						elmY = ( (repHeight / 2) - (scaleElmSize / 2) );
-						elmX = parseInt(elmX);
-						elmY = parseInt(elmY);
-						$("#x_now").html(elmX);
-						$("#y_now").html(elmY);
-
-						ratio = figureScale(imageWidth,repWidth);
-
-				}, false);
-
-		}
+	}
 }
 
 function figureScale(original,now){
@@ -161,6 +156,7 @@ function rotate(){
 		// $("#x").html(leftOffset);
 		// $("#y").html();
 
+
 		trimRestore();
 }
 //canvasの初期化
@@ -199,54 +195,42 @@ $(function(){
 	$hammerObj.get("pinch").set({ enable: true });
 	$jqIdTrimingElm.css("transform", "scale(1)");
 
-	//var obj = $($idTrimingElm);
-	//var rect = obj.getBoundingClientRect();
+	var obj = $idTrimingElm;
+	var rect = obj.getBoundingClientRect();
+	//座標を計算する
+	var positionX;
+	var positionY;
+	window.onload = function() {
+    var element = document.getElementById('canvas');
+    var rect = element.getBoundingClientRect();
 
-	// 座標を計算する
-	// var positionX;
-	// var positionY;
+    console.log(rect.left);   // x座標(絶対座標)
+    console.log(rect.top);    // y座標(絶対座標)
+    console.log(rect.width);  // 幅
+    console.log(rect.height); // 高さ
 
-	// window.onload = function() {
-  //   var element = document.getElementById('canvas');
-  //   var rect = element.getBoundingClientRect();
+		function getRect(){
+			positionX = rect.left + window.pageXOffset;
+			positionY = rect.top + window.pageYOffset;
+		}
+	}
+
+
+
+	// var $idAreaImage = $("#js_triming_areaImage");
+	// $idAreaImage.load(function() {
+  //     //console.log('読み込み完了');
+	// 		//var element = document.getElementById('js_triming_areaImage');
+	// 		var originalWidth  = $(this).width();
+	// 		var originalHeight = $(this).height();
+	//     var originalTop    = $(this).offset().top;
+	// 		var originalLeft   = $(this).offset().left;
 	//
-  //   console.log(rect.left);   // x座標(絶対座標)
-  //   console.log(rect.top);    // y座標(絶対座標)
-  //   console.log(rect.width);  // 幅
-  //   console.log(rect.height); // 高さ
-	//
-	// 	// function getRect(){
-	// 	// 	positionX = rect.left + window.pageXOffset;
-	// 	// 	positionY = rect.top + window.pageYOffset;
-	// 	// }
-	// }
-
-
-
-	var $idAreaImage = $("#js_triming_areaImage");
-	$idAreaImage.load(function() {
-      //console.log('読み込み完了');
-			//var element = document.getElementById('js_triming_areaImage');
-			var originalWidth  = $(this).width();
-			var originalHeight = $(this).height();
-	    var originalTop    = $(this).offset().top;
-			var originalLeft   = $(this).offset().left;
-
-	    console.log(originalTop,originalLeft,originalWidth,originalHeight);   // x座標(絶対座標)
-	    // console.log(rect.top);    // y座標(絶対座標)
-	    // console.log(rect.width);  // 幅
-	    // console.log(rect.height); // 高さ
-  });
-
-	// window.onload = function() {
-	// 	var element = document.getElementById('js_triming_areaImage');
-  //   var rect = element.getBoundingClientRect();
-	//
-  //   console.log(rect.left);   // x座標(絶対座標)
-  //   console.log(rect.top);    // y座標(絶対座標)
-  //   console.log(rect.width);  // 幅
-  //   console.log(rect.height); // 高さ
-	// }
+	//     console.log(originalTop,originalLeft,originalWidth,originalHeight);   // x座標(絶対座標)
+	//     console.log(rect.top);    // y座標(絶対座標)
+	//     console.log(rect.width);  // 幅
+	//     console.log(rect.height); // 高さ
+  // });
 
 	$hammerObj.on("pan",function(event) {
       if(event.isFinal) { //end
@@ -296,16 +280,6 @@ $(function(){
                       "left": elmX + "px",
                       "top": elmY + "px"
                   });
-
-									//座業の決定
-									// elmX = ( ($jqIdTrimingArea.data("elmPosX") - ($jqIdTrimingArea.data("x") - event.center.x)) ) + leftOffset;
-									// elmY = ($jqIdTrimingArea.data("elmPosY") - ($jqIdTrimingArea.data("y") - event.center.y))  + ;
-
-									// elmX = ( ( repWidth/ 2) - (scaleElmSize / 2) ) + leftOffset;
-									// elmY = ( (repHeight / 2) - (scaleElmSize / 2) );
-									// elmX =  $("#js_triming_area").offset().top;
-									// elmY = $("#js_triming_area").offset().left;
-
 
 									$("#x_now").html(elmX);
 									$("#y_now").html(elmY);
@@ -359,31 +333,6 @@ $(function(){
               pinchTime = false;
           }, 100);
 
-					//elmX = ( ($jqIdTrimingArea.data("elmPosX") - ($jqIdTrimingArea.data("x") - event.center.x)) );
-					//elmY = ( ($jqIdTrimingArea.data("elmPosY") - ($jqIdTrimingArea.data("y") - event.center.y)) );
-					// elmX = ($jqIdTrimingArea.data("elmPosX"));
-					// elmY = ($jqIdTrimingArea.data("elmPosY"));
-
-					// elmX =  $("#js_triming_area").offset().top;
-					// elmY = $("#js_triming_area").offset().left;
-					// elmX = parseInt(elmX);
-					// elmY = parseInt(elmY);
-
-					// if( elmX < 0){
-					// 	elmX = 0;
-					// }
-					// if( elmX > repWidth - scaleElmSize ){
-					// 	elmX = repWidth - scaleElmSize;
-					// }
-					// if( elmY < 0){
-					// 	elmY = 0;
-					// }
-					// if( elmY > repHeight - scaleElmSize ){
-					// 	elmY = repHeight - scaleElmSize;
-					// }
-
-					// $("#x_now").html(elmX);
-					// $("#y_now").html(elmY);
 					$("#scale").html(scaleRatio);
 					$('#now-size').html(scaleElmSize);
 
@@ -419,32 +368,14 @@ $(function(){
 		//elmY = elmY + ( scaleElmSize - ( scaleElmSize * scaleRatio ) );
 
 		$jqIdTrimingElm.css({
-		//$("#dammy").css({
 			width: scaleElmSize,
 			height: scaleElmSize,
 			"left": elmX,
 			"top": elmY,
 			"transform": "scale(1)",
-			"border": 'solid 2px blue'
+			//"border": 'solid 2px blue'
 		});
-
-		//alert(elmX);
-
-		// elmX =  ($("#js_triming_element").position().left);
-		// elmY = ($("#js_triming_element").offset().top) - topOffset;
-		//
-		// elmX = parseInt(elmX);
-		// elmY = parseInt(elmY);
-		// $("#x_now").html(elmX);
-		// $("#y_now").html(elmY);
-		// $("#scale").html(scaleRatio);
-		// $('#now-size').html(scaleElmSize);
 	});
-
-
-	function getPinchendCss(scaleElmSize){
-
-	}
 
 });
 
