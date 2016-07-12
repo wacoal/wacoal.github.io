@@ -301,6 +301,7 @@ $(function(){
 
 
 	//pinch event
+	var lock = false;
   $hammerObj2.on("pinch",function(event) {
 
       event.preventDefault ? event.preventDefault() : (event.returnValue = false);
@@ -328,8 +329,12 @@ $(function(){
 
 					scaleRatio = floatFormat( scaleSize, 1 );
 
+					if (!lock) {
+						scaleElmSize = elmSize * scaleRatio;
+	        }
+	        lock = true;
 
-					scaleElmSize = elmSize * scaleRatio;
+					scaleElmSize = scaleElmSize * scaleRatio;
 					var hi = scaleElmSize / elmSize;
 
 					// if( scaleRatio < 1 ){
