@@ -399,6 +399,7 @@ $(function(){
 		scaleElmSize = elmSize * scaleRatio;
 
 		elmX = ($("#js_triming_element").position().left);
+		elmY = ($("#js_triming_element").offset().top) - topOffset;
 
 		elmX = elmX + ( scaleElmSize - ( scaleElmSize * scaleRatio ) );
 		elmY = elmY + ( scaleElmSize - ( scaleElmSize * scaleRatio ) );
@@ -407,7 +408,7 @@ $(function(){
 			width: scaleElmSize,
 			height: scaleElmSize,
 			"left": elmX,
-			// "top": elmY,
+			"top": elmY,
 			"transform": "scale(1)"
 		});
 
