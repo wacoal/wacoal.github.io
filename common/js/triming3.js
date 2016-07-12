@@ -385,9 +385,9 @@ $(function(){
 
 	$hammerObj2.on("pinchend",function(event) {
 
-		if( scaleRatio < 1 ) {
-			scaleRatio = 1 - scaleRatio;
-		}
+		// if( scaleRatio < 1 ) {
+		// 	scaleRatio = 1 - scaleRatio;
+		// }
 
 		elmX = elmX + ( scaleElmSize * scaleRatio );
 		elmY = elmY + ( scaleElmSize * scaleRatio );
