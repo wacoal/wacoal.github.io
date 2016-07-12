@@ -95,8 +95,8 @@ function main(dataUrl) {
 
 			elmX = ( ( repWidth/ 2) - (scaleElmSize / 2) ) + leftOffset;
 			elmY = ( (repHeight / 2) - (scaleElmSize / 2) );
-			elmX = parseInt(elmX);
-			elmY = parseInt(elmY);
+			// elmX = parseInt(elmX);
+			// elmY = parseInt(elmY);
 			$("#x_now").html(elmX);
 			$("#y_now").html(elmY);
 
