@@ -329,14 +329,15 @@ $(function(){
 					scaleRatio = floatFormat( scaleSize, 1 );
 
 					var hi = scaleElmSize / elmSize;
+					scaleElmSize = elmSize * scaleRatio;
 
-					if( scaleRatio < 1 ){
-						scaleElmSize = elmSize * scaleRatio;
-					} else if( scaleRatio > 1 ){
-						//alert(scaleRatio);
-					} else {
-
-					}
+					// if( scaleRatio < 1 ){
+					// 	scaleElmSize = elmSize * scaleRatio;
+					// } else if( scaleRatio > 1 ){
+					// 	//alert(scaleRatio);
+					// } else {
+					//
+					// }
 
 
 					// elmSize : scaleElmSize = 1 : x;
