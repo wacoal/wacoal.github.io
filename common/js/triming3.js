@@ -295,6 +295,9 @@ $(function(){
   $hammerObj2.on("pinch",function(event) {
       event.preventDefault ? event.preventDefault() : (event.returnValue = false);
       if(!pinchTime) { //start
+					$jqIdTrimingElm.css({
+						"transform": "scale(none)"
+					});
           pinchTime = event.timeStamp;
           var preScale = String($jqIdTrimingElm.css("transform")).replace("matrix(", "");
           preScale = preScale.replace(")", "");
@@ -351,7 +354,7 @@ $(function(){
 			height: scaleElmSize,
 			"left": elmX,
 			"top": elmY,
-			"transform": "scale(none)",
+			"transform": "scale(1)",
 			"border": 'solid 2px blue'
 		});
 	});
