@@ -64,6 +64,8 @@ function main(dataUrl) {
 			ctx.drawImage(image, 0, 0, repWidth, repHeight);
 			ctx.save();
 
+			elmMaxSize = repWidth < repHeight ? repWidth / scaleElmSize : repHeight / scaleElmSize;
+
 			//trimRestore();
 			$("#js_triming_area").css({
 				width: repWidth,
@@ -72,11 +74,11 @@ function main(dataUrl) {
 			$("#js_triming_element").css({
 				top: (repHeight / 2) - (scaleElmSize / 2),
 				left: (repWidth /2) - (scaleElmSize / 2),
-				// maxWidth: repWidth,
-				// maxHeight: repHeight
+				maxWidth: elmMaxSize,
+				maxHeight: elmMaxSize
 			});
 
-			elmMaxSize = repWidth < repHeight ? repWidth / scaleElmSize : repHeight / scaleElmSize;
+
 
 			//TODO function化したい
 			topOffset =  $("#js_triming_area").offset().top;
@@ -349,6 +351,8 @@ $(function(){
 		scaleMaxHeight = repHeight / scaleElmSize;
 		maxScale = scaleMaxWidth < scaleMaxHeight ? scaleMaxWidth : scaleMaxHeight;
 
+		alert(maxScale);
+
 		elmX = ($jqIdTrimingElm.position().left);
 		elmY = ($jqIdTrimingElm.offset().top) - topOffset;
 
@@ -358,7 +362,7 @@ $(function(){
 			"left": elmX,
 			"top": elmY,
 			"transform": "scale(1)",
-			"border": 'solid 2px blue'
+			//"border": 'solid 2px blue'
 		});
 	});
 
