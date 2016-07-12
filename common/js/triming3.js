@@ -348,11 +348,11 @@ $(function(){
 					elmY = elmY + ( scaleElmSize * scaleRatio );
 
           $jqIdTrimingElm.css({
-						width: scaleElmSize,
-						height: scaleElmSize,
-						top: elmX,
-						left: elmY,
-						//"transform": "scale(" + scaleSize + ")"
+						// width: scaleElmSize,
+						// height: scaleElmSize,
+						// top: elmX,
+						// left: elmY,
+						"transform": "scale(" + scaleSize + ")"
 					});
           $pinchTimer = setTimeout(function() { //end
               pinchTime = false;
@@ -395,16 +395,16 @@ $(function(){
 		// 	scaleRatio = 1 - scaleRatio;
 		// }
 
-		// elmX = elmX + ( scaleElmSize * scaleRatio );
-		// elmY = elmY + ( scaleElmSize * scaleRatio );
+		elmX = elmX + ( scaleElmSize * scaleRatio );
+		elmY = elmY + ( scaleElmSize * scaleRatio );
 
-		// $jqIdTrimingElm.css({
-		// 	width: scaleElmSize,
-		// 	height: scaleElmSize,
-		// 	"left": elmX,
-		// 	"top": elmY,
-		// 	"transform": "scale(none)"
-		// });
+		$jqIdTrimingElm.css({
+			width: scaleElmSize,
+			height: scaleElmSize,
+			"left": elmX,
+			"top": elmY,
+			"transform": "scale(none)"
+		});
 
 
 		// elmX =  ($("#js_triming_element").position().left);
