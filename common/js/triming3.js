@@ -363,7 +363,7 @@ $(function(){
 		// scaleMaxHeight = repHeight / scaleElmSize;
 		// maxScale = scaleMaxWidth < scaleMaxHeight ? scaleMaxWidth : scaleMaxHeight;
 
-		//alert(maxScale);
+		alert(maxScale);
 
 		elmX = ($jqIdTrimingElm.position().left);
 		elmY = ($jqIdTrimingElm.offset().top) - topOffset;
