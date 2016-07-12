@@ -86,7 +86,8 @@ function main(dataUrl) {
 			elmSize = scaleElmSize;
 			$("#o-size").html(imageWidth);
 			$('#now-size').html(elmSize);
-			$("#x").html(leftOffset);
+			//$("#x").html(leftOffset);
+			$("#x").html(maxScale);
 			$("#y").html(topOffset);
 
 			elmX = ( ( repWidth/ 2) - (scaleElmSize / 2) ) + leftOffset;
