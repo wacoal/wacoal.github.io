@@ -404,7 +404,7 @@ $(function(){
 		//elmX = ($jqIdTrimingElm.position().left);
 		//elmY = ($jqIdTrimingElm.offset().top) - topOffset;
 
-		elmX = elmX + ( scaleElmSize - ( scaleElmSize * scaleRatio ) );
+		//elmX = elmX + ( scaleElmSize - ( scaleElmSize * scaleRatio ) );
 		//elmY = elmY + ( scaleElmSize - ( scaleElmSize * scaleRatio ) );
 
 		//$jqIdTrimingElm.css({
