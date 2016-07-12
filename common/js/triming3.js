@@ -399,7 +399,7 @@ function trimData(){
 	console.log(trimWidth);
 	console.log(trimX);
 	console.log(trimY);
-	alert(trimWidth,trimX,trimY);
+	//alert(trimWidth);
 }
 
 
