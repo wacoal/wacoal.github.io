@@ -328,19 +328,21 @@ $(function(){
 
 					scaleRatio = floatFormat( scaleSize, 1 );
 
-					// if( scaleRatio < 1 ){
-					// 	scaleElmSize = elmSize * scaleRatio;
-					// } else if( scaleRatio > 1 ){
-					// 	//alert(scaleRatio);
-					// } else {
-					//
-					// }
-					scaleElmSize = elmSize * scaleRatio;
+					var hi = scaleElmSize / elmSize;
+
+					if( hi < 1 ){
+						scaleElmSize = elmSize * scaleRatio;
+					} else if( hi > 1 ){
+						//alert(scaleRatio);
+					} else {
+
+					}
+
 
 					// elmSize : scaleElmSize = 1 : x;
 					// scaleElmSize = elmSize * x;
 					// x= scaleElmSize / elmSize;
-					var hi = scaleElmSize / elmSize;
+
 
 					$("#x").html(scaleSize);
 					$("#y").html(hi);
