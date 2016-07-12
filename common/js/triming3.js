@@ -54,8 +54,8 @@ function main(dataUrl) {
 			repWidth  = imageWidth < imageHeight ? minWidth : minHeight / imageHeight * imageWidth;
 			repHeight = imageHeight < imageWidth ? minHeight : minWidth / imageWidth * imageHeight;
 
-			repWidth  = parseInt(repWidth);
-			repHeight = parseInt(repHeight);
+			// repWidth  = parseInt(repWidth);
+			// repHeight = parseInt(repHeight);
 
 			scaleMaxWidth = repWidth / scaleElmSize;
 			scaleMaxHeight = repHeight / scaleElmSize;
@@ -77,8 +77,8 @@ function main(dataUrl) {
 			$("#js_triming_element").css({
 				top: (repHeight / 2) - (scaleElmSize / 2),
 				left: (repWidth /2) - (scaleElmSize / 2),
-				// maxWidth: elmMaxSize,
-				// maxHeight: elmMaxSize
+				maxWidth: elmMaxSize,
+				maxHeight: elmMaxSize
 			});
 
 
@@ -268,8 +268,8 @@ $(function(){
 
 									elmX = ( ($jqIdTrimingArea.data("elmPosX") - ($jqIdTrimingArea.data("x") - event.center.x)) );
 									elmY = ( ($jqIdTrimingArea.data("elmPosY") - ($jqIdTrimingArea.data("y") - event.center.y)) );
-									elmX = parseInt(elmX);
-									elmY = parseInt(elmY);
+									// elmX = parseInt(elmX);
+									// elmY = parseInt(elmY);
 									if( elmX < 0){
 										elmX = 0;
 									}
