@@ -314,9 +314,9 @@ $(function(){
 					if( scaleSize > limitScale ){
 						scaleSize = limitScale - 0.1
 					}
-					if( scaleSize < 0.4 ){
-						scaleSize = 0.4
-					}
+					// if( scaleSize < 0.4 ){
+					// 	scaleSize = 0.4
+					// }
 					//scaleRatio = floatFormat( scaleSize, 3 );
 
 					scaleRatio = floatFormat( scaleSize, 1 );
