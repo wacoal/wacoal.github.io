@@ -7,8 +7,10 @@ var minWidth = 320;
 var minHeight = 240;
 var imageWidth;
 var imageHeight;
+
 var trimX;
 var trimY;
+var trimWidth;
 
 var posX = 0;
 var posY = 0;
@@ -101,6 +103,8 @@ function main(dataUrl) {
 			$("#y_now").html(elmY);
 
 			ratio = figureScale(imageWidth,repWidth);
+
+			trimData();
 
 		}, false);
 
@@ -252,7 +256,7 @@ $(function(){
               $jqIdTrimingElm.css("top", "0px");
           if(Number(String($jqIdTrimingElm.css("top")).replace("px", "")) > ($jqIdTrimingArea.outerHeight() - $jqIdTrimingElm.height()))
               $jqIdTrimingElm.css("top", ($jqIdTrimingArea.outerHeight() - $jqIdTrimingElm.height()) + "px");
-
+					trimData();
       } else {
           if(!panTime) { //start
               panTime = event.timeStamp;
@@ -379,9 +383,25 @@ $(function(){
 			"transform": "scale(1)",
 			//"border": 'solid 2px blue'
 		});
+
+
+		trimData();
+
 	});
 
 });
+
+//ポストするデータなので、比率を掛ける
+function trimData(){
+	trimWidth = scaleElmSize * ratio;
+	trimX     = elmX * ratio;
+	trimY     = elmY * ratio;
+	console.log(trimWidth);
+	console.log(trimX);
+	console.log(trimY);
+	alert(trimWidth,trimX,trimY);
+}
+
 
 function sendImage(){
 		if (!ctx) return;
@@ -389,7 +409,40 @@ function sendImage(){
 		//console.log(blobX, blobY);
 		//var imageData = ctx.getImageData(trimX, trimY, minWidth, minHeight);
 		//TODO
-
+		var jqxhr;
+		if (jqxhr) {
+			return;
+		}
+		jqxhr = $.ajax({
+				url : 'triming3.html',
+				data : data,
+				type : 'post',
+				timeout: 10000,
+				data: {
+		        trimWidth: trimWidth,
+		        trimX: trimX
+		    }
+			}).done(function(rs){
+				// if ( rs == 0 ){
+				// 	var tit1 = ("リクエストしました");
+				// 	r = '<?=$pfmr->getProp("user1.handle")?>さんに<?=EC_NAME?>のリクエストをしました。';
+				// } else {
+				// 	var tit1 = ("リクエストできませんでした");
+				// 	r = rs;
+				// }
+				// jAlert(r, tit1);
+				return false;
+			})
+			.fail(function(){
+				// var tit1 = ("エラーです");
+				// r = '<p>リクエストできませんでした。</p>';
+				// jAlert(r, tit1);
+				return false;
+			})
+			.always(function(){
+				return false;
+			})
+		;
 }
 
 
@@ -400,7 +453,7 @@ $('#js_btn_upload').off("click").on("click",function(e){
 	testX = elmX * ratio;
 	testY = elmY * ratio;
 	console.log(test,testX,testY);
-	console.log();
+	sendImage();
 	// srcImgPost = $(this).closest("form").attr("action");
 	// if(preventEvent){
 	// 	e.preventDefault();
