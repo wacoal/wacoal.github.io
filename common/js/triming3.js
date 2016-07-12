@@ -351,7 +351,7 @@ $(function(){
 			height: scaleElmSize,
 			"left": elmX,
 			"top": elmY,
-			"transform": "scale(1)",
+			"transform": "scale(none)",
 			"border": 'solid 2px blue'
 		});
 	});
