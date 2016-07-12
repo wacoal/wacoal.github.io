@@ -39,6 +39,7 @@ var scaleRatio = 1;
 var scaleMaxWidth;
 var scaleMaxHeight;
 var maxScale;
+var limitScale;
 var minScale;
 
 function main(dataUrl) {
@@ -59,6 +60,7 @@ function main(dataUrl) {
 			scaleMaxWidth = repWidth / scaleElmSize;
 			scaleMaxHeight = repHeight / scaleElmSize;
 			maxScale = scaleMaxWidth < scaleMaxHeight ? scaleMaxWidth : scaleMaxHeight;
+			limitScale = maxScale;
 
 			canvas.width = repWidth;
 			canvas.height = repHeight;
@@ -309,8 +311,8 @@ $(function(){
       } else { //move
           if($pinchTimer) clearTimeout($pinchTimer);
 					var scaleSize = $jqIdTrimingArea.data("preScale") + (event.scale - $jqIdTrimingArea.data("scale"));
-					if( scaleSize > maxScale ){
-						scaleSize = maxScale
+					if( scaleSize > limitScale ){
+						scaleSize = limitScale
 					}
 					if( scaleSize < 0.4 ){
 						scaleSize = 0.4
@@ -363,7 +365,8 @@ $(function(){
 		// scaleMaxHeight = repHeight / scaleElmSize;
 		// maxScale = scaleMaxWidth < scaleMaxHeight ? scaleMaxWidth : scaleMaxHeight;
 
-		alert(maxScale);
+		//alert(maxScale);
+		limitScale = maxScale;
 
 		elmX = ($jqIdTrimingElm.position().left);
 		elmY = ($jqIdTrimingElm.offset().top) - topOffset;
