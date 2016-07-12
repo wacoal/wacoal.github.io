@@ -73,8 +73,8 @@ function main(dataUrl) {
 			$("#js_triming_element").css({
 				top: (repHeight / 2) - (scaleElmSize / 2),
 				left: (repWidth /2) - (scaleElmSize / 2),
-				// maxWidth: repWidth,
-				// maxHeight: repHeight
+				maxWidth: repWidth,
+				maxHeight: repHeight
 			});
 
 			elmMaxSize = repWidth < repHeight ? repWidth / scaleElmSize : repHeight / scaleElmSize;
@@ -195,6 +195,12 @@ $(function(){
 	$hammerObj.get("pinch").set({ enable: true });
 	$jqIdTrimingElm.css("transform", "scale(1)");
 
+	// 小数点n位までを残す関数 (四捨五入)
+	function floatFormat( number, n ) {
+		var _pow = Math.pow( 10 , n ) ;
+		return Math.round( number * _pow ) / _pow ;
+	}
+
 	// var obj = $idTrimingElm;
 	// var rect = obj.getBoundingClientRect();
 	// //座標を計算する
@@ -285,12 +291,6 @@ $(function(){
       }
   });
 
-	// 小数点n位までを残す関数 (四捨五入)
-	function floatFormat( number, n ) {
-		var _pow = Math.pow( 10 , n ) ;
-		return Math.round( number * _pow ) / _pow ;
-	}
-
 	//pinch event
   $hammerObj2.on("pinch",function(event) {
 
@@ -307,12 +307,12 @@ $(function(){
       } else { //move
           if($pinchTimer) clearTimeout($pinchTimer);
 					var scaleSize = $jqIdTrimingArea.data("preScale") + (event.scale - $jqIdTrimingArea.data("scale"));
-					if( scaleSize > maxScale ){
-						scaleSize = maxScale
-					}
-					if( scaleSize < 0.4 ){
-						scaleSize = 0.4
-					}
+					// if( scaleSize > maxScale ){
+					// 	scaleSize = maxScale
+					// }
+					// if( scaleSize < 0.4 ){
+					// 	scaleSize = 0.4
+					// }
 					//scaleRatio = floatFormat( scaleSize, 3 );
 					scaleRatio = floatFormat( scaleSize, 3 );
 					scaleElmSize = elmSize * scaleRatio;
