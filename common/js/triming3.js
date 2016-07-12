@@ -395,8 +395,8 @@ $(function(){
 		// 	scaleRatio = 1 - scaleRatio;
 		// }
 
-		elmX = elmX + ( scaleElmSize * ( scaleRatio * 2 ) );
-		elmY = elmY + ( scaleElmSize * ( scaleRatio * 2 ) );
+		elmX = elmX + ( ( scaleElmSize * scaleRatio ) / 2 );
+		elmY = elmY + ( ( scaleElmSize * scaleRatio ) / 2 );
 
 		$jqIdTrimingElm.css({
 			width: scaleElmSize,
