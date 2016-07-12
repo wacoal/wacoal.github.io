@@ -316,8 +316,8 @@ $(function(){
 					// }
 					//scaleRatio = floatFormat( scaleSize, 3 );
 
-					// scaleRatio = floatFormat( scaleSize, 3 );
-					// scaleElmSize = elmSize * scaleRatio;
+					scaleRatio = floatFormat( scaleSize, 3 );
+					scaleElmSize = elmSize * scaleRatio;
 					//
 					// scaleMaxWidth = repWidth / scaleElmSize;
 					// scaleMaxHeight = repHeight / scaleElmSize;
