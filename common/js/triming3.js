@@ -327,9 +327,9 @@ $(function(){
 					// elmY = elmY + ( scaleElmSize * scaleRatio );
 
 					scaleElmSize = scaleElmSize * scaleSize;
-					scaleMaxWidth = repWidth / scaleElmSize;
-					scaleMaxHeight = repHeight / scaleElmSize;
-					maxScale = scaleMaxWidth < scaleMaxHeight ? scaleMaxWidth : scaleMaxHeight;
+					// scaleMaxWidth = repWidth / scaleElmSize;
+					// scaleMaxHeight = repHeight / scaleElmSize;
+					// maxScale = scaleMaxWidth < scaleMaxHeight ? scaleMaxWidth : scaleMaxHeight;
 
           $jqIdTrimingElm.css({
 						"transform": "scale(" + scaleSize + ")"
@@ -361,7 +361,7 @@ $(function(){
 		// scaleMaxHeight = repHeight / scaleElmSize;
 		// maxScale = scaleMaxWidth < scaleMaxHeight ? scaleMaxWidth : scaleMaxHeight;
 
-		alert(scaleElmSize,maxScale);
+		alert(scaleElmSize);
 
 		//alert(maxScale);
 
