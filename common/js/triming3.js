@@ -352,8 +352,7 @@ $(function(){
 					// x= scaleElmSize / elmSize;
 
 
-					$("#x").html(scaleSize);
-					$("#y").html(maxScale);
+
 					//
 					// scaleMaxWidth = repWidth / scaleElmSize;
 					// scaleMaxHeight = repHeight / scaleElmSize;
@@ -401,6 +400,9 @@ $(function(){
 		//alert(maxScale);
 		maxScale = elmSize / scaleElmSize;
 		limitScale = maxScale;
+
+		$("#x").html(scaleSize);
+		$("#y").html(maxScale);
 
 		elmX = ($jqIdTrimingElm.position().left);
 		elmY = ($jqIdTrimingElm.offset().top) - topOffset;
