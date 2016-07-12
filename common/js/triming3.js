@@ -301,7 +301,12 @@ $(function(){
 
 
 	//pinch event
-	var lock = false;
+	// var lock = false;
+	// if (!lock) {
+	// 	scaleElmSize = elmSize * scaleRatio;
+	// 	maxScale = elmSize / scaleElmSize;
+	// }
+	// lock = true;
   $hammerObj2.on("pinch",function(event) {
 
       event.preventDefault ? event.preventDefault() : (event.returnValue = false);
@@ -314,6 +319,7 @@ $(function(){
           $jqIdTrimingArea
               .data("preScale", preScale)
               .data("scale", event.scale);
+
       } else { //move
           if($pinchTimer) clearTimeout($pinchTimer);
 					var scaleSize = $jqIdTrimingArea.data("preScale") + (event.scale - $jqIdTrimingArea.data("scale"));
@@ -328,11 +334,6 @@ $(function(){
 
 
 					scaleRatio = floatFormat( scaleSize, 1 );
-
-					if (!lock) {
-						scaleElmSize = elmSize * scaleRatio;
-	        }
-	        lock = true;
 
 					scaleElmSize = scaleElmSize * scaleRatio;
 					var hi = scaleElmSize / elmSize;
@@ -352,11 +353,11 @@ $(function(){
 
 
 					$("#x").html(scaleSize);
-					$("#y").html(hi);
+					$("#y").html(maxScale);
 					//
 					// scaleMaxWidth = repWidth / scaleElmSize;
 					// scaleMaxHeight = repHeight / scaleElmSize;
-					maxScale = elmSize / scaleElmSize;
+					//maxScale = elmSize / scaleElmSize;
 					//
 					// elmX = elmX + ( scaleElmSize * scaleRatio );
 					// elmY = elmY + ( scaleElmSize * scaleRatio );
@@ -398,6 +399,7 @@ $(function(){
 		// maxScale = scaleMaxWidth < scaleMaxHeight ? scaleMaxWidth : scaleMaxHeight;
 
 		//alert(maxScale);
+		maxScale = elmSize / scaleElmSize;
 		limitScale = maxScale;
 
 		elmX = ($jqIdTrimingElm.position().left);
