@@ -394,7 +394,7 @@ $(function(){
 		// // if( scaleRatio < 1 ) {
 		// // 	scaleRatio = 1 - scaleRatio;
 		// // }
-		alert(scaleElmSize);
+		//alert(scaleElmSize);
 
 		// scaleRatio = floatFormat( scaleSize, 3 );
 		// scaleElmSize = elmSize * scaleRatio;
@@ -407,8 +407,8 @@ $(function(){
 		elmX = elmX + ( scaleElmSize - ( scaleElmSize * scaleRatio ) );
 		elmY = elmY + ( scaleElmSize - ( scaleElmSize * scaleRatio ) );
 
-		//$jqIdTrimingElm.css({
-		$("#dammy").css({
+		$jqIdTrimingElm.css({
+		//$("#dammy").css({
 			width: scaleElmSize,
 			height: scaleElmSize,
 			"left": elmX,
