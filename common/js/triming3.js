@@ -39,6 +39,7 @@ var scaleRatio = 1;
 var scaleMaxWidth;
 var scaleMaxHeight;
 var maxScale;
+var minScale;
 
 function main(dataUrl) {
 	if (canvas.getContext) {
@@ -157,7 +158,6 @@ function rotate(){
 		// $('#now-size').html(parseInt(repWidth));
 		// $("#x").html(leftOffset);
 		// $("#y").html();
-
 
 		trimRestore();
 }
@@ -309,12 +309,12 @@ $(function(){
       } else { //move
           if($pinchTimer) clearTimeout($pinchTimer);
 					var scaleSize = $jqIdTrimingArea.data("preScale") + (event.scale - $jqIdTrimingArea.data("scale"));
-					// if( scaleSize > maxScale ){
-					// 	scaleSize = maxScale
-					// }
-					// if( scaleSize < 0.4 ){
-					// 	scaleSize = 0.4
-					// }
+					if( scaleSize > maxScale ){
+						scaleSize = maxScale
+					}
+					if( scaleSize < 0.4 ){
+						scaleSize = 0.4
+					}
 					//scaleRatio = floatFormat( scaleSize, 3 );
 
 					scaleRatio = floatFormat( scaleSize, 3 );
