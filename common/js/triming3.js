@@ -328,13 +328,14 @@ $(function(){
 
 					scaleRatio = floatFormat( scaleSize, 1 );
 
-					if( scaleRatio < 1 ){
-						scaleElmSize = elmSize * scaleRatio;
-					} else if( scaleRatio > 1 ){
-						//alert(scaleRatio);
-					} else {
-
-					}
+					// if( scaleRatio < 1 ){
+					// 	scaleElmSize = elmSize * scaleRatio;
+					// } else if( scaleRatio > 1 ){
+					// 	//alert(scaleRatio);
+					// } else {
+					//
+					// }
+					scaleElmSize = elmSize * scaleRatio;
 
 					// elmSize : scaleElmSize = 1 : x;
 					// scaleElmSize = elmSize * x;
