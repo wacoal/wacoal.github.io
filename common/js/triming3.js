@@ -402,7 +402,7 @@ $(function(){
 
 
 		elmX = ($jqIdTrimingElm.position().left);
-		//elmY = ($jqIdTrimingElm.offset().top) - topOffset;
+		elmY = ($jqIdTrimingElm.offset().top) - topOffset;
 
 		//elmX = elmX + ( scaleElmSize - ( scaleElmSize * scaleRatio ) );
 		//elmY = elmY + ( scaleElmSize - ( scaleElmSize * scaleRatio ) );
@@ -412,12 +412,12 @@ $(function(){
 			width: scaleElmSize,
 			height: scaleElmSize,
 			"left": elmX,
-			// "top": elmY,
+			"top": elmY,
 			"transform": "scale(1)",
 			"border": 'solid 2px blue'
 		});
 
-		alert(elmX);
+		//alert(elmX);
 
 		// elmX =  ($("#js_triming_element").position().left);
 		// elmY = ($("#js_triming_element").offset().top) - topOffset;
