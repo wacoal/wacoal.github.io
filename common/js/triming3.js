@@ -318,6 +318,10 @@ $(function(){
 					scaleRatio = floatFormat( scaleSize, 3 );
 					scaleElmSize = elmSize * scaleRatio;
 
+					scaleMaxWidth = repWidth / scaleElmSize;
+					scaleMaxHeight = repHeight / scaleElmSize;
+					maxScale = scaleMaxWidth < scaleMaxHeight ? scaleMaxWidth : scaleMaxHeight;
+
 					elmX = elmX + ( scaleElmSize * scaleRatio );
 					elmY = elmY + ( scaleElmSize * scaleRatio );
 
@@ -351,7 +355,7 @@ $(function(){
 		scaleMaxHeight = repHeight / scaleElmSize;
 		maxScale = scaleMaxWidth < scaleMaxHeight ? scaleMaxWidth : scaleMaxHeight;
 
-		alert(maxScale);
+		//alert(maxScale);
 
 		elmX = ($jqIdTrimingElm.position().left);
 		elmY = ($jqIdTrimingElm.offset().top) - topOffset;
