@@ -362,7 +362,7 @@ $(function(){
 			"left": elmX,
 			"top": elmY,
 			"transform": "scale(1)",
-			//"border": 'solid 2px blue'
+			"border": 'solid 2px blue'
 		});
 	});
 
