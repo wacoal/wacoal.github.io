@@ -77,8 +77,8 @@ function main(dataUrl) {
 			$("#js_triming_element").css({
 				top: (repHeight / 2) - (scaleElmSize / 2),
 				left: (repWidth /2) - (scaleElmSize / 2),
-				maxWidth: elmMaxSize,
-				maxHeight: elmMaxSize
+				// maxWidth: elmMaxSize,
+				// maxHeight: elmMaxSize
 			});
 
 
