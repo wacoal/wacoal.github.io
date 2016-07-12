@@ -402,10 +402,10 @@ $(function(){
 
 
 		elmX = ($jqIdTrimingElm.position().left);
-		elmY = ($jqIdTrimingElm.offset().top) - topOffset;
+		//elmY = ($jqIdTrimingElm.offset().top) - topOffset;
 
 		elmX = elmX + ( scaleElmSize - ( scaleElmSize * scaleRatio ) );
-		elmY = elmY + ( scaleElmSize - ( scaleElmSize * scaleRatio ) );
+		//elmY = elmY + ( scaleElmSize - ( scaleElmSize * scaleRatio ) );
 
 		$jqIdTrimingElm.css({
 		//$("#dammy").css({
@@ -414,7 +414,7 @@ $(function(){
 			"left": elmX,
 			"top": elmY,
 			"transform": "scale(1)",
-			"border": 'solid 2px blue'
+			//"border": 'solid 2px blue'
 		});
 
 
