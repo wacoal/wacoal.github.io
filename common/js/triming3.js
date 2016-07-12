@@ -351,10 +351,6 @@ $(function(){
 					elmY = elmY + ( scaleElmSize * scaleRatio );
 
           $jqIdTrimingElm.css({
-						// width: scaleElmSize,
-						// height: scaleElmSize,
-						// top: elmX,
-						// left: elmY,
 						"transform": "scale(" + scaleSize + ")"
 					});
           $pinchTimer = setTimeout(function() { //end
@@ -389,6 +385,10 @@ $(function(){
 					$("#scale").html(scaleRatio);
 					$('#now-size').html(scaleElmSize);
 
+					$jqIdTrimingElm.css({
+						"transform": "scale(1)"
+					});
+
       }
   });
 
@@ -412,7 +412,7 @@ $(function(){
 			height: scaleElmSize,
 			"left": elmX,
 			"top": elmY,
-			"transform": "scale('1')"
+			"transform": "scale(1)"
 		});
 
 
