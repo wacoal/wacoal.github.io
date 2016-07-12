@@ -46,7 +46,7 @@ function main(dataUrl) {
 		ctx2 = canvas2.getContext('2d');
 		image.src = dataUrl;
 		image.addEventListener('load', function(){
-			//$(".loading").hide();
+			$(".loading").hide();
 			imageWidth = image.width;
 			imageHeight = image.height;
 			repWidth  = imageWidth < imageHeight ? minWidth : minHeight / imageHeight * imageWidth;
@@ -57,7 +57,6 @@ function main(dataUrl) {
 
 			scaleMaxWidth = repWidth / scaleElmSize;
 			scaleMaxHeight = repHeight / scaleElmSize;
-
 			maxScale = scaleMaxWidth < scaleMaxHeight ? scaleMaxWidth : scaleMaxHeight;
 
 			canvas.width = repWidth;
@@ -73,8 +72,8 @@ function main(dataUrl) {
 			$("#js_triming_element").css({
 				top: (repHeight / 2) - (scaleElmSize / 2),
 				left: (repWidth /2) - (scaleElmSize / 2),
-				maxWidth: repWidth,
-				maxHeight: repHeight
+				// maxWidth: repWidth,
+				// maxHeight: repHeight
 			});
 
 			elmMaxSize = repWidth < repHeight ? repWidth / scaleElmSize : repHeight / scaleElmSize;
@@ -335,14 +334,20 @@ $(function(){
 	$hammerObj2.on("pinchend",function(event) {
 
 		var scaleSize = $jqIdTrimingArea.data("preScale") + (event.scale - $jqIdTrimingArea.data("scale"));
-		if( scaleSize > maxScale ){
-			scaleSize = maxScale
-		}
-		if( scaleSize < 0.4 ){
-			scaleSize = 0.4
-		}
+
+
+		// if( scaleSize > maxScale ){
+		// 	scaleSize = maxScale
+		// }
+		// if( scaleSize < 0.4 ){
+		// 	scaleSize = 0.4
+		// }
 		scaleRatio = floatFormat( scaleSize, 3 );
 		scaleElmSize = elmSize * scaleRatio;
+
+		scaleMaxWidth = repWidth / scaleElmSize;
+		scaleMaxHeight = repHeight / scaleElmSize;
+		maxScale = scaleMaxWidth < scaleMaxHeight ? scaleMaxWidth : scaleMaxHeight;
 
 		elmX = ($jqIdTrimingElm.position().left);
 		elmY = ($jqIdTrimingElm.offset().top) - topOffset;
