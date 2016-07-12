@@ -326,6 +326,11 @@ $(function(){
 					// elmX = elmX + ( scaleElmSize * scaleRatio );
 					// elmY = elmY + ( scaleElmSize * scaleRatio );
 
+					scaleElmSize = scaleElmSize * scaleSize;
+					scaleMaxWidth = repWidth / scaleElmSize;
+					scaleMaxHeight = repHeight / scaleElmSize;
+					maxScale = scaleMaxWidth < scaleMaxHeight ? scaleMaxWidth : scaleMaxHeight;
+
           $jqIdTrimingElm.css({
 						"transform": "scale(" + scaleSize + ")"
 					});
@@ -349,12 +354,14 @@ $(function(){
 		// if( scaleSize < 0.4 ){
 		// 	scaleSize = 0.4
 		// }
-		scaleRatio = floatFormat( scaleSize, 3 );
-		scaleElmSize = elmSize * scaleRatio;
+		// scaleRatio = floatFormat( scaleSize, 3 );
+		// scaleElmSize = elmSize * scaleRatio;
+		//
+		// scaleMaxWidth = repWidth / scaleElmSize;
+		// scaleMaxHeight = repHeight / scaleElmSize;
+		// maxScale = scaleMaxWidth < scaleMaxHeight ? scaleMaxWidth : scaleMaxHeight;
 
-		scaleMaxWidth = repWidth / scaleElmSize;
-		scaleMaxHeight = repHeight / scaleElmSize;
-		maxScale = scaleMaxWidth < scaleMaxHeight ? scaleMaxWidth : scaleMaxHeight;
+		alert(scaleElmSize,maxScale);
 
 		//alert(maxScale);
 
