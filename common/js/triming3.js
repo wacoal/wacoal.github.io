@@ -398,13 +398,15 @@ $(function(){
 		scaleRatio = floatFormat( scaleSize, 3 );
 		scaleElmSize = elmSize * scaleRatio;
 
+		elmX = ($("#js_triming_element").position().left);
+
 		elmX = elmX + ( scaleElmSize - ( scaleElmSize * scaleRatio ) );
 		elmY = elmY + ( scaleElmSize - ( scaleElmSize * scaleRatio ) );
 
 		$jqIdTrimingElm.css({
 			width: scaleElmSize,
 			height: scaleElmSize,
-			// "left": elmX,
+			"left": elmX,
 			// "top": elmY,
 			"transform": "scale(1)"
 		});
