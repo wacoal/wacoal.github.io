@@ -394,11 +394,12 @@ $(function(){
 		// // if( scaleRatio < 1 ) {
 		// // 	scaleRatio = 1 - scaleRatio;
 		// // }
+		alert(scaleElmSize);
 
 		scaleRatio = floatFormat( scaleSize, 3 );
 		scaleElmSize = elmSize * scaleRatio;
 
-		alert(scaleElmSize);
+
 
 		elmX = ($jqIdTrimingElm.position().left);
 		elmY = ($jqIdTrimingElm.offset().top) - topOffset;
