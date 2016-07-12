@@ -80,8 +80,8 @@ function main(dataUrl) {
 			elmMaxSize = repWidth < repHeight ? repWidth / scaleElmSize : repHeight / scaleElmSize;
 
 			//TODO function化したい
-			topOffset =  $jqIdTrimingArea.offset().top;
-			leftOffset = $jqIdTrimingArea.offset().left;
+			topOffset =  $("#js_triming_area").offset().top;
+			leftOffset = $("#js_triming_area").offset().left;
 			elmSize = scaleElmSize;
 			$("#o-size").html(imageWidth);
 			$('#now-size').html(elmSize);
@@ -256,7 +256,6 @@ $(function(){
           } else { //move
               if ($jqIdTrimingArea.data("down") == true) {
 
-
 									elmX = ( ($jqIdTrimingArea.data("elmPosX") - ($jqIdTrimingArea.data("x") - event.center.x)) );
 									elmY = ( ($jqIdTrimingArea.data("elmPosY") - ($jqIdTrimingArea.data("y") - event.center.y)) );
 									elmX = parseInt(elmX);
@@ -329,8 +328,6 @@ $(function(){
 
 					$("#scale").html(scaleRatio);
 					$('#now-size').html(scaleElmSize);
-
-
       }
   });
 
