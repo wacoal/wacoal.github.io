@@ -326,6 +326,10 @@ $(function(){
 					scaleRatio = floatFormat( scaleSize, 1 );
 					if( scaleRatio < 1 ){
 						scaleElmSize = elmSize * scaleRatio;
+					} else if( scaleRatio > 1 ){
+						alert(scaleRatio);
+					} else {
+
 					}
 					//
 					// scaleMaxWidth = repWidth / scaleElmSize;
