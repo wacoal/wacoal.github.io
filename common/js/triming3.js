@@ -395,6 +395,9 @@ $(function(){
 		// // 	scaleRatio = 1 - scaleRatio;
 		// // }
 
+		scaleRatio = floatFormat( scaleSize, 3 );
+		scaleElmSize = elmSize * scaleRatio;
+
 		elmX = elmX + ( scaleElmSize - ( scaleElmSize * scaleRatio ) );
 		elmY = elmY + ( scaleElmSize - ( scaleElmSize * scaleRatio ) );
 
