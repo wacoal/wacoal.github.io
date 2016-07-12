@@ -63,7 +63,7 @@ function main(dataUrl) {
 						// scaleMaxWidth = parseInt(scaleMaxWidth);
 						// scaleMaxHeight = parseInt(scaleMaxHeight);
 
-						maxScale = scaleMaxWidth < scaleMaxHeight ? scaleMaxHeight : scaleMaxWidth;
+						maxScale = scaleMaxWidth < scaleMaxHeight ? scaleMaxWidth : scaleMaxHeight;
 
 						canvas.width = repWidth;
 						canvas.height = repHeight;
