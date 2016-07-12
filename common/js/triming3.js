@@ -299,6 +299,8 @@ $(function(){
       }
   });
 
+	var isClicked = true;
+	var originScale = 1;
 	//pinch event
   $hammerObj2.on("pinch",function(event) {
 
@@ -318,14 +320,20 @@ $(function(){
 					if( scaleSize > limitScale ){
 						scaleSize = limitScale
 					}
-					$("#x").html(scaleSize);
+
 					// if( scaleSize < 0.4 ){
 					// 	scaleSize = 0.4
 					// }
 					//scaleRatio = floatFormat( scaleSize, 3 );
 
+					if (isClicked) {
+            originScale = scaleRatio;
+	        }
+	        isClicked = false;
+
 					scaleRatio = floatFormat( scaleSize, 1 );
-					scaleRatio = scaleRatio * 1;
+					scaleRatio = scaleRatio * originScale;
+
 					if( scaleRatio < 1 ){
 						scaleElmSize = elmSize * scaleRatio;
 					} else if( scaleRatio > 1 ){
@@ -333,6 +341,8 @@ $(function(){
 					} else {
 
 					}
+					$("#x").html(scaleSize);
+					$("#y").html(scaleRatio);
 					//
 					// scaleMaxWidth = repWidth / scaleElmSize;
 					// scaleMaxHeight = repHeight / scaleElmSize;
