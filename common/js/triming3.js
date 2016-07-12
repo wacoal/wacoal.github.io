@@ -395,22 +395,6 @@ $(function(){
 		// // 	scaleRatio = 1 - scaleRatio;
 		// // }
 
-		getPinchendCss(scaleElmSize);
-
-
-		// elmX =  ($("#js_triming_element").position().left);
-		// elmY = ($("#js_triming_element").offset().top) - topOffset;
-		//
-		// elmX = parseInt(elmX);
-		// elmY = parseInt(elmY);
-		// $("#x_now").html(elmX);
-		// $("#y_now").html(elmY);
-		// $("#scale").html(scaleRatio);
-		// $('#now-size').html(scaleElmSize);
-	});
-
-
-	function getPinchendCss(scaleElmSize){
 		scaleRatio = floatFormat( scaleSize, 3 );
 		scaleElmSize = elmSize * scaleRatio;
 
@@ -431,6 +415,22 @@ $(function(){
 			"transform": "scale(1)",
 			"border": 'solid 2px blue'
 		});
+
+
+		// elmX =  ($("#js_triming_element").position().left);
+		// elmY = ($("#js_triming_element").offset().top) - topOffset;
+		//
+		// elmX = parseInt(elmX);
+		// elmY = parseInt(elmY);
+		// $("#x_now").html(elmX);
+		// $("#y_now").html(elmY);
+		// $("#scale").html(scaleRatio);
+		// $('#now-size').html(scaleElmSize);
+	});
+
+
+	function getPinchendCss(scaleElmSize){
+
 	}
 
 });
