@@ -62,7 +62,7 @@ function main(dataUrl) {
 						scaleMaxHeight = parseInt(scaleMaxHeight);
 
 						maxScale = scaleMaxWidth < scaleMaxHeight ? scaleMaxWidth : scaleMaxHeight;
-
+ß
 						canvas.width = repWidth;
 						canvas.height = repHeight;
 						ctx.drawImage(image, 0, 0, repWidth, repHeight);
@@ -391,9 +391,9 @@ $(function(){
 
 	$hammerObj2.on("pinchend",function(event) {
 
-		// if( scaleRatio < 1 ) {
-		// 	scaleRatio = 1 - scaleRatio;
-		// }
+		// // if( scaleRatio < 1 ) {
+		// // 	scaleRatio = 1 - scaleRatio;
+		// // }
 
 		elmX = elmX + ( scaleElmSize - ( scaleElmSize * scaleRatio ) );
 		elmY = elmY + ( scaleElmSize - ( scaleElmSize * scaleRatio ) );
@@ -401,8 +401,8 @@ $(function(){
 		$jqIdTrimingElm.css({
 			width: scaleElmSize,
 			height: scaleElmSize,
-			"left": elmX,
-			"top": elmY,
+			// "left": elmX,
+			// "top": elmY,
 			"transform": "scale(1)"
 		});
 
