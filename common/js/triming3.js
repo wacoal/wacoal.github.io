@@ -385,7 +385,7 @@ $(function(){
 					$("#scale").html(scaleRatio);
 					$('#now-size').html(scaleElmSize);
 
-					getPinchendCss(scaleElmSize);
+
       }
   });
 
@@ -395,7 +395,7 @@ $(function(){
 		// // 	scaleRatio = 1 - scaleRatio;
 		// // }
 
-
+		getPinchendCss(scaleElmSize);
 
 
 		// elmX =  ($("#js_triming_element").position().left);
@@ -427,7 +427,7 @@ $(function(){
 			"left": elmX,
 			"top": elmY,
 			"transform": "scale(1)",
-			border: 'solid 2px blue'
+			"border": 'solid 2px blue'
 		});
 	}
 
