@@ -55,13 +55,15 @@ function main(dataUrl) {
 						repWidth  = parseInt(repWidth);
 						repHeight = parseInt(repHeight);
 
+
+
 						scaleMaxWidth = repWidth / scaleElmSize;
 						scaleMaxHeight = repHeight / scaleElmSize;
 
-						scaleMaxWidth = parseInt(scaleMaxWidth);
-						scaleMaxHeight = parseInt(scaleMaxHeight);
+						// scaleMaxWidth = parseInt(scaleMaxWidth);
+						// scaleMaxHeight = parseInt(scaleMaxHeight);
 
-						maxScale = scaleMaxWidth < scaleMaxHeight ? scaleMaxWidth : scaleMaxHeight;
+						maxScale = scaleMaxWidth < scaleMaxHeight ? scaleMaxHeight : scaleMaxWidth;
 
 						canvas.width = repWidth;
 						canvas.height = repHeight;
