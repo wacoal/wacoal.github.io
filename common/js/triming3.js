@@ -294,7 +294,7 @@ $(function(){
 
 	//pinch event
   $hammerObj2.on("pinch",function(event) {
-			elmSize = scaleElmSize;
+
       event.preventDefault ? event.preventDefault() : (event.returnValue = false);
       if(!pinchTime) { //start
           pinchTime = event.timeStamp;
@@ -316,15 +316,15 @@ $(function(){
 					// }
 					//scaleRatio = floatFormat( scaleSize, 3 );
 
-					scaleRatio = floatFormat( scaleSize, 3 );
-					scaleElmSize = elmSize * scaleRatio;
-
-					scaleMaxWidth = repWidth / scaleElmSize;
-					scaleMaxHeight = repHeight / scaleElmSize;
-					maxScale = scaleMaxWidth < scaleMaxHeight ? scaleMaxWidth : scaleMaxHeight;
-
-					elmX = elmX + ( scaleElmSize * scaleRatio );
-					elmY = elmY + ( scaleElmSize * scaleRatio );
+					// scaleRatio = floatFormat( scaleSize, 3 );
+					// scaleElmSize = elmSize * scaleRatio;
+					//
+					// scaleMaxWidth = repWidth / scaleElmSize;
+					// scaleMaxHeight = repHeight / scaleElmSize;
+					// maxScale = scaleMaxWidth < scaleMaxHeight ? scaleMaxWidth : scaleMaxHeight;
+					//
+					// elmX = elmX + ( scaleElmSize * scaleRatio );
+					// elmY = elmY + ( scaleElmSize * scaleRatio );
 
           $jqIdTrimingElm.css({
 						"transform": "scale(" + scaleSize + ")"
