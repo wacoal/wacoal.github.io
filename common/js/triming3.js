@@ -89,18 +89,18 @@ function main(dataUrl) {
 			topOffset =  $("#js_triming_area").offset().top;
 			leftOffset = $("#js_triming_area").offset().left;
 			elmSize = scaleElmSize;
-			$("#o-size").html(imageWidth);
-			$('#now-size').html(elmSize);
-			//$("#x").html(leftOffset);
-			$("#x").html(maxScale);
-			$("#y").html(topOffset);
+			// $("#o-size").html(imageWidth);
+			// $('#now-size').html(elmSize);
+			// //$("#x").html(leftOffset);
+			// $("#x").html(maxScale);
+			// $("#y").html(topOffset);
 
 			elmX = ( ( repWidth/ 2) - (scaleElmSize / 2) ) + leftOffset;
 			elmY = ( (repHeight / 2) - (scaleElmSize / 2) );
 			// elmX = parseInt(elmX);
 			// elmY = parseInt(elmY);
-			$("#x_now").html(elmX);
-			$("#y_now").html(elmY);
+			// $("#x_now").html(elmX);
+			// $("#y_now").html(elmY);
 
 			ratio = figureScale(imageWidth,repWidth);
 
@@ -292,8 +292,8 @@ $(function(){
                       "top": elmY + "px"
                   });
 
-									$("#x_now").html(elmX);
-									$("#y_now").html(elmY);
+									//$("#x_now").html(elmX);
+									//$("#y_now").html(elmY);
               }
           }
       }
@@ -316,8 +316,9 @@ $(function(){
           if($pinchTimer) clearTimeout($pinchTimer);
 					var scaleSize = $jqIdTrimingArea.data("preScale") + (event.scale - $jqIdTrimingArea.data("scale"));
 					if( scaleSize > limitScale ){
-						scaleSize = limitScale - 0.1
+						scaleSize = limitScale
 					}
+					$("#x").html(scaleSize);
 					// if( scaleSize < 0.4 ){
 					// 	scaleSize = 0.4
 					// }
@@ -327,7 +328,7 @@ $(function(){
 					if( scaleRatio < 1 ){
 						scaleElmSize = elmSize * scaleRatio;
 					} else if( scaleRatio > 1 ){
-						alert(scaleRatio);
+						//alert(scaleRatio);
 					} else {
 
 					}
@@ -351,9 +352,9 @@ $(function(){
               pinchTime = false;
           }, 100);
 
-					$("#scale").html(scaleRatio);
-					$('#now-size').html(scaleElmSize);
-					$('#x').html(maxScale);
+					// $("#scale").html(scaleRatio);
+					// $('#now-size').html(scaleElmSize);
+					// $('#x').html(maxScale);
       }
   });
 
