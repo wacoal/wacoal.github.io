@@ -403,7 +403,7 @@ $(function(){
 			height: scaleElmSize,
 			"left": elmX,
 			"top": elmY,
-			"transform": "scale(none)"
+			"transform": "scale(1)"
 		});
 
 
