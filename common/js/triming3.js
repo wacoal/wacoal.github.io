@@ -312,7 +312,7 @@ $(function(){
           if($pinchTimer) clearTimeout($pinchTimer);
 					var scaleSize = $jqIdTrimingArea.data("preScale") + (event.scale - $jqIdTrimingArea.data("scale"));
 					if( scaleSize > limitScale ){
-						scaleSize = limitScale
+						scaleSize = limitScale - 0.1
 					}
 					if( scaleSize < 0.4 ){
 						scaleSize = 0.4
