@@ -328,8 +328,9 @@ $(function(){
 
 					scaleRatio = floatFormat( scaleSize, 1 );
 
-					var hi = scaleElmSize / elmSize;
+
 					scaleElmSize = elmSize * scaleRatio;
+					var hi = scaleElmSize / elmSize;
 
 					// if( scaleRatio < 1 ){
 					// 	scaleElmSize = elmSize * scaleRatio;
