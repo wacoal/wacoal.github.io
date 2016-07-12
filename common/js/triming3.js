@@ -292,10 +292,13 @@ $(function(){
 	}
 
 	//pinch event
-  $hammerObj2.on("pinch",function(event) {
+	$hammerObj2.on("pinchin",function(event) {
 		$jqIdTrimingElm.css({
 			"transform": "scale(none)"
 		});
+	});
+  $hammerObj2.on("pinch",function(event) {
+
       event.preventDefault ? event.preventDefault() : (event.returnValue = false);
       if(!pinchTime) { //start
           pinchTime = event.timeStamp;
