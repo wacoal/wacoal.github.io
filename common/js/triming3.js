@@ -339,9 +339,10 @@ $(function(){
 					// elmSize : scaleElmSize = 1 : x;
 					// scaleElmSize = elmSize * x;
 					// x= scaleElmSize / elmSize;
+					var hi = scaleElmSize / elmSize;
 
 					$("#x").html(scaleSize);
-					$("#y").html(elmSize);
+					$("#y").html(hi);
 					//
 					// scaleMaxWidth = repWidth / scaleElmSize;
 					// scaleMaxHeight = repHeight / scaleElmSize;
