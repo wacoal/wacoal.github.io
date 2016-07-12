@@ -352,7 +352,7 @@ $(function(){
 			height: scaleElmSize,
 			"left": elmX,
 			"top": elmY,
-			"transform": "scale(" + scaleSize + ")",
+			"transform": "scale(1)",
 			"border": 'solid 2px blue'
 		});
 	});
