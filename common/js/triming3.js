@@ -326,7 +326,7 @@ $(function(){
 					// elmX = elmX + ( scaleElmSize * scaleRatio );
 					// elmY = elmY + ( scaleElmSize * scaleRatio );
 
-					scaleElmSize = scaleElmSize * scaleSize;
+					//scaleElmSize = scaleElmSize * scaleSize;
 					// scaleMaxWidth = repWidth / scaleElmSize;
 					// scaleMaxHeight = repHeight / scaleElmSize;
 					// maxScale = scaleMaxWidth < scaleMaxHeight ? scaleMaxWidth : scaleMaxHeight;
@@ -361,7 +361,7 @@ $(function(){
 		// scaleMaxHeight = repHeight / scaleElmSize;
 		// maxScale = scaleMaxWidth < scaleMaxHeight ? scaleMaxWidth : scaleMaxHeight;
 
-		alert(scaleElmSize);
+		//alert(scaleElmSize);
 
 		//alert(maxScale);
 
