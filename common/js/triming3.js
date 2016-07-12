@@ -330,9 +330,9 @@ $(function(){
 
 					var hi = scaleElmSize / elmSize;
 
-					if( hi < 1 ){
+					if( scaleRatio < 1 ){
 						scaleElmSize = elmSize * scaleRatio;
-					} else if( hi > 1 ){
+					} else if( scaleRatio > 1 ){
 						//alert(scaleRatio);
 					} else {
 
