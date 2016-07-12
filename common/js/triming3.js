@@ -385,6 +385,10 @@ $(function(){
 
 	$hammerObj2.on("pinchend",function(event) {
 
+		if( scaleRatio < 1 ) {
+			scaleRatio = 1 - scaleRatio;
+		}
+
 		elmX = scaleElmSize * scaleRatio;
 		elmY = scaleElmSize * scaleRatio;
 
