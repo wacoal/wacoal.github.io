@@ -407,8 +407,8 @@ $(function(){
 		//elmX = elmX + ( scaleElmSize - ( scaleElmSize * scaleRatio ) );
 		//elmY = elmY + ( scaleElmSize - ( scaleElmSize * scaleRatio ) );
 
-		$jqIdTrimingElm.css({
-		//$("#dammy").css({
+		//$jqIdTrimingElm.css({
+		$("#dammy").css({
 			width: scaleElmSize,
 			height: scaleElmSize,
 			"left": elmX,
@@ -416,6 +416,9 @@ $(function(){
 			"transform": "scale(1)",
 			"border": 'solid 2px blue'
 		});
+
+		$jqIdTrimingElm.remove;
+		$("#dammy").attr("id","js_triming_element");
 
 		//alert(elmX);
 
