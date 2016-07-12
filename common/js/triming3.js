@@ -333,21 +333,18 @@ $(function(){
 
 	$hammerObj2.on("pinchend",function(event) {
 
-		// var scaleSize = $jqIdTrimingArea.data("preScale") + (event.scale - $jqIdTrimingArea.data("scale"));
-		// if( scaleSize > maxScale ){
-		// 	scaleSize = maxScale
-		// }
-		// if( scaleSize < 0.4 ){
-		// 	scaleSize = 0.4
-		// }
-		// scaleRatio = floatFormat( scaleSize, 3 );
-		// scaleElmSize = elmSize * scaleRatio;
+		var scaleSize = $jqIdTrimingArea.data("preScale") + (event.scale - $jqIdTrimingArea.data("scale"));
+		if( scaleSize > maxScale ){
+			scaleSize = maxScale
+		}
+		if( scaleSize < 0.4 ){
+			scaleSize = 0.4
+		}
+		scaleRatio = floatFormat( scaleSize, 3 );
+		scaleElmSize = elmSize * scaleRatio;
 
 		elmX = ($jqIdTrimingElm.position().left);
 		elmY = ($jqIdTrimingElm.offset().top) - topOffset;
-
-		//elmX = elmX + ( scaleElmSize - ( scaleElmSize * scaleRatio ) );
-		//elmY = elmY + ( scaleElmSize - ( scaleElmSize * scaleRatio ) );
 
 		$jqIdTrimingElm.css({
 			width: scaleElmSize,
