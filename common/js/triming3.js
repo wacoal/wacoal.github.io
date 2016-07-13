@@ -63,6 +63,7 @@ function main(dataUrl) {
 			scaleMaxHeight = repHeight / scaleElmSize;
 			maxScale = scaleMaxWidth < scaleMaxHeight ? scaleMaxWidth : scaleMaxHeight;
 			limitScale = maxScale;
+			$("#x").html(maxScale);
 
 			canvas.width = repWidth;
 			canvas.height = repHeight;
@@ -404,7 +405,7 @@ $(function(){
 
 		//alert(maxScale);
 		maxScale = elmSize / scaleElmSize;
-		limitScale = maxScale;
+		//limitScale = maxScale;
 
 		$("#scaleSize").html(scaleSize);
 		$("#maxScale").html(maxScale);
