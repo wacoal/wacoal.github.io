@@ -401,8 +401,8 @@ $(function(){
 		maxScale = elmSize / scaleElmSize;
 		limitScale = maxScale;
 
-		$("#x").html(scaleSize);
-		$("#y").html(maxScale);
+		$("#scaleSize").html(scaleSize);
+		$("#maxScale").html(maxScale);
 
 		elmX = ($jqIdTrimingElm.position().left);
 		elmY = ($jqIdTrimingElm.offset().top) - topOffset;
