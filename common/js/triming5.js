@@ -180,8 +180,8 @@ $(function(){
 	var saveScale = 1; //拡大率（縮小率）の初期値
 	var eventKind = '';
 	var elm = document.getElementById('animationLayer'); //タップを取得するエレメントを定義
-	//var img = document.getElementById('img01'); //拡大させる画像を定義
-	var img = canvas; //拡大させる画像を定義
+	var img = document.getElementById('img01'); //拡大させる画像を定義
+	//var img = canvas; //拡大させる画像を定義
 
 	elm.addEventListener('touchstart', touchStart, false);//タップされた瞬間
 	elm.addEventListener('touchstart', touchMove, false);//指を動かしている
