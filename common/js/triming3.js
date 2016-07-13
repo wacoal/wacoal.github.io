@@ -106,6 +106,10 @@ function main(dataUrl) {
 
 			trimData();
 
+
+			$("#elmSize").html(elmSize);
+			$("#scaleElmSize").html(scaleElmSize);
+
 		}, false);
 
 	}
@@ -403,6 +407,8 @@ $(function(){
 
 		$("#scaleSize").html(scaleSize);
 		$("#maxScale").html(maxScale);
+		$("#elmSize").html(elmSize);
+		$("#scaleElmSize").html(scaleElmSize);
 
 		elmX = ($jqIdTrimingElm.position().left);
 		elmY = ($jqIdTrimingElm.offset().top) - topOffset;
