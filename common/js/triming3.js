@@ -529,7 +529,7 @@ $('#js_btn_upload').off("click").on("click",function(e){
 	// }
 });
 
-
+var maxmax;
 function test_info(){
 	$("#scaleSize").html(scaleSize);
 	$("#maxScale").html(maxScale);
