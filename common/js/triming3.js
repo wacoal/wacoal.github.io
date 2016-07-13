@@ -339,7 +339,8 @@ $(function(){
 					//scaleRatio = floatFormat( scaleSize, 3 );
 
 
-					scaleRatio = floatFormat( scaleSize, 1 );
+					//scaleRatio = floatFormat( scaleSize, 1 );
+					scaleRatio = scaleSize;
 
 					scaleElmSize = elmSize * scaleRatio;
 
