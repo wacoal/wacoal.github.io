@@ -311,7 +311,7 @@ $(function(){
 	// 	maxScale = elmSize / scaleElmSize;
 	// }
 	// lock = true;
-$( "#canvas" ).on("pinch",function(event) {
+  $hammerObj2.on("pinch",function(event) {
 
       event.preventDefault ? event.preventDefault() : (event.returnValue = false);
       if(!pinchTime) { //start
@@ -383,7 +383,7 @@ $( "#canvas" ).on("pinch",function(event) {
       }
   });
 
-	$( "#canvas" ).on("pinchend",function(event) {
+	$hammerObj2.on("pinchend",function(event) {
 
 		var scaleSize = $jqIdTrimingArea.data("preScale") + (event.scale - $jqIdTrimingArea.data("scale"));
 
