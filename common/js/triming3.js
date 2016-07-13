@@ -328,7 +328,7 @@ $(function(){
       } else { //move
           if($pinchTimer) clearTimeout($pinchTimer);
 					scaleSize = $jqIdTrimingArea.data("preScale") + (event.scale - $jqIdTrimingArea.data("scale"));
-					maxmax = scaleSize * limitScale;
+
 					if( scaleSize > maxmax ){
 						scaleSize = maxmax
 					}
@@ -387,7 +387,7 @@ $(function(){
 
 	$hammerObj2.on("pinchend",function(event) {
 
-		var scaleSize = $jqIdTrimingArea.data("preScale") + (event.scale - $jqIdTrimingArea.data("scale"));
+		//var scaleSize = $jqIdTrimingArea.data("preScale") + (event.scale - $jqIdTrimingArea.data("scale"));
 
 
 		// if( scaleSize > maxScale ){
@@ -405,6 +405,7 @@ $(function(){
 
 		//alert(maxScale);
 		maxScale = elmSize / scaleElmSize;
+		maxmax   = scaleSize * limitScale;
 		//limitScale = maxScale;
 
 		test_info();
