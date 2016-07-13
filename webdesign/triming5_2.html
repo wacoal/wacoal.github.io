@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<!--[if lt IE 9]>
+<script src="../common/js/html5shiv.js"></script>
+<![endif]-->
+<meta name="viewport" content="width=device-width, maximum-scale=1, minimum-scale=1, user-scalable=no" />
+<meta name="format-detection" content="telephone=no">
+
+<title>triming
+</title>
+<!--<link type="text/css" rel="stylesheet" href="common/css/common.css" media="screen" />-->
+
+<link type="text/css" rel="stylesheet" href="/common/css/webdesign_triming.css" media="screen" />
+
+<script type="text/javascript" src="../common/js/jquery-2.1.3.min.js"></script>
+</head>
+
+<body>
+
+
+
+
+
+<div id="pageBottom" class="case">
+	<h3 class="titLv2">画像の投稿はコチラ</h3>
+
+	<div class="trimming-wrap-content">
+		<div class="trimming-wrap">
+			<div class="trimming-wrap-head"><!-- ファイル選択とアナウンス -->
+					<p class="trimming-move__txt is_small">
+						scaleSize＝<span id="scaleSize"></span>
+						maxScale=<span id="maxScale"></span>
+						scaleElmSize=<span id="scaleElmSize"></span>
+						elmSize=<span id="elmSize"></span>
+						limitScale=<span id="limitScale"></span>
+						maxmax=<span id="maxmax"></span>
+					<!--
+						写真を切り取る範囲を選択して下さい。<br>赤線内を指でずらすことで調整できます。<br>
+						x=<span id="x"></span>.Y=<span id="y"></span>.<br>originSize=<span id="originsize"></span>..originSize=<span id="nowsize"></span>
+					-->
+					</p>
+			</div>
+
+			<div class="trimming-move">
+					<label class="trimming-move-label">
+							<input id="js_btn_rotate" type="button" class="bttn__input" value="回転">
+					</label>
+			</div>
+
+			<div class="trimming-wrap-canvas">
+					<div id="js_triming_area" class="triming-area">
+						<canvas id="canvas"></canvas>
+						<div id="js_triming_element" class="triming-element"></div>
+						<canvas id="canvas2"></canvas>
+					</div>
+			</div>
+			<ul class="lists has_2 box trimming-wrap-button">
+					<li class="lists__item ">
+						<label class="bttn" for="open-prof">閉じる</label>
+					</li>
+					<li class="lists__item">
+						<label class="trimming-label bttn">
+							<input type="submit" name="rebutton" value="この位置で切り取る" id="js_btn_upload" class="bttn__input" />
+						</label>
+					</li>
+			</ul>
+			<div class="loading">
+					<div class="load-container load5">
+							<div class="loader">Loading...</div>
+					</div>
+			</div>
+		</div>
+	</div>
+
+</div>
+
+
+
+
+<script type="text/javascript" src="/common/js/hammer.min.js"></script>
+<!--<script type="text/javascript" src="/common/js/jquery.hammer.js"></script>-->
+<script type="text/javascript" src="/common/js/triming5.js"></script>
+<script>
+$(function(){
+	$(window).on("load",function(){
+		main("/common/img/sample1.jpg");
+	});
+});
+</script>
+
+<!-- Scripts -->
+
+
+
+
+</body>
+</html>
