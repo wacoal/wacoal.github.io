@@ -530,6 +530,7 @@ $('#js_btn_upload').off("click").on("click",function(e){
 });
 
 var maxmax;
+var scaleSize;
 function test_info(){
 	$("#scaleSize").html(scaleSize);
 	$("#maxScale").html(maxScale);
