@@ -536,5 +536,5 @@ function test_info(){
 	$("#elmSize").html(elmSize);
 	$("#scaleElmSize").html(scaleElmSize);
 	$("#limitScale").html(limitScale);
-
+	$("#maxmax").html(maxmax);
 }
