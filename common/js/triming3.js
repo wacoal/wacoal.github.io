@@ -327,9 +327,9 @@ $(function(){
       } else { //move
           if($pinchTimer) clearTimeout($pinchTimer);
 					var scaleSize = $jqIdTrimingArea.data("preScale") + (event.scale - $jqIdTrimingArea.data("scale"));
-					// if( scaleSize > limitScale ){
-					// 	scaleSize = limitScale
-					// }
+					if( scaleSize > limitScale ){
+						scaleSize = limitScale
+					}
 
 					// if( scaleSize < 0.4 ){
 					// 	scaleSize = 0.4
@@ -418,7 +418,7 @@ $(function(){
 		$jqIdTrimingElm.css({
 			width: scaleElmSize,
 			height: scaleElmSize,
-			maxWidth: elmSize,
+			//maxWidth: elmSize,
 			"left": elmX,
 			"top": elmY,
 			"transform": "scale(1)",
