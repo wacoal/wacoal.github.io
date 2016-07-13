@@ -406,6 +406,9 @@ $(function(){
 		//alert(maxScale);
 		maxScale = elmSize / scaleElmSize;
 		maxmax   = scaleSize * limitScale;
+		if( maxmax > limitScale ){
+			maxmax = limitScale;
+		}
 		//limitScale = maxScale;
 
 		test_info();
