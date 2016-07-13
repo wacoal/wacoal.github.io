@@ -17,6 +17,7 @@
 <style>
 #animationLayer {
 	position: absolute;
+	z-inde: 8;
 	top: 0;
 	left: 0;
 	display: block;
@@ -56,13 +57,16 @@
 							<input id="js_btn_rotate" type="button" class="bttn__input" value="回転">
 					</label>
 			</div>
-			
+
 			<div class="trimming-wrap-canvas">
 				<div id="js_triming_area" class="triming-area">
 					<canvas id="canvas"></canvas>
 					<div id="js_triming_element" class="triming-element"></div>
 					<canvas id="canvas2"></canvas>
 				</div>
+
+				<div id="animationLayer"></div>
+
 				<ul class="lists has_2 box trimming-wrap-button">
 						<li class="lists__item ">
 							<label class="bttn" for="open-prof">閉じる</label>
@@ -78,7 +82,7 @@
 		</div>
 	</div>
 
-	<div id="animationLayer"></div>
+
 
 </div>
 
