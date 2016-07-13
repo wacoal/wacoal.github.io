@@ -416,12 +416,12 @@ $(function(){
 		elmY = ($jqIdTrimingElm.offset().top) - topOffset;
 
 		$jqIdTrimingElm.css({
-			width: scaleElmSize,
-			height: scaleElmSize,
-			//maxWidth: elmSize,
-			"left": elmX,
-			"top": elmY,
-			"transform": "scale(1)",
+			// width: scaleElmSize,
+			// height: scaleElmSize,
+			// //maxWidth: elmSize,
+			// "left": elmX,
+			// "top": elmY,
+			// "transform": "scale(1)",
 			//"border": 'solid 2px blue'
 		});
 
