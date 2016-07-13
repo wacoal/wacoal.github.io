@@ -380,9 +380,7 @@ $(function(){
               pinchTime = false;
           }, 100);
 
-					// $("#scale").html(scaleRatio);
-					// $('#now-size').html(scaleElmSize);
-					// $('#x').html(maxScale);
+					test_info();
       }
   });
 
