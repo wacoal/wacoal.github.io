@@ -14,7 +14,16 @@
 <!--<link type="text/css" rel="stylesheet" href="common/css/common.css" media="screen" />-->
 
 <link type="text/css" rel="stylesheet" href="/common/css/webdesign_triming.css" media="screen" />
-
+<style>
+#animationLayer {
+	position: absolute;
+	top: 0;
+	left: 0;
+	display: block;
+	width: 100%;
+	height: 100%;
+}
+</style>
 <script type="text/javascript" src="../common/js/jquery-2.1.3.min.js"></script>
 </head>
 
@@ -24,108 +33,68 @@
 
 
 
-<div id="imgList" style="-webkit-transform:translate3d(0%, 0%, 0px);">
+<div id="pageBottom" class="case">
+	<h3 class="titLv2">画像の投稿はコチラ</h3>
 
-    <div style="-webkit-transform:translate3d(-100%, 0%, 0px);"><img src="/common/img/download1.jpg" id="img01"></div>・・・画像a
+	<div class="trimming-wrap-content">
+		<div class="trimming-wrap">
+			<div class="trimming-wrap-head">
+
+				<p class="trimming-move__txt">
+					x＝<span id="x"></span>
+					y=<span id="y"></span><br>
+					oSize=<span id="o-size"></span>.nowSize=<span id="now-size"></span><br>
+					nowx＝<span id="x_now"></span>
+					nowy=<span id="y_now"></span><br>
+					scaleSize=<span id="scale"></span>
+				</p>
+
+			</div>
+
+			<div class="trimming-move">
+					<label class="trimming-move-label">
+							<input id="js_btn_rotate" type="button" class="bttn__input" value="回転">
+					</label>
+			</div>
+			
+			<div class="trimming-wrap-canvas">
+				<div id="js_triming_area" class="triming-area">
+					<canvas id="canvas"></canvas>
+					<div id="js_triming_element" class="triming-element"></div>
+					<canvas id="canvas2"></canvas>
+				</div>
+				<ul class="lists has_2 box trimming-wrap-button">
+						<li class="lists__item ">
+							<label class="bttn" for="open-prof">閉じる</label>
+						</li>
+						<li class="lists__item">
+							<label class="trimming-label bttn">
+								<input type="submit" name="rebutton" value="この位置で切り取る" id="js_btn_upload" class="bttn__input" />
+							</label>
+						</li>
+				</ul>
+			</div>
+
+		</div>
+	</div>
+
+	<div id="animationLayer"></div>
 
 </div>
 
-<div id="animationLayer"></div>
 
-<!--
+
+
+
 <script type="text/javascript" src="/common/js/hammer.min.js"></script>
-<script type="text/javascript" src="/common/js/jquery.hammer.js"></script>
+<!--<script type="text/javascript" src="/common/js/jquery.hammer.js"></script>-->
 <script type="text/javascript" src="/common/js/triming5.js"></script>
--->
 <script>
-var startDistance;
-var moveDistance;
-var currentScale = 1;
-var saveScale = 1; //拡大率（縮小率）の初期値
-var eventKind = '';
-var elm = document.getElementById('animationLayer'); //タップを取得するエレメントを定義
-var img = document.getElementById('img01'); //拡大させる画像を定義
-
-elm.addEventListener('touchstart', touchStart, false);//タップされた瞬間
-elm.addEventListener('touchstart', touchMove, false);//指を動かしている
-elm.addEventListener('touchstart', touchEnd, false);//指が画面から離れた
-
-//タップされた瞬間に実行されるメソッド
-function touchStart(e) {
-    switch (e.touches.length) {
-      case 1:
-        eventKind = 'flick';
-      case 2:
-        eventKind = 'pinch';
-        pinchStart(e);
-        break;
-      default:
-        break;
-    }
-}
-
-//指が動いている時に実行されるメソッド
-function touchMove(e) {
-    e.preventDefault();
-    switch (e.touches.length) {
-      case 2:
-        pinchMove(e);
-        break;
-      default:
-        break;
-    }
-}
-
-//指が離れた時に実行されるメソッド
-function touchEnd(e) {
-    switch (eventKind) {
-      case 'pinch':
-        pinchEnd(e);
-        break;
-      default:
-        break;
-    }
-}
-
-
-function pinchStart(e){
-
-  //スタート時の指の距離を保持
-  startDistance = getDistance(e);
-
-}
-
-function pinchMove(e){
-
-  //2本指の距離を計算
-  moveDistance = getDistance(e);
-
-  //start時の距離を基準に動いた比率を計算
-  currentScale = moveDistance / startDistance;
-
-  //拡大率を算出
-  saveScale = saveScale * currentScale;
-
-  img.style.webkitTransform =
-    'scale3d(' + saveScale + ',' + saveScale + ', 1)';
-}
-
-function pinchEnd(e){
-  if(saveScale < 1){
-    saveScale = 1;
-    img.style.webkitTransform =
-      'scale3d(' + saveScale + ',' + saveScale + ', 1)';
-  }
-}
-
-//指の距離を測るメソッド.
-function getMeasure(e) {
- return Math.sqrt(
-     Math.pow(
-         Number(e.touches[0].pageX) - Number(e.touches[1].pageX), 2) +
-     Math.pow(
-         Number(e.touches[0].pageY) - Number(e.touches[1].pageY), 2));
-}
+$(function(){
+	$(window).on("load",function(){
+		main("/common/img/sample1.jpg");
+	});
+});
 </script>
 
 <!-- Scripts -->
