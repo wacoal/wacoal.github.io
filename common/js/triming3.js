@@ -328,7 +328,7 @@ $(function(){
       } else { //move
           if($pinchTimer) clearTimeout($pinchTimer);
 					var scaleSize = $jqIdTrimingArea.data("preScale") + (event.scale - $jqIdTrimingArea.data("scale"));
-					var maxmax = scaleSize * limitScale
+					maxmax = scaleSize * limitScale
 					if( scaleSize > maxmax ){
 						scaleSize = maxmax
 					}
