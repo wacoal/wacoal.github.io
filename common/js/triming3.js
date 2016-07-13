@@ -63,7 +63,8 @@ function main(dataUrl) {
 			scaleMaxHeight = repHeight / scaleElmSize;
 			maxScale = scaleMaxWidth < scaleMaxHeight ? scaleMaxWidth : scaleMaxHeight;
 			limitScale = maxScale;
-			$("#x").html(maxScale);
+
+			test_info();
 
 			canvas.width = repWidth;
 			canvas.height = repHeight;
@@ -108,8 +109,7 @@ function main(dataUrl) {
 			trimData();
 
 
-			$("#elmSize").html(elmSize);
-			$("#scaleElmSize").html(scaleElmSize);
+			test_info();
 
 		}, false);
 
@@ -407,10 +407,7 @@ $(function(){
 		maxScale = elmSize / scaleElmSize;
 		//limitScale = maxScale;
 
-		$("#scaleSize").html(scaleSize);
-		$("#maxScale").html(maxScale);
-		$("#elmSize").html(elmSize);
-		$("#scaleElmSize").html(scaleElmSize);
+		test_info();
 
 		//var maxElmWidth = scaleElmSize * maxScale;
 
@@ -531,3 +528,11 @@ $('#js_btn_upload').off("click").on("click",function(e){
 	// 	preventEvent = true;
 	// }
 });
+
+
+function test_info(){
+	$("#scaleSize").html(scaleSize);
+	$("#maxScale").html(maxScale);
+	$("#elmSize").html(elmSize);
+	$("#scaleElmSize").html(scaleElmSize);
+}
