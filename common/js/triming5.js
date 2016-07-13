@@ -172,100 +172,102 @@ $(function(){
 		$("#js_btn_rotate").on('click',function(){
 			rotate();
 		});
+
+		img = canvas;
 	});
 
-	var startDistance;
-	var moveDistance;
-	var currentScale = 1;
-	var saveScale = 1; //拡大率（縮小率）の初期値
-	var eventKind = '';
-	var elm = document.getElementById('animationLayer'); //タップを取得するエレメントを定義
-	var img = document.getElementById('img01'); //拡大させる画像を定義
-	//var img = canvas; //拡大させる画像を定義
-
-	elm.addEventListener('touchstart', touchStart, false);//タップされた瞬間
-	elm.addEventListener('touchstart', touchMove, false);//指を動かしている
-	elm.addEventListener('touchstart', touchEnd, false);//指が画面から離れた
-
-	//タップされた瞬間に実行されるメソッド
-	function touchStart(e) {
-	    switch (e.touches.length) {
-	      case 1:
-	        eventKind = 'flick';
-	      case 2:
-	        eventKind = 'pinch';
-	        pinchStart(e);
-	        break;
-	      default:
-	        break;
-	    }
-	}
-
-	//指が動いている時に実行されるメソッド
-	function touchMove(e) {
-	    e.preventDefault();
-	    switch (e.touches.length) {
-	      case 2:
-	        pinchMove(e);
-	        break;
-	      default:
-	        break;
-	    }
-	}
-
-	//指が離れた時に実行されるメソッド
-	function touchEnd(e) {
-	    switch (eventKind) {
-	      case 'pinch':
-	        pinchEnd(e);
-	        break;
-	      default:
-	        break;
-	    }
-	}
-
-
-	function pinchStart(e){
-
-	  //スタート時の指の距離を保持
-	  startDistance = getDistance(e);
-
-	}
-
-	function pinchMove(e){
-
-	  //2本指の距離を計算
-	  moveDistance = getDistance(e);
-
-	  //start時の距離を基準に動いた比率を計算
-	  currentScale = moveDistance / startDistance;
-
-	  //拡大率を算出
-	  saveScale = saveScale * currentScale;
-
-	  img.style.webkitTransform =
-	    'scale3d(' + saveScale + ',' + saveScale + ', 1)';
-	}
-
-	function pinchEnd(e){
-	  if(saveScale < 1){
-	    saveScale = 1;
-	    img.style.webkitTransform =
-	      'scale3d(' + saveScale + ',' + saveScale + ', 1)';
-	  }
-	}
-
-	//指の距離を測るメソッド.
-	function getMeasure(e) {
-	 return Math.sqrt(
-	     Math.pow(
-	         Number(e.touches[0].pageX) - Number(e.touches[1].pageX), 2) +
-	     Math.pow(
-	         Number(e.touches[0].pageY) - Number(e.touches[1].pageY), 2));
-	}
-
-
 });
+
+var startDistance;
+var moveDistance;
+var currentScale = 1;
+var saveScale = 1; //拡大率（縮小率）の初期値
+var eventKind = '';
+var elm = document.getElementById('animationLayer'); //タップを取得するエレメントを定義
+//var img = document.getElementById('img01'); //拡大させる画像を定義
+//var img = canvas; //拡大させる画像を定義
+var img;
+
+elm.addEventListener('touchstart', touchStart, false);//タップされた瞬間
+elm.addEventListener('touchstart', touchMove, false);//指を動かしている
+elm.addEventListener('touchstart', touchEnd, false);//指が画面から離れた
+
+//タップされた瞬間に実行されるメソッド
+function touchStart(e) {
+    switch (e.touches.length) {
+      case 1:
+        eventKind = 'flick';
+      case 2:
+        eventKind = 'pinch';
+        pinchStart(e);
+        break;
+      default:
+        break;
+    }
+}
+
+//指が動いている時に実行されるメソッド
+function touchMove(e) {
+    e.preventDefault();
+    switch (e.touches.length) {
+      case 2:
+        pinchMove(e);
+        break;
+      default:
+        break;
+    }
+}
+
+//指が離れた時に実行されるメソッド
+function touchEnd(e) {
+    switch (eventKind) {
+      case 'pinch':
+        pinchEnd(e);
+        break;
+      default:
+        break;
+    }
+}
+
+
+function pinchStart(e){
+
+  //スタート時の指の距離を保持
+  startDistance = getDistance(e);
+
+}
+
+function pinchMove(e){
+
+  //2本指の距離を計算
+  moveDistance = getDistance(e);
+
+  //start時の距離を基準に動いた比率を計算
+  currentScale = moveDistance / startDistance;
+
+  //拡大率を算出
+  saveScale = saveScale * currentScale;
+
+  img.style.webkitTransform =
+    'scale3d(' + saveScale + ',' + saveScale + ', 1)';
+}
+
+function pinchEnd(e){
+  if(saveScale < 1){
+    saveScale = 1;
+    img.style.webkitTransform =
+      'scale3d(' + saveScale + ',' + saveScale + ', 1)';
+  }
+}
+
+//指の距離を測るメソッド.
+function getMeasure(e) {
+ return Math.sqrt(
+     Math.pow(
+         Number(e.touches[0].pageX) - Number(e.touches[1].pageX), 2) +
+     Math.pow(
+         Number(e.touches[0].pageY) - Number(e.touches[1].pageY), 2));
+}
 
 //ポストするデータなので、比率を掛ける
 function trimData(){

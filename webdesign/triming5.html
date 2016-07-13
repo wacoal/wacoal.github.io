@@ -30,9 +30,9 @@
 
 }
 .triming-image__image {
-display: block;
-width: 100%;
-height: 100%;
+	display: block;
+	width: 100%;
+	height: 100%;
 }
 </style>
 <script type="text/javascript" src="../common/js/jquery-2.1.3.min.js"></script>
@@ -69,18 +69,17 @@ height: 100%;
 			</div>
 
 			<div class="trimming-wrap-canvas">
-				<!--
+
 				<div id="js_triming_area" class="triming-area">
 					<canvas id="canvas"></canvas>
 					<div id="js_triming_element" class="triming-element"></div>
 					<canvas id="canvas2"></canvas>
 				</div>
-				-->
-
+				<!--
 				<div class="triming-image" style="-webkit-transform:translate3d(-100%, 0%, 0px);">
 					<img src="/common/img/sample1.jpg" id="img01" class="triming-image__image">
 				</div>
-				<div id="js_triming_element" class="triming-element"></div>
+				-->
 				<div id="animationLayer"></div>
 
 				<ul class="lists has_2 box trimming-wrap-button">
@@ -112,7 +111,7 @@ height: 100%;
 <script>
 $(function(){
 	$(window).on("load",function(){
-		//main("/common/img/sample1.jpg");
+		main("/common/img/sample1.jpg");
 	});
 });
 </script>
