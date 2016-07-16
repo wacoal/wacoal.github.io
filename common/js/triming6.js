@@ -297,8 +297,9 @@ function pinchEnd(e){
     canvas.style.webkitTransform =
       //'scale3d(' + saveScale + ',' + saveScale + ', 1)';
 			'scale(' + saveScale + ',' + saveScale + ')';
+
+		alert(saveScale);
   }
-	alert(saveScale);
 }
 
 //指の距離を測るメソッド.
