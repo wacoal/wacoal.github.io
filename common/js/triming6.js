@@ -294,8 +294,10 @@ function pinchEnd(e){
   if(saveScale < 1){
     saveScale = 1;
     canvas.style.webkitTransform =
-      'scale3d(' + saveScale + ',' + saveScale + ', 1)';
+      //'scale3d(' + saveScale + ',' + saveScale + ', 1)';
+			'scale(' + saveScale + ',' + saveScale + ')';
   }
+	alert(saveScale);
 }
 
 //指の距離を測るメソッド.
