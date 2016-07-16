@@ -287,7 +287,8 @@ function pinchMove(e){
   saveScale = saveScale * currentScale;
 
   canvas.style.webkitTransform =
-    'scale3d(' + saveScale + ',' + saveScale + ', 1)';
+    //'scale3d(' + saveScale + ',' + saveScale + ', 1)';
+		'scale(' + saveScale + ',' + saveScale + ')';
 }
 
 function pinchEnd(e){
