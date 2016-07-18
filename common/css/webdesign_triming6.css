@@ -299,13 +299,9 @@ a.bttn:hover,
 #canvas {
   position: absolute;
   z-index: 600;
-  top: 50%;
-  left: 50%;
+  top: 0;
+  left: 0;
   margin: auto;
-  -moz-transform: translate(-50%, -50%);
-  -webkit-transform: translate(-50%, -50%);
-  -o-transform: translate(-50%, -50%);
-  -ms-transform: translate(-50%, -50%);
 }
 
 #canvas2 {

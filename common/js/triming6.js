@@ -197,7 +197,7 @@ $(function(){
 	var $idTrimingArea = document.getElementById("js_triming_area");
 	//var $idTrimingArea = document.getElementById("canvas");
 	var $jqIdTrimingArea = $($idTrimingArea);
-	var $idTrimingElm = document.getElementById("canvas");
+	var $idTrimingElm = document.getElementById("js_triming_element");
 	var $jqIdTrimingElm = $($idTrimingElm);
 	var $hammerObj = new Hammer($idTrimingElm);
 	var $hammerObj2 = new Hammer($idTrimingArea);
@@ -206,7 +206,7 @@ $(function(){
 	var $pinchTimer = {};
 	$hammerObj.get("pan").set({ enable: true });
 	$hammerObj.get("pinch").set({ enable: true });
-	//$jqIdTrimingElm.css("transform", "scale(1)");
+	$jqIdTrimingElm.css("transform", "scale(1)");
 
 	// 小数点n位までを残す関数 (四捨五入)
 	function floatFormat( number, n ) {
@@ -262,7 +262,6 @@ $(function(){
           if(Number(String($jqIdTrimingElm.css("top")).replace("px", "")) > ($jqIdTrimingArea.outerHeight() - $jqIdTrimingElm.height()))
               $jqIdTrimingElm.css("top", ($jqIdTrimingArea.outerHeight() - $jqIdTrimingElm.height()) + "px");
 					trimData();
-					console.log("test");
       } else {
           if(!panTime) { //start
               panTime = event.timeStamp;
