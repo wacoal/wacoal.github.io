@@ -409,7 +409,7 @@ $(function(){
 			maxmax = limitScale;
 		}
 		//limitScale = maxScale;
-
+		alert("test");
 		test_info();
 
 		//var maxElmWidth = scaleElmSize * maxScale;
