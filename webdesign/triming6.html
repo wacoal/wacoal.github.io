@@ -12,7 +12,7 @@
 <title>triming
 </title>
 <!--<link type="text/css" rel="stylesheet" href="common/css/common.css" media="screen" />-->
-<link type="text/css" rel="stylesheet" href="/common/css/webdesign_triming.css" media="screen" />
+<link type="text/css" rel="stylesheet" href="/common/css/webdesign_triming6.css" media="screen" />
 <style>
 #animationLayer {
 	position: absolute;
@@ -59,8 +59,7 @@
 		<input type="checkbox" onchange="this.checked ? $('#selfile').click() : false;" id="open-prof">
 		<div class="trimming-wrap-content">
 			<div class="trimming-wrap">
-					<div class="trimming-wrap-head"><!-- ファイル選択とアナウンス -->
-
+					<div class="trimming-wrap-head">
 						<p class="trimming-move__txt is_small">
 							x＝<span id="x"></span>
 							y=<span id="y"></span><br>
@@ -78,12 +77,11 @@
 					</div>
 
 					<div class="trimming-wrap-canvas">
-							<div id="imageBox">
+							<div id="js_triming_area" class="triming-area">
 								<canvas id="canvas"></canvas>
 								<div id="thumbBox"></div>
 								<canvas id="canvas2"></canvas>
 							</div>
-							<div id="animationLayer"></div>
 					</div>
 					<ul class="lists has_2 box trimming-wrap-button">
 							<li class="lists__item ">
@@ -106,9 +104,7 @@
 
 </div>
 
-<!--
 <script type="text/javascript" src="/common/js/hammer.min.js"></script>
--->
 <script type="text/javascript" src="/common/js/triming6.js"></script>
 
 <script>
