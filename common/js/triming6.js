@@ -197,7 +197,7 @@ $(function(){
 	var $idTrimingArea = document.getElementById("js_triming_area");
 	//var $idTrimingArea = document.getElementById("canvas");
 	var $jqIdTrimingArea = $($idTrimingArea);
-	var $idTrimingElm = document.getElementById("js_triming_element");
+	var $idTrimingElm = document.getElementById("canvas");
 	var $jqIdTrimingElm = $($idTrimingElm);
 	var $hammerObj = new Hammer($idTrimingElm);
 	var $hammerObj2 = new Hammer($idTrimingArea);
