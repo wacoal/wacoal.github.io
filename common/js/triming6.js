@@ -19,11 +19,9 @@ var blobY = 0;
 
 var dataUrl="";
 var ctx;
-var ctx2
 var image = new Image();
 
 var canvas;
-var canvas2;
 
 var preventEvent = true;
 var srcImgPost;
@@ -47,7 +45,6 @@ var minScale;
 function main(dataUrl) {
 	if (canvas.getContext) {
 		ctx = canvas.getContext('2d');
-		ctx2 = canvas2.getContext('2d');
 		image.src = dataUrl;
 		image.addEventListener('load', function(){
 			$(".loading").hide();
@@ -78,12 +75,12 @@ function main(dataUrl) {
 				width: repWidth,
 				height: repHeight
 			});
-			$("#js_triming_element").css({
-				top: (repHeight / 2) - (scaleElmSize / 2),
-				left: (repWidth /2) - (scaleElmSize / 2),
-				// maxWidth: elmMaxSize,
-				// maxHeight: elmMaxSize
-			});
+			// $("#js_triming_element").css({
+			// 	top: (repHeight / 2) - (scaleElmSize / 2),
+			// 	left: (repWidth /2) - (scaleElmSize / 2),
+			// 	// maxWidth: elmMaxSize,
+			// 	// maxHeight: elmMaxSize
+			// });
 
 
 
@@ -195,7 +192,6 @@ $(function(){
 
 	//ライブラリの初期設定
 	var $idTrimingArea = document.getElementById("js_triming_area");
-	//var $idTrimingArea = document.getElementById("canvas");
 	var $jqIdTrimingArea = $($idTrimingArea);
 	var $idTrimingElm = document.getElementById("canvas");
 	var $jqIdTrimingElm = $($idTrimingElm);
@@ -279,24 +275,27 @@ $(function(){
 									elmY = ( ($jqIdTrimingArea.data("elmPosY") - ($jqIdTrimingArea.data("y") - event.center.y)) );
 									// elmX = parseInt(elmX);
 									// elmY = parseInt(elmY);
-									if( elmX < 0){
-										elmX = 0;
-									}
-									if( elmX > repWidth - scaleElmSize ){
-										elmX = repWidth - scaleElmSize;
-									}
-									if( elmY < 0){
-										elmY = 0;
-									}
-									if( elmY > repHeight - scaleElmSize ){
-										elmY = repHeight - scaleElmSize;
-									}
+									// if( elmX < 0){
+									// 	elmX = 0;
+									// }
+									// if( elmX > repWidth - scaleElmSize ){
+									// 	elmX = repWidth - scaleElmSize;
+									// }
+									// if( elmY < 0){
+									// 	elmY = 0;
+									// }
+									// if( elmY > repHeight - scaleElmSize ){
+									// 	elmY = repHeight - scaleElmSize;
+									// }
 
-                  $jqIdTrimingElm.css({
-                      "left": elmX + "px",
-                      "top": elmY + "px"
-                  });
-
+                  // $jqIdTrimingElm.css({
+                  //     "left": elmX + "px",
+                  //     "top": elmY + "px"
+                  // });
+									//$jqIdTrimingElm.translate(elmX,elmY);
+									ctx.clearRect(0, 0, canvas.width, canvas.height);
+									ctx.drawImage(image, elmX, elmY, repWidth, repHeight);
+									ctx.save();
 									//$("#x_now").html(elmX);
 									//$("#y_now").html(elmY);
               }
