@@ -377,7 +377,6 @@ a.bttn:hover,
   margin: 20px auto;
 }
 
-#open-prof:checked + .trimming-wrap-content,
 .trimming-wrap-content {
   display: block;
   position: fixed;
@@ -489,22 +488,14 @@ a.bttn:hover,
   padding: 12px 4px;
   border: solid 1px #fcfafb;
   border-radius: 4px;
+  text-align: center;
+  background: #fcfafb;
+  border: solid 1px #212121;
 }
 .trimming-move-label .bttn__input {
-  color: #fcfafb;
+  color: #212121;
   line-height: 1;
   font-size: 14px;
-}
-.trimming-move-label:before {
-  content: "";
-  display: inline-block;
-  vertical-align: middle;
-  width: 16px;
-  height: 16px;
-  background-repeat: no-repeat;
-  background-position: -60px -330px;
-  background-size: 80px auto;
-  content: "";
 }
 
 .btnAccent.is_black {
