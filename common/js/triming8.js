@@ -84,6 +84,10 @@ function floatFormat( number, n ) {
 	return Math.round( number * _pow ) / _pow ;
 }
 
+$(window).on("load",function(){
+	getSize();
+});
+
 function getSize(){
 	elmWidth  = $jqIdTrimingElm.width();
 	elmHeight = $jqIdTrimingElm.height();
