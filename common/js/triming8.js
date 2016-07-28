@@ -175,7 +175,7 @@ $hammerObj2.on("pinchend",function(event) {
 		nowCoord = (elmWidth * scaleSize) / 4;
 	}
 	var nowCoordX = nowCoord + originalX;
-	var nowCoordY = nowCoord + originalX;
+	var nowCoordY = nowCoord + originalY;
 
 	$jqIdTrimingElm.css({
 		width : elmWidth * scaleSize,
