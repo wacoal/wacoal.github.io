@@ -68,9 +68,15 @@ var $hammerObj2 = new Hammer($idTrimingArea);
 var panTime = false;
 var pinchTime = false;
 var $pinchTimer = {};
+
+var elmWidth;
+var elmHeight;
+var areaWidth;
+var areaHeight;
+
 $hammerObj.get("pan").set({ enable: true });
 $hammerObj.get("pinch").set({ enable: true });
-$jqIdTrimingElm.css("transform", "scale(1)");
+//$jqIdTrimingElm.css("transform", "scale(1)");
 
 // 小数点n位までを残す関数 (四捨五入)
 function floatFormat( number, n ) {
@@ -78,19 +84,28 @@ function floatFormat( number, n ) {
 	return Math.round( number * _pow ) / _pow ;
 }
 
+function getSize(){
+	elmWidth  = $jqIdTrimingElm.width();
+	elmHeight = $jqIdTrimingElm.height();
+	areaWidth = $jqIdTrimingArea.width();
+	areaHeight= $jqIdTrimingArea.height();
+	//areaHeight= $jqIdTrimingArea.outerHeight();
+}
+
 ///上下左右の動き
 $hammerObj.on("pan",function(event){
 	if(event.isFinal) { //end
+		getSize();
 		panTime = false;
 		$jqIdTrimingArea.data("down", false);
 		if(Number(String($jqIdTrimingElm.css("left")).replace("px", "")) < 0)
 				$jqIdTrimingElm.css("left", "0px");
-		if(Number(String($jqIdTrimingElm.css("left")).replace("px", "")) > ($jqIdTrimingArea.width() - $jqIdTrimingElm.width()))
-				$jqIdTrimingElm.css("left", ($jqIdTrimingArea.width() - $jqIdTrimingElm.width()) + "px");
+		if(Number(String($jqIdTrimingElm.css("left")).replace("px", "")) > (areaWidth - elmWidth))
+				$jqIdTrimingElm.css("left", (areaWidth - elmWidth) + "px");
 		if(Number(String($jqIdTrimingElm.css("top")).replace("px", "")) < 0)
 				$jqIdTrimingElm.css("top", "0px");
-		if(Number(String($jqIdTrimingElm.css("top")).replace("px", "")) > ($jqIdTrimingArea.outerHeight() - $jqIdTrimingElm.height()))
-				$jqIdTrimingElm.css("top", ($jqIdTrimingArea.outerHeight() - $jqIdTrimingElm.height()) + "px");
+		if(Number(String($jqIdTrimingElm.css("top")).replace("px", "")) > (areaHeight - elmHeight))
+				$jqIdTrimingElm.css("top", (areaHeight - elmHeight) + "px");
 	} else {
 		if(!panTime) { //start
 			panTime = event.timeStamp;
