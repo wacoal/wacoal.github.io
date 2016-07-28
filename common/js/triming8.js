@@ -24,12 +24,14 @@ var coordY;
 $(window).on("resize load",function(){
 	windowWidth  = $(window).width();
 	windowHeight = $(window).height();
-	//console.log(originWidth,originHeight,windowWidth,windowHeight);
+	//console.log(originWidth,originHeight,windowWidth,windowHeight,repWidth,repHeight);
 	//console.log(originalY);
 });
 
 ///画像のオリジナルサイズ取得 & $idTrimImgを端末サイズに
 $idTrimImg.on('load',function(){
+		windowWidth  = $(window).width();
+		windowHeight = $(window).height();
     var img = new Image();
     img.src = $idTrimImg.attr('src');
     originWidth = img.width;
@@ -40,10 +42,10 @@ $idTrimImg.on('load',function(){
 			originalY = ( windowHeight / 2 ) - ( repHeight / 2 );
 			originalX = ( windowWidth / 2 ) - (repWidth /2);
 			$idTrimImg.css({
-				width     : repWidth,
-				height    : repHeight,
-				top       : originalY,
-				left      : originalX,
+				width  : repWidth,
+				height : repHeight,
+				top    : originalY,
+				left   : originalX,
 			});
     }
 		$idLoading.addClass("hide");
@@ -88,7 +90,9 @@ function floatFormat( number, n ) {
 	return Math.round( number * _pow ) / _pow ;
 }
 
-$(window).on("load",function(){
+$(window).on("resize load",function(){
+	areaWidth = $jqIdTrimingArea.width();
+	areaHeight= $jqIdTrimingArea.height();
 	getElmSize();
 });
 
@@ -97,14 +101,13 @@ function getElmSize(){
 	elmHeight = $jqIdTrimingElm.height();
 	elmX      = Number(String($jqIdTrimingElm.css("left")).replace("px", ""));
 	elmY      = Number(String($jqIdTrimingElm.css("top")).replace("px", ""));
-	areaWidth = $jqIdTrimingArea.width();
-	areaHeight= $jqIdTrimingArea.height();
 	//areaHeight= $jqIdTrimingArea.outerHeight();
 }
 
 ///上下左右の動き
 $hammerObj.on("pan",function(event){
 	if(event.isFinal) { //end
+		getElmSize();
 		panTime = false;
 		$jqIdTrimingArea.data("down", false);
 		if( elmX < 0)
@@ -115,6 +118,9 @@ $hammerObj.on("pan",function(event){
 				$jqIdTrimingElm.css("top", "0px");
 		if( elmY > (areaHeight - elmHeight))
 				$jqIdTrimingElm.css("top", (areaHeight - elmHeight) + "px");
+
+		getElmSize();
+		//console.log(elmX,elmY,areaWidth,elmWidth);
 	} else {
 		if(!panTime) { //start
 			panTime = event.timeStamp;
@@ -124,7 +130,6 @@ $hammerObj.on("pan",function(event){
 					.data("y", event.center.y)
 					.data("elmPosX", Number(String($jqIdTrimingElm.css("left")).replace("px", "")))
 					.data("elmPosY", Number(String($jqIdTrimingElm.css("top")).replace("px", "")));
-
 		} else { //move
 			if ($jqIdTrimingArea.data("down") == true) {
 				elmMoveX = ( ($jqIdTrimingArea.data("elmPosX") - ($jqIdTrimingArea.data("x") - event.center.x)) );
