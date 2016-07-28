@@ -177,11 +177,11 @@ $hammerObj2.on("pinchend",function(event) {
 	var nowCoordY;
 
 	if( scaleSize > 1 ) {
-		nowCoordX = originalX - ( (elmWidth * scaleSize) / 4 );
-		nowCoordY = originalY - ( (elmHeight * scaleSize) / 4 );
+		nowCoordX = elmX - ( (elmWidth * scaleSize) / 4 );
+		nowCoordY = elmY - ( (elmHeight * scaleSize) / 4 );
 	} else {
-		nowCoordX = originalX + ( (elmWidth * scaleSize) / 4 );
-		nowCoordY = originalY + ( (elmHeight * scaleSize) / 4 );
+		nowCoordX = elmX + ( (elmWidth * scaleSize) / 4 );
+		nowCoordY = elmY + ( (elmHeight * scaleSize) / 4 );
 	}
 
 	$jqIdTrimingElm.css({
