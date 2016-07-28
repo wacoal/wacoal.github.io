@@ -85,10 +85,10 @@ function floatFormat( number, n ) {
 }
 
 $(window).on("load",function(){
-	getSize();
+	getElmSize();
 });
 
-function getSize(){
+function getElmSize(){
 	elmWidth  = $jqIdTrimingElm.width();
 	elmHeight = $jqIdTrimingElm.height();
 	areaWidth = $jqIdTrimingArea.width();
@@ -159,7 +159,7 @@ $hammerObj2.on("pinch",function(event) {
 });
 ///ピンチおわり
 $hammerObj2.on("pinchend",function(event) {
-	getSize();
+	getElmSize();
 	alert("tesw");
 });
 
