@@ -165,7 +165,7 @@ $hammerObj2.on("pinchend",function(event) {
 	getElmSize();
 	///座標の計算
 	var nowCoord;
-	if( scaleSize > 0 ) {
+	if( scaleSize > 1 ) {
 		nowCoord = -(elmWidth * scaleSize) / 4;
 	} else {
 		nowCoord = (elmWidth * scaleSize) / 4;
