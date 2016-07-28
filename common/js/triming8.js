@@ -20,7 +20,6 @@ var minHeight = 240;
 var repMinWidth = minWidth;
 var repMinHeight = minHeight;
 
-
 ///現在の座標
 var coordX;
 var coordY;
@@ -30,6 +29,9 @@ var targetY;
 var targetX;
 var targetWidth  = 240;
 var targetHeight = 240;
+
+var slideY = 0;
+var slideX = 0;
 
 $(window).on("resize load",function(){
 	windowWidth  = $(window).width();
@@ -51,16 +53,18 @@ $idTrimImg.on('load',function(){
 			if( originWidth < originHeight ){
 				repWidth = minWidth;
 				repMinWidth = minWidth;
+				slideY =  (targetHeight / 2 );
 			} else {
 				repWidth = minHeight / originHeight * originWidth;
-				repMinWidth = "auto";
+				repMinWidth = repWidth;
 			}
 			if( originHeight < originWidth ){
 				repHeight = minHeight;
 				repMinHeight = minHeight;
+				slideX =  (targetWidth / 2 );
 			} else {
 				repHeight = minWidth / originWidth * originHeight;
-				repMinHeight = "auto";
+				repMinHeight = repHeight;
 			}
 			// repWidth  = originWidth < originHeight ? minWidth : minHeight / originHeight * originWidth;
 			// repHeight = originHeight < originWidth ? minHeight : minWidth / originWidth * originHeight;
@@ -145,13 +149,13 @@ $hammerObj2.on("pan",function(event){
 		getElmSize();
 		panTime = false;
 		$jqIdTrimingArea.data("down", false);
-		if( elmMoveX < targetX){
+		if( elmMoveX + slideX < targetX){
 			$jqIdTrimingElm.css("left", (areaWidth - elmWidth - targetX) + "px");
 		}
-		if( elmMoveX > targetX){
+		if( elmMoveX > targetX ){
 			$jqIdTrimingElm.css("left", targetX);
 		}
-		if( elmMoveY < targetY){
+		if( elmMoveY + slideY < targetY){
 			$jqIdTrimingElm.css("top", (areaHeight - elmHeight - targetY) + "px");
 		}
 		if( elmMoveY > targetY){
@@ -178,8 +182,8 @@ $hammerObj2.on("pan",function(event){
 				});
 			}
 			//console.log(elmMoveX);
-			$("#elmY").html(elmMoveX);
-			$("#elmX").html(elmX);
+			$("#elmY").html(elmMoveY + (targetHeight / 2 ));
+			$("#elmX").html(targetY);
 		}
 	}
 });
@@ -241,13 +245,13 @@ $hammerObj2.on("pinchend",function(event) {
 	// repWidth  = nowWidth < nowHeight ? targetWidth : targetHeight / nowHeight * nowWidth;
 	// repHeight = nowHeight < nowWidth ? targetHeight : targetWidth / nowWidth * nowHeight;
 
-	// $jqIdTrimingElm.css({
-	// 	width : elmWidth * scaleSize,
-	// 	height: elmHeight * scaleSize,
-	// 	top   : nowCoordY,
-	// 	left  : nowCoordX,
-	// 	transform: "scale(1)"
-	// });
+	$jqIdTrimingElm.css({
+		width : elmWidth * scaleSize,
+		height: elmHeight * scaleSize,
+		top   : nowCoordY,
+		left  : nowCoordX,
+		transform: "scale(1)"
+	});
 
 	getElmSize();
 
