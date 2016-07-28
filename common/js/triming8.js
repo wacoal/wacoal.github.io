@@ -166,6 +166,8 @@ $hammerObj2.on("pinchend",function(event) {
 	$jqIdTrimingElm.css({
 		width : elmWidth * scaleSize,
 		height: elmHeight * scaleSize,
+		top   : elmY * scaleSize,
+		left  : elmX * scaleSize,
 		transform: "scale(1)"
 	});
 	getElmSize();
