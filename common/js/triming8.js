@@ -95,7 +95,6 @@ function getSize(){
 ///上下左右の動き
 $hammerObj.on("pan",function(event){
 	if(event.isFinal) { //end
-		getSize();
 		panTime = false;
 		$jqIdTrimingArea.data("down", false);
 		if(Number(String($jqIdTrimingElm.css("left")).replace("px", "")) < 0)
@@ -156,7 +155,7 @@ $hammerObj2.on("pinch",function(event) {
 });
 ///ピンチおわり
 $hammerObj2.on("pinchend",function(event) {
-
+	getSize();
 });
 
 //==========================================================================
