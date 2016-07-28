@@ -2,6 +2,7 @@
 var $idTrimArea = $("#js_triming_area");
 var $idTrimImg  = $("#js_triming_image");
 var $idLoading  = $("#js_loading");
+var $idTarget   = $("#js_triming_target");
 
 var windowWidth  = $(window).width();
 var windowHeight = $(window).height();
@@ -21,11 +22,18 @@ var minHeight = 240;
 var coordX;
 var coordY;
 
+///target
+var targetY;
+var targetX;
+var targetWidth  = 240;
+var targetHeight = 240;
+
 $(window).on("resize load",function(){
 	windowWidth  = $(window).width();
 	windowHeight = $(window).height();
 	//console.log(originWidth,originHeight,windowWidth,windowHeight,repWidth,repHeight);
 	//console.log(originalY);
+	getTargetInfo();
 });
 
 ///画像のオリジナルサイズ取得 & $idTrimImgを端末サイズに
@@ -50,6 +58,12 @@ $idTrimImg.on('load',function(){
     }
 		$idLoading.addClass("hide");
 });
+
+function getTargetInfo(){
+	targetY = $idTarget.offset().top;
+	targetX = $idTarget.offset().left;
+	console.log(targetY,targetX);
+}
 
 ///現在の座標の取得
 function getCoord(){
@@ -105,19 +119,20 @@ function getElmSize(){
 }
 
 ///上下左右の動き
-$hammerObj.on("pan",function(event){
+$hammerObj2.on("pan",function(event){
 	if(event.isFinal) { //end
 		getElmSize();
 		panTime = false;
 		$jqIdTrimingArea.data("down", false);
-		if( elmX < 0)
-				$jqIdTrimingElm.css("left", "0px");
+		if( elmX < targetX)
+				$jqIdTrimingElm.css("left", (areaWidth - elmWidth - targetX) + "px");
 		if( elmX > (areaWidth - elmWidth))
-				$jqIdTrimingElm.css("left", (areaWidth - elmWidth) + "px");
-		if( elmY < 0)
-				$jqIdTrimingElm.css("top", "0px");
+				$jqIdTrimingElm.css("left", targetX);
+		if( elmY < targetY)
+				$jqIdTrimingElm.css("top", (areaHeight - elmHeight - targetY) + "px");
 		if( elmY > (areaHeight - elmHeight))
-				$jqIdTrimingElm.css("top", (areaHeight - elmHeight) + "px");
+				$jqIdTrimingElm.css("top", targetY);
+
 
 		getElmSize();
 		//console.log(elmX,elmY,areaWidth,elmWidth);
@@ -172,10 +187,11 @@ $hammerObj2.on("pinch",function(event) {
 $hammerObj2.on("pinchend",function(event) {
 	//$jqIdTrimingElm.after();
 	getElmSize();
+
+	///TO DO なんかずれる
 	///座標の計算
 	var nowCoordX;
 	var nowCoordY;
-
 	if( scaleSize > 1 ) {
 		nowCoordX = elmX - ( (elmWidth * scaleSize) / 4 );
 		nowCoordY = elmY - ( (elmHeight * scaleSize) / 4 );
@@ -192,7 +208,7 @@ $hammerObj2.on("pinchend",function(event) {
 		transform: "scale(1)"
 	});
 	getElmSize();
-	// $("#elmY").html(elmY);
+
 	$("#elmY").html(nowCoordY);
 	$("#elmX").html(nowCoordX);
 });
