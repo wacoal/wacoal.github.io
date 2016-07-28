@@ -163,11 +163,14 @@ $hammerObj2.on("pinch",function(event) {
 $hammerObj2.on("pinchend",function(event) {
 	//$jqIdTrimingElm.after();
 	getElmSize();
+	///座標の計算
+
+
 	$jqIdTrimingElm.css({
 		width : elmWidth * scaleSize,
 		height: elmHeight * scaleSize,
-		top   : elmY * scaleSize,
-		left  : elmX * scaleSize,
+		top   : elmY / scaleSize,
+		left  : elmX / scaleSize,
 		transform: "scale(1)"
 	});
 	getElmSize();
