@@ -124,14 +124,22 @@ $hammerObj2.on("pan",function(event){
 		getElmSize();
 		panTime = false;
 		$jqIdTrimingArea.data("down", false);
-		if( elmX < targetX)
-				$jqIdTrimingElm.css("left", (areaWidth - elmWidth - targetX) + "px");
-		if( elmX > (areaWidth - elmWidth))
-				$jqIdTrimingElm.css("left", targetX);
-		if( elmY < targetY)
-				$jqIdTrimingElm.css("top", (areaHeight - elmHeight - targetY) + "px");
-		if( elmY > (areaHeight - elmHeight))
-				$jqIdTrimingElm.css("top", targetY);
+		if( elmX < targetX){
+			$jqIdTrimingElm.css("left", (areaWidth - elmWidth - targetX) + "px");
+		}
+		if( elmMoveX > targetX){
+			$jqIdTrimingElm.css("left", targetX);
+		}
+		// if( elmX > (areaWidth - elmWidth))
+		// 		$jqIdTrimingElm.css("left", targetX);
+		if( elmY < targetY){
+			$jqIdTrimingElm.css("top", (areaHeight - elmHeight - targetY) + "px");
+		}
+		if( elmMoveY > targetY){
+			$jqIdTrimingElm.css("top", targetY);
+		}
+		// if( elmY > (areaHeight - elmHeight))
+		// 		$jqIdTrimingElm.css("top", targetY);
 
 
 		getElmSize();
@@ -154,6 +162,7 @@ $hammerObj2.on("pan",function(event){
 						"top" : elmMoveY + "px"
 				});
 			}
+			console.log(elmMoveX);
 		}
 	}
 });
