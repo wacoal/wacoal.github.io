@@ -101,8 +101,7 @@ var $idTrimingArea   = document.getElementById("js_triming_area");
 var $jqIdTrimingArea = $($idTrimingArea);
 var $idTrimingElm    = document.getElementById("js_triming_image");
 var $jqIdTrimingElm  = $($idTrimingElm);
-var $hammerObj       = new Hammer($idTrimingElm);
-var $hammerObj2      = new Hammer($idTrimingArea);
+var $hammerObj      = new Hammer($idTrimingArea);
 var panTime     = false;
 var pinchTime   = false;
 var $pinchTimer = {};
@@ -119,7 +118,10 @@ var elmMoveY;
 
 $hammerObj.get("pan").set({ enable: true });
 $hammerObj.get("pinch").set({ enable: true });
-$jqIdTrimingElm.css("transform", "scale(1)");
+$jqIdTrimingElm.css({
+		transform: "scale(1)",
+		transformOrigin: "0% 0%"
+	});
 
 // 小数点n位までを残す関数 (四捨五入)
 function floatFormat( number, n ) {
@@ -138,15 +140,16 @@ function getElmSize(){
 	elmHeight = $jqIdTrimingElm.height();
 	elmX      = $jqIdTrimingElm.offset().left;
 	elmY      = $jqIdTrimingElm.offset().top;
+
 	// elmX      = Number(String($jqIdTrimingElm.css("left")).replace("px", ""));
 	// elmY      = Number(String($jqIdTrimingElm.css("top")).replace("px", ""));
 	//areaHeight= $jqIdTrimingArea.outerHeight();
 }
 
 ///上下左右の動き
-$hammerObj2.on("pan",function(event){
+$hammerObj.on("pan",function(event){
 	if(event.isFinal) { //end
-		getElmSize();
+		//getElmSize();
 		panTime = false;
 		$jqIdTrimingArea.data("down", false);
 		if( elmMoveX + slideX < targetX){
@@ -161,7 +164,7 @@ $hammerObj2.on("pan",function(event){
 		if( elmMoveY > targetY){
 			$jqIdTrimingElm.css("top", targetY);
 		}
-		getElmSize();
+		//getElmSize();
 		//console.log(elmX,elmY,areaWidth,elmWidth);
 	} else {
 		if(!panTime) { //start
@@ -182,14 +185,14 @@ $hammerObj2.on("pan",function(event){
 				});
 			}
 			//console.log(elmMoveX);
-			$("#elmY").html(elmMoveY + (targetHeight / 2 ));
-			$("#elmX").html(targetY);
+			// $("#elmY").html(elmMoveX);
+			// $("#elmX").html(targetX);
 		}
 	}
 });
 
 ///ピンチインピンチアウト
-$hammerObj2.on("pinch",function(event) {
+$hammerObj.on("pinch",function(event) {
 		event.preventDefault ? event.preventDefault() : (event.returnValue = false);
 		if(!pinchTime) { //start
 			pinchTime = event.timeStamp;
@@ -210,25 +213,28 @@ $hammerObj2.on("pinch",function(event) {
 					pinchTime = false;
 			}, 100);
 
-			$("#scale").html(scaleSize)
+			$("#scale").html(scaleSize);
+
 		}
 });
 ///ピンチおわり
-$hammerObj2.on("pinchend",function(event) {
+$hammerObj.on("pinchend",function(event) {
 	//$jqIdTrimingElm.after();
-	getElmSize();
-
+	//getElmSize();
 	///TO DO なんかずれる
 	///座標の計算
 	var nowCoordX;
 	var nowCoordY;
 	if( scaleSize > 1 ) {
-		nowCoordX = elmX - ( (elmWidth * scaleSize) / 8 );
-		nowCoordY = elmY - ( (elmHeight * scaleSize) / 8 );
+		nowCoordX = elmX - ( (elmWidth * scaleSize) / 4 ) - elmWidth /2;
+		nowCoordY = elmY - ( (elmHeight * scaleSize) / 4 );
 	} else {
-		nowCoordX = elmX + ( (elmWidth * scaleSize) / 8 );
-		nowCoordY = elmY + ( (elmHeight * scaleSize) / 8 );
+		nowCoordX = elmX + ( (elmWidth * scaleSize) / 4 ) - elmWidth /2;;
+		nowCoordY = elmY + ( (elmHeight * scaleSize) / 4 );
 	}
+
+	elmX      = $jqIdTrimingElm.offset().left;
+	$("#elmX").html(elmX);
 	//画像の幅と高さ調整
 	// var nowWidth;
 	// var nowHeight;
@@ -248,14 +254,14 @@ $hammerObj2.on("pinchend",function(event) {
 	$jqIdTrimingElm.css({
 		width : elmWidth * scaleSize,
 		height: elmHeight * scaleSize,
-		top   : nowCoordY,
-		left  : nowCoordX,
+		//top   : ( elmHeight * scaleSize ) /2,
+		//left  : nowCoordX,
 		transform: "scale(1)"
 	});
 
 	getElmSize();
-
-	// $("#elmY").html(nowCoordY);
+	//
+	// $("#elmY").html(elmX);
 	// $("#elmX").html(nowCoordX);
 });
 
