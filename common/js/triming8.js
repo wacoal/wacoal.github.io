@@ -66,6 +66,8 @@ $idTrimImg.on('load',function(){
 				repHeight = minWidth / originWidth * originHeight;
 				repMinHeight = repHeight;
 			}
+			// slideX =  (repWidth / 2 );
+			// slideY =  (repHeight / 2 );
 			// repWidth  = originWidth < originHeight ? minWidth : minHeight / originHeight * originWidth;
 			// repHeight = originHeight < originWidth ? minHeight : minWidth / originWidth * originHeight;
 			originalY = ( windowHeight / 2 ) - ( repHeight / 2 );
@@ -185,8 +187,8 @@ $hammerObj.on("pan",function(event){
 				});
 			}
 			//console.log(elmMoveX);
-			// $("#elmY").html(elmMoveX);
-			// $("#elmX").html(targetX);
+			$("#elmY").html(elmMoveX + slideX);
+			$("#elmX").html(targetX);
 		}
 	}
 });
@@ -258,6 +260,18 @@ $hammerObj.on("pinchend",function(event) {
 		//left  : nowCoordX,
 		transform: "scale(1)"
 	});
+
+	if( originWidth < originHeight ){
+		slideY = ( elmHeight * scaleSize ) /2;
+		slideX = (targetWidth * scaleSize / 2 );
+
+	}else {
+		slideY = (targetHeight * scaleSize / 2 );
+		slideX = ( elmWidth * scaleSize ) /2
+	}
+
+
+
 
 	getElmSize();
 	//
