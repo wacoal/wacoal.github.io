@@ -164,7 +164,7 @@ $hammerObj2.on("pinchend",function(event) {
 	//$jqIdTrimingElm.after();
 	getElmSize();
 	///座標の計算
-
+	$("#elmY").html(elmX);
 
 	$jqIdTrimingElm.css({
 		width : elmWidth * scaleSize,
@@ -175,7 +175,7 @@ $hammerObj2.on("pinchend",function(event) {
 	});
 	getElmSize();
 	// $("#elmY").html(elmY);
-	// $("#elmX").html(elmX);
+	$("#elmX").html(elmX);
 });
 
 //==========================================================================
