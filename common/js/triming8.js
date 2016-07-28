@@ -76,7 +76,7 @@ var areaHeight;
 
 $hammerObj.get("pan").set({ enable: true });
 $hammerObj.get("pinch").set({ enable: true });
-//$jqIdTrimingElm.css("transform", "scale(1)");
+$jqIdTrimingElm.css("transform", "scale(1)");
 
 // 小数点n位までを残す関数 (四捨五入)
 function floatFormat( number, n ) {
