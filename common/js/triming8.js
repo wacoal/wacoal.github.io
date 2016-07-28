@@ -160,6 +160,7 @@ $hammerObj2.on("pinch",function(event) {
 ///ピンチおわり
 $hammerObj2.on("pinchend",function(event) {
 	getSize();
+	alert("tesw");
 });
 
 //==========================================================================
