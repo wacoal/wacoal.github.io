@@ -168,14 +168,16 @@ $hammerObj2.on("pinchend",function(event) {
 	//$jqIdTrimingElm.after();
 	getElmSize();
 	///座標の計算
-	var nowCoord;
+	var nowCoordX;
+	var nowCoordY;
+
 	if( scaleSize > 1 ) {
-		nowCoord = -(elmWidth * scaleSize) / 4;
+		nowCoordX = originalX - ( (elmWidth * scaleSize) / 4 );
+		nowCoordY = originalY - ( (elmHeight * scaleSize) / 4 );
 	} else {
-		nowCoord = (elmWidth * scaleSize) / 4;
+		nowCoordX = originalX + ( (elmWidth * scaleSize) / 4 );
+		nowCoordY = originalY + ( (elmHeight * scaleSize) / 4 );
 	}
-	var nowCoordX = nowCoord + originalX;
-	var nowCoordY = nowCoord + originalY;
 
 	$jqIdTrimingElm.css({
 		width : elmWidth * scaleSize,
