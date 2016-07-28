@@ -15,9 +15,6 @@ var repHeight = false;
 var minWidth  = 320;
 var minHeight = 240;
 
-///動き
-var elmX;
-var elmY;
 ///現在の座標
 var coordX;
 var coordY;
@@ -72,6 +69,10 @@ var elmHeight;
 var areaWidth;
 var areaHeight;
 
+///動き
+var elmMoveX;
+var elmMoveY;
+
 $hammerObj.get("pan").set({ enable: true });
 $hammerObj.get("pinch").set({ enable: true });
 $jqIdTrimingElm.css("transform", "scale(1)");
@@ -89,6 +90,8 @@ $(window).on("load",function(){
 function getElmSize(){
 	elmWidth  = $jqIdTrimingElm.width();
 	elmHeight = $jqIdTrimingElm.height();
+	elmX      = Number(String($jqIdTrimingElm.css("left")).replace("px", ""));
+	elmY      = Number(String($jqIdTrimingElm.css("top")).replace("px", ""));
 	areaWidth = $jqIdTrimingArea.width();
 	areaHeight= $jqIdTrimingArea.height();
 	//areaHeight= $jqIdTrimingArea.outerHeight();
@@ -99,13 +102,13 @@ $hammerObj.on("pan",function(event){
 	if(event.isFinal) { //end
 		panTime = false;
 		$jqIdTrimingArea.data("down", false);
-		if(Number(String($jqIdTrimingElm.css("left")).replace("px", "")) < 0)
+		if( elmX < 0)
 				$jqIdTrimingElm.css("left", "0px");
-		if(Number(String($jqIdTrimingElm.css("left")).replace("px", "")) > (areaWidth - elmWidth))
+		if( elmX > (areaWidth - elmWidth))
 				$jqIdTrimingElm.css("left", (areaWidth - elmWidth) + "px");
-		if(Number(String($jqIdTrimingElm.css("top")).replace("px", "")) < 0)
+		if( elmY < 0)
 				$jqIdTrimingElm.css("top", "0px");
-		if(Number(String($jqIdTrimingElm.css("top")).replace("px", "")) > (areaHeight - elmHeight))
+		if( elmY > (areaHeight - elmHeight))
 				$jqIdTrimingElm.css("top", (areaHeight - elmHeight) + "px");
 	} else {
 		if(!panTime) { //start
@@ -119,11 +122,11 @@ $hammerObj.on("pan",function(event){
 
 		} else { //move
 			if ($jqIdTrimingArea.data("down") == true) {
-				elmX = ( ($jqIdTrimingArea.data("elmPosX") - ($jqIdTrimingArea.data("x") - event.center.x)) );
-				elmY = ( ($jqIdTrimingArea.data("elmPosY") - ($jqIdTrimingArea.data("y") - event.center.y)) );
+				elmMoveX = ( ($jqIdTrimingArea.data("elmPosX") - ($jqIdTrimingArea.data("x") - event.center.x)) );
+				elmMoveY = ( ($jqIdTrimingArea.data("elmPosY") - ($jqIdTrimingArea.data("y") - event.center.y)) );
 				$jqIdTrimingElm.css({
-						"left": elmX + "px",
-						"top": elmY + "px"
+						"left": elmMoveX + "px",
+						"top" : elmMoveY + "px"
 				});
 			}
 		}
@@ -158,8 +161,8 @@ $hammerObj2.on("pinch",function(event) {
 ///ピンチおわり
 $hammerObj2.on("pinchend",function(event) {
 	getElmSize();
-	$("#areaWidth").html(areaWidth);
-	$("#elmWidth").html(elmWidth);
+	$("#elmY").html(elmY);
+	$("#elmX").html(elmX);
 });
 
 //==========================================================================
