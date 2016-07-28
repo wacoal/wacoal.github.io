@@ -63,6 +63,7 @@ var $hammerObj2      = new Hammer($idTrimingArea);
 var panTime     = false;
 var pinchTime   = false;
 var $pinchTimer = {};
+var scaleSize = 1;
 
 var elmWidth;
 var elmHeight;
@@ -160,9 +161,16 @@ $hammerObj2.on("pinch",function(event) {
 });
 ///ピンチおわり
 $hammerObj2.on("pinchend",function(event) {
+	//$jqIdTrimingElm.after();
 	getElmSize();
-	$("#elmY").html(elmY);
-	$("#elmX").html(elmX);
+	$jqIdTrimingElm.css({
+		width : elmWidth * scaleSize,
+		height: elmHeight * scaleSize,
+		transform: "scale(1)"
+	});
+	getElmSize();
+	// $("#elmY").html(elmY);
+	// $("#elmX").html(elmX);
 });
 
 //==========================================================================
