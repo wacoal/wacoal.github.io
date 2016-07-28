@@ -15,8 +15,11 @@ var originalY;
 
 var repWidth  = 1;
 var repHeight = false;
-var minWidth  = 320;
+var minWidth  = 240;
 var minHeight = 240;
+var repMinWidth = minWidth;
+var repMinHeight = minHeight;
+
 
 ///現在の座標
 var coordX;
@@ -45,15 +48,31 @@ $idTrimImg.on('load',function(){
     originWidth = img.width;
     originHeight = img.height;
     if(originWidth != 0 || originHeight != 0){
-			repWidth  = originWidth < originHeight ? minWidth : minHeight / originHeight * originWidth;
-			repHeight = originHeight < originWidth ? minHeight : minWidth / originWidth * originHeight;
+			if( originWidth < originHeight ){
+				repWidth = minWidth;
+				repMinWidth = minWidth;
+			} else {
+				repWidth = minHeight / originHeight * originWidth;
+				repMinWidth = "auto";
+			}
+			if( originHeight < originWidth ){
+				repHeight = minHeight;
+				repMinHeight = minHeight;
+			} else {
+				repHeight = minWidth / originWidth * originHeight;
+				repMinHeight = "auto";
+			}
+			// repWidth  = originWidth < originHeight ? minWidth : minHeight / originHeight * originWidth;
+			// repHeight = originHeight < originWidth ? minHeight : minWidth / originWidth * originHeight;
 			originalY = ( windowHeight / 2 ) - ( repHeight / 2 );
-			originalX = ( windowWidth / 2 ) - (repWidth /2);
+			originalX = ( windowWidth / 2 ) - ( repWidth /2 );
 			$idTrimImg.css({
-				width  : repWidth,
-				height : repHeight,
-				top    : originalY,
-				left   : originalX,
+				width    : repWidth,
+				height   : repHeight,
+				top      : originalY,
+				left     : originalX,
+				minWidth : repMinWidth,
+				minHeight: repMinHeight,
 			});
     }
 		$idLoading.addClass("hide");
@@ -62,7 +81,7 @@ $idTrimImg.on('load',function(){
 function getTargetInfo(){
 	targetY = $idTarget.offset().top;
 	targetX = $idTarget.offset().left;
-	console.log(targetY,targetX);
+	//console.log(targetY,targetX);
 }
 
 ///現在の座標の取得
@@ -113,8 +132,10 @@ $(window).on("resize load",function(){
 function getElmSize(){
 	elmWidth  = $jqIdTrimingElm.width();
 	elmHeight = $jqIdTrimingElm.height();
-	elmX      = Number(String($jqIdTrimingElm.css("left")).replace("px", ""));
-	elmY      = Number(String($jqIdTrimingElm.css("top")).replace("px", ""));
+	elmX      = $jqIdTrimingElm.offset().left;
+	elmY      = $jqIdTrimingElm.offset().top;
+	// elmX      = Number(String($jqIdTrimingElm.css("left")).replace("px", ""));
+	// elmY      = Number(String($jqIdTrimingElm.css("top")).replace("px", ""));
 	//areaHeight= $jqIdTrimingArea.outerHeight();
 }
 
@@ -124,24 +145,18 @@ $hammerObj2.on("pan",function(event){
 		getElmSize();
 		panTime = false;
 		$jqIdTrimingArea.data("down", false);
-		if( elmX < targetX){
+		if( elmMoveX < targetX){
 			$jqIdTrimingElm.css("left", (areaWidth - elmWidth - targetX) + "px");
 		}
 		if( elmMoveX > targetX){
 			$jqIdTrimingElm.css("left", targetX);
 		}
-		// if( elmX > (areaWidth - elmWidth))
-		// 		$jqIdTrimingElm.css("left", targetX);
-		if( elmY < targetY){
+		if( elmMoveY < targetY){
 			$jqIdTrimingElm.css("top", (areaHeight - elmHeight - targetY) + "px");
 		}
 		if( elmMoveY > targetY){
 			$jqIdTrimingElm.css("top", targetY);
 		}
-		// if( elmY > (areaHeight - elmHeight))
-		// 		$jqIdTrimingElm.css("top", targetY);
-
-
 		getElmSize();
 		//console.log(elmX,elmY,areaWidth,elmWidth);
 	} else {
@@ -162,7 +177,9 @@ $hammerObj2.on("pan",function(event){
 						"top" : elmMoveY + "px"
 				});
 			}
-			console.log(elmMoveX);
+			//console.log(elmMoveX);
+			$("#elmY").html(elmMoveX);
+			$("#elmX").html(elmX);
 		}
 	}
 });
@@ -202,179 +219,40 @@ $hammerObj2.on("pinchend",function(event) {
 	var nowCoordX;
 	var nowCoordY;
 	if( scaleSize > 1 ) {
-		nowCoordX = elmX - ( (elmWidth * scaleSize) / 4 );
-		nowCoordY = elmY - ( (elmHeight * scaleSize) / 4 );
+		nowCoordX = elmX - ( (elmWidth * scaleSize) / 8 );
+		nowCoordY = elmY - ( (elmHeight * scaleSize) / 8 );
 	} else {
-		nowCoordX = elmX + ( (elmWidth * scaleSize) / 4 );
-		nowCoordY = elmY + ( (elmHeight * scaleSize) / 4 );
+		nowCoordX = elmX + ( (elmWidth * scaleSize) / 8 );
+		nowCoordY = elmY + ( (elmHeight * scaleSize) / 8 );
 	}
+	//画像の幅と高さ調整
+	// var nowWidth;
+	// var nowHeight;
+	// if( (elmWidth * scaleSize) > targetWidth ){
+	// 	nowWidth = (elmWidth * scaleSize)
+	// } else {
+	// 	nowWidth = targetWidth;
+	// }
+	// if( (elmWidth * scaleSize) > targetHeight ){
+	// 	nowHeight = (elmHeight * scaleSize)
+	// } else {
+	// 	nowHeight = targetHeight;
+	// }
+	// repWidth  = nowWidth < nowHeight ? targetWidth : targetHeight / nowHeight * nowWidth;
+	// repHeight = nowHeight < nowWidth ? targetHeight : targetWidth / nowWidth * nowHeight;
 
-	$jqIdTrimingElm.css({
-		width : elmWidth * scaleSize,
-		height: elmHeight * scaleSize,
-		top   : nowCoordY,
-		left  : nowCoordX,
-		transform: "scale(1)"
-	});
+	// $jqIdTrimingElm.css({
+	// 	width : elmWidth * scaleSize,
+	// 	height: elmHeight * scaleSize,
+	// 	top   : nowCoordY,
+	// 	left  : nowCoordX,
+	// 	transform: "scale(1)"
+	// });
+
 	getElmSize();
 
-	$("#elmY").html(nowCoordY);
-	$("#elmX").html(nowCoordX);
+	// $("#elmY").html(nowCoordY);
+	// $("#elmX").html(nowCoordX);
 });
 
 //==========================================================================
-
-
-
-
-//
-//
-//
-// 	var rectWidth = 100;
-// 	var rectHeight = 50;
-// 	var theta = 10;
-//
-// 	var canvas;
-// 	var ctx;
-//
-// 	var RotateState = 0;
-//
-// 	// var Img = document.createElement('img');
-// 	// Img.src = "http://sites.google.com/site/westinthefareast/home/datafiles/Desert.jpg";
-//
-// 	var repWidth = 204.8;
-// 	var repHeight = 153.6;
-//
-// 	var angle = 0;
-// 	var repWidth = 1;
-// 	var repHeight = false;
-// 	var minWidth = 320;
-// 	var minHeight = 240;
-// 	var imageWidth;
-// 	var imageHeight;
-// 	var trimX;
-// 	var trimY;
-//
-// 	var dataUrl="";
-// 	var ctx;
-// 	var image = new Image();
-//
-// 	$(function(){
-// 			canvas = document.getElementById('DrawField');
-//
-// 			$("#js_btn_rotate").on('click',function(){
-// 				rotate();
-// 			});
-// 	});
-//
-//
-//
-// 	function main(dataUrl) {
-// 			if (canvas.getContext) {
-// 					canvas.setAttribute('width', '400');
-// 					canvas.setAttribute('height', '400');
-// 					ctx = canvas.getContext('2d');
-// 					image.src = dataUrl;
-// 					image.addEventListener('load', function(){
-// 							//$(".loading").hide();
-// 							imageWidth = image.width;
-// 							imageHeight = image.height;
-// 							repWidth = imageWidth < imageHeight ? minWidth : minHeight / imageHeight * imageWidth;
-// 							repHeight = imageHeight < imageWidth ? minHeight : minWidth / imageWidth * imageHeight;
-//
-// 							canvas.width = repWidth;
-// 							canvas.height = repHeight;
-// 							ctx.translate(canvas.width/2,canvas.height/2);
-// 							//ctx.drawImage(image, 0, 0, repWidth, repHeight);
-// 							ctx.drawImage(image,-repWidth/2,-repHeight/2,repWidth,repHeight);
-// 							ctx.save();
-//
-// 							//trimRestore();
-// 					}, false);
-// 			}
-// 	}
-//
-// 	function rotate(){
-// 			if (!ctx) return;
-// 			restore();
-// 			angle = angle >= 270 ? 0 : angle + 90;
-// 			if(angle % 180) {
-// 					repWidth = imageWidth < imageHeight ? minHeight : minWidth / imageHeight * imageWidth;
-// 					repHeight = imageHeight < imageWidth ? minWidth : minHeight / imageWidth * imageHeight;
-// 			} else {
-// 					repWidth = imageWidth < imageHeight ? minWidth : minHeight / imageHeight * imageWidth;
-// 					repHeight = imageHeight < imageWidth ? minHeight : minWidth / imageWidth * imageHeight;
-// 			}
-// 			canvas.width = angle % 180 ? repHeight : repWidth;
-// 			canvas.height = angle % 180 ? repWidth : repHeight;
-// 			ctx.fillRect(0,0,canvas.width + 1,canvas.height + 1);
-// 			ctx.rotate(angle * Math.PI / 180);
-// 			ctx.translate( -( angle == 180 || angle == 270 ? repWidth : 0), -( angle == 90|| angle == 180  ? repHeight : 0) );
-// 			//ctx.drawImage(image,-repWidth/2,-repHeight/2,repWidth,repHeight)
-// 			ctx.drawImage(image, 0, 0, repWidth, repHeight);
-// 			//trimRestore();
-// 	}
-//
-// 	//canvasの初期化
-// 	function restore(){
-// 			posX = 0;
-// 			posY = 0;
-// 			canvas.width = repWidth;
-// 			canvas.height = repHeight;
-// 			ctx.restore();
-// 			ctx.drawImage(image, 0, 0, repWidth, repHeight);
-// 			ctx.save();
-// 	}
-//
-// 	//回転ボタンが押された時の処理
-// 	function RotateView(){
-// 		//ステータスを回転状態にする
-// 		RotateState = 1;
-// 		DoRotate();
-// 	}
-//
-// 	//回転を行う処理。タイマーで再帰的に繰り返される。
-// 	function DoRotate(){
-// 		if (RotateState == 0){
-// 			return;
-// 		}
-// 		else{
-// 			//表示された画像を消す
-// 			ctx.clearRect(-repWidth/2-10,-repHeight/2-10,repWidth+20,repHeight+20);
-// 			//座標を回転させる
-// 			ctx.rotate(theta * Math.PI / 180);
-// 			//画像の重心がキャンバス座標の中心点にくるように画像を表示する
-// 			ctx.drawImage(image,-repWidth/2,-repHeight/2,repWidth,repHeight);
-// 			//30ミリ秒ごとに座標の回転と画像の描画を繰り返す
-// 			setTimeout(function(){DoRotate()},30);
-// 		}
-// 	}
-//
-// 	//画像を縮小表示する処理
-// 	function ShrinkView(){
-// 		//表示された画像を消す
-// 		ctx.clearRect(-repWidth/2-10,-repHeight/2-10,repWidth+20,repHeight+20);
-// 		//画像の大きさを0.833倍にする
-// 		repWidth = repWidth/1.2;
-// 		repHeight = repHeight/1.2;
-// 		//画像の重心がキャンバス座標の中心点にくるように画像を表示する
-// 		ctx.drawImage(image,-repWidth/2,-repHeight/2,repWidth,repHeight);
-// 	}
-//
-// 	//画像を拡大表示する処理
-// 	function ExpandView(){
-// 		//表示された画像を消す
-// 		ctx.clearRect(-repWidth/2-10,-repHeight/2-10,repWidth+20,repHeight+20);
-// 		//画像の大きさを1.2倍にする
-// 		repWidth = repWidth*1.2;
-// 		repHeight = repHeight*1.2;
-// 		//画像の重心がキャンバス座標の中心点にくるように画像を表示する
-// 		ctx.drawImage(image,-repWidth/2,-repHeight/2,repWidth,repHeight);
-// 	}
-//
-// 	//回転を止める処理
-// 	function StopRotate(){
-// 		//ステータスを停止状態にする
-// 		RotateState = 0;
-// 	}
-//
