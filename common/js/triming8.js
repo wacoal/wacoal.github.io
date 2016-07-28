@@ -5,20 +5,30 @@ var $idTrimArea = $("#js_triming_area");
 var $idTrimImg  = $("#js_triming_image");
 var $idLoading  = $("#js_loading");
 
-var windowWidth;
-var windowHeight;
+var windowWidth  = $(window).width();
+var windowHeight = $(window).height();
 var originWidth;
 var originHeight;
+var originalX = $idTrimImg.offset().left;
+var originalY = $idTrimImg.offset().top;
 
 var repWidth  = 1;
 var repHeight = false;
 var minWidth  = 320;
 var minHeight = 240;
 
+///動き
+var elmX;
+var elmY;
+///現在の座標
+var coordX;
+var coordY;
+
 $(window).on("resize load",function(){
 	windowWidth  = $(window).width();
 	windowHeight = $(window).height();
-	console.log(originWidth,originHeight,windowWidth,windowHeight);
+	//console.log(originWidth,originHeight,windowWidth,windowHeight);
+	//console.log(originalY);
 });
 
 ///画像のオリジナルサイズ取得 & $idTrimImgを端末サイズに
@@ -33,16 +43,18 @@ $idTrimImg.on('load',function(){
 			$idTrimImg.css({
 				width     : repWidth,
 				height    : repHeight,
-				marginTop : - (repHeight/2),
-				marginLeft: - (repWidth/2),
+				top       : ( windowHeight / 2 ) - ( repHeight / 2 ),
+				left      : ( windowWidth / 2 ) - (repWidth /2),
 			});
-      //$idTrimImg.width(Math.floor(originWidth/2)).height(Math.floor(originHeight/2));
     }
 		$idLoading.addClass("hide");
 });
 
-
-
+///現在の座標の取得
+function getCoord(){
+	coordY = $idTrimImg.offset().top;
+	coordX = $idTrimImg.offset().left;
+}
 
 //==========================================================================
 
@@ -66,26 +78,73 @@ function floatFormat( number, n ) {
 	return Math.round( number * _pow ) / _pow ;
 }
 
+///上下左右の動き
 $hammerObj.on("pan",function(event){
 	if(event.isFinal) { //end
-
+		panTime = false;
+		$jqIdTrimingArea.data("down", false);
+		if(Number(String($jqIdTrimingElm.css("left")).replace("px", "")) < 0)
+				$jqIdTrimingElm.css("left", "0px");
+		if(Number(String($jqIdTrimingElm.css("left")).replace("px", "")) > ($jqIdTrimingArea.width() - $jqIdTrimingElm.width()))
+				$jqIdTrimingElm.css("left", ($jqIdTrimingArea.width() - $jqIdTrimingElm.width()) + "px");
+		if(Number(String($jqIdTrimingElm.css("top")).replace("px", "")) < 0)
+				$jqIdTrimingElm.css("top", "0px");
+		if(Number(String($jqIdTrimingElm.css("top")).replace("px", "")) > ($jqIdTrimingArea.outerHeight() - $jqIdTrimingElm.height()))
+				$jqIdTrimingElm.css("top", ($jqIdTrimingArea.outerHeight() - $jqIdTrimingElm.height()) + "px");
 	} else {
-
 		if(!panTime) { //start
+			panTime = event.timeStamp;
+			$jqIdTrimingArea
+					.data("down", true)
+					.data("x", event.center.x)
+					.data("y", event.center.y)
+					.data("elmPosX", Number(String($jqIdTrimingElm.css("left")).replace("px", "")))
+					.data("elmPosY", Number(String($jqIdTrimingElm.css("top")).replace("px", "")));
 
 		} else { //move
 			if ($jqIdTrimingArea.data("down") == true) {
-
+				elmX = ( ($jqIdTrimingArea.data("elmPosX") - ($jqIdTrimingArea.data("x") - event.center.x)) );
+				elmY = ( ($jqIdTrimingArea.data("elmPosY") - ($jqIdTrimingArea.data("y") - event.center.y)) );
+				$jqIdTrimingElm.css({
+						"left": elmX + "px",
+						"top": elmY + "px"
+				});
 			}
 		}
 	}
 });
 
+///ピンチインピンチアウト
+$hammerObj2.on("pinch",function(event) {
+		event.preventDefault ? event.preventDefault() : (event.returnValue = false);
+		if(!pinchTime) { //start
+			pinchTime = event.timeStamp;
+			var preScale = String($jqIdTrimingElm.css("transform")).replace("matrix(", "");
+			preScale = preScale.replace(")", "");
+			preScale = preScale.split(",");
+			preScale = Math.sqrt(preScale[0] * preScale[0] + preScale[1] * preScale[1]);
+			$jqIdTrimingArea
+					.data("preScale", preScale)
+					.data("scale", event.scale);
+		} else { //move
+			if($pinchTimer) clearTimeout($pinchTimer);
+			scaleSize = $jqIdTrimingArea.data("preScale") + (event.scale - $jqIdTrimingArea.data("scale"));
+			$jqIdTrimingElm.css({
+				"transform": "scale(" + scaleSize + ")"
+			});
+			$pinchTimer = setTimeout(function() { //end
+					pinchTime = false;
+			}, 100);
 
+			$("#scale").html(scaleSize)
+		}
+});
+///ピンチおわり
+$hammerObj2.on("pinchend",function(event) {
 
+});
 
-
-
+//==========================================================================
 
 
 

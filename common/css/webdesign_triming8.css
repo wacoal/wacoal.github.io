@@ -197,8 +197,8 @@ lists
 
 .triming-area__image {
   position: absolute;
-  top: 50%;
-  left: 50%;
+  top: 0;
+  left: 0;
   display: block;
   width: 100%;
 }
