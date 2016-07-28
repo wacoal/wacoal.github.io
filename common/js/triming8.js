@@ -7,8 +7,10 @@ var windowWidth  = $(window).width();
 var windowHeight = $(window).height();
 var originWidth;
 var originHeight;
-var originalX = $idTrimImg.offset().left;
-var originalY = $idTrimImg.offset().top;
+var originalX;
+var originalY;
+// var originalX = $idTrimImg.offset().left;
+// var originalY = $idTrimImg.offset().top;
 
 var repWidth  = 1;
 var repHeight = false;
@@ -35,11 +37,13 @@ $idTrimImg.on('load',function(){
     if(originWidth != 0 || originHeight != 0){
 			repWidth  = originWidth < originHeight ? minWidth : minHeight / originHeight * originWidth;
 			repHeight = originHeight < originWidth ? minHeight : minWidth / originWidth * originHeight;
+			originalY = ( windowHeight / 2 ) - ( repHeight / 2 );
+			originalX = ( windowWidth / 2 ) - (repWidth /2);
 			$idTrimImg.css({
 				width     : repWidth,
 				height    : repHeight,
-				top       : ( windowHeight / 2 ) - ( repHeight / 2 ),
-				left      : ( windowWidth / 2 ) - (repWidth /2),
+				top       : originalY,
+				left      : originalX,
 			});
     }
 		$idLoading.addClass("hide");
@@ -170,12 +174,14 @@ $hammerObj2.on("pinchend",function(event) {
 	} else {
 		nowCoord = (elmWidth * scaleSize) / 4;
 	}
+	var nowCoordX = nowCoord + originalX;
+	var nowCoordY = nowCoord + originalX;
 
 	$jqIdTrimingElm.css({
 		width : elmWidth * scaleSize,
 		height: elmHeight * scaleSize,
-		top   : nowCoord,
-		left  : nowCoord,
+		top   : nowCoordY,
+		left  : nowCoordX,
 		transform: "scale(1)"
 	});
 	getElmSize();
