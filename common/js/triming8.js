@@ -1,6 +1,4 @@
 
-
-
 var $idTrimArea = $("#js_triming_area");
 var $idTrimImg  = $("#js_triming_image");
 var $idLoading  = $("#js_loading");
@@ -59,14 +57,14 @@ function getCoord(){
 //==========================================================================
 
 //ライブラリの初期設定
-var $idTrimingArea = document.getElementById("js_triming_area");
+var $idTrimingArea   = document.getElementById("js_triming_area");
 var $jqIdTrimingArea = $($idTrimingArea);
-var $idTrimingElm = document.getElementById("js_triming_image");
-var $jqIdTrimingElm = $($idTrimingElm);
-var $hammerObj = new Hammer($idTrimingElm);
-var $hammerObj2 = new Hammer($idTrimingArea);
-var panTime = false;
-var pinchTime = false;
+var $idTrimingElm    = document.getElementById("js_triming_image");
+var $jqIdTrimingElm  = $($idTrimingElm);
+var $hammerObj       = new Hammer($idTrimingElm);
+var $hammerObj2      = new Hammer($idTrimingArea);
+var panTime     = false;
+var pinchTime   = false;
 var $pinchTimer = {};
 
 var elmWidth;
@@ -160,7 +158,7 @@ $hammerObj2.on("pinch",function(event) {
 ///ピンチおわり
 $hammerObj2.on("pinchend",function(event) {
 	getElmSize();
-	alert("tesw");
+	//alert("tesw");
 });
 
 //==========================================================================
