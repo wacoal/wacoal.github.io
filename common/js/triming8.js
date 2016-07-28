@@ -180,7 +180,7 @@ $hammerObj2.on("pinchend",function(event) {
 	});
 	getElmSize();
 	// $("#elmY").html(elmY);
-	$("#elmX").html(elmX);
+	$("#elmX").html(nowCoord);
 });
 
 //==========================================================================
