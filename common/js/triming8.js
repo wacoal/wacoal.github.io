@@ -164,13 +164,18 @@ $hammerObj2.on("pinchend",function(event) {
 	//$jqIdTrimingElm.after();
 	getElmSize();
 	///座標の計算
-	$("#elmY").html(elmX);
+	var nowCoord;
+	if( scaleSize > 0 ) {
+		nowCoord = -(elmWidth * scaleSize) / 4;
+	} else {
+		nowCoord = (elmWidth * scaleSize) / 4;
+	}
 
 	$jqIdTrimingElm.css({
 		width : elmWidth * scaleSize,
 		height: elmHeight * scaleSize,
-		top   : elmY / scaleSize,
-		left  : elmX / scaleSize,
+		top   : nowCoord,
+		left  : nowCoord,
 		transform: "scale(1)"
 	});
 	getElmSize();
