@@ -216,7 +216,8 @@ $hammerObj.on("pinch",function(event) {
 			}, 100);
 
 			$("#scale").html(scaleSize);
-
+			$("#elmY").html(elmMoveX + slideX);
+			$("#elmX").html(targetX);
 		}
 });
 ///ピンチおわり
