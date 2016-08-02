@@ -168,6 +168,8 @@ $hammerObj.on("pan",function(event){
 		}
 		//getElmSize();
 		//console.log(elmX,elmY,areaWidth,elmWidth);
+		// $("#elmY").html(elmX + slideX);
+		// $("#elmX").html(targetX);
 	} else {
 		if(!panTime) { //start
 			panTime = event.timeStamp;
@@ -187,8 +189,7 @@ $hammerObj.on("pan",function(event){
 				});
 			}
 			//console.log(elmMoveX);
-			$("#elmY").html(elmMoveX + slideX);
-			$("#elmX").html(targetX);
+			// $("#elmY").html(elmMoveX + slideX);
 		}
 	}
 });
@@ -197,14 +198,17 @@ $hammerObj.on("pan",function(event){
 $hammerObj.on("pinch",function(event) {
 		event.preventDefault ? event.preventDefault() : (event.returnValue = false);
 		if(!pinchTime) { //start
-			pinchTime = event.timeStamp;
-			var preScale = String($jqIdTrimingElm.css("transform")).replace("matrix(", "");
-			preScale = preScale.replace(")", "");
-			preScale = preScale.split(",");
-			preScale = Math.sqrt(preScale[0] * preScale[0] + preScale[1] * preScale[1]);
-			$jqIdTrimingArea
-					.data("preScale", preScale)
-					.data("scale", event.scale);
+			// pinchTime = event.timeStamp;
+			// var preScale = String($jqIdTrimingElm.css("transform")).replace("matrix(", "");
+			// preScale = preScale.replace(")", "");
+			// preScale = preScale.split(",");
+			// preScale = Math.sqrt(preScale[0] * preScale[0] + preScale[1] * preScale[1]);
+			// $jqIdTrimingArea
+			// 		.data("preScale", preScale)
+			// 		.data("scale", event.scale);
+			//
+			// var startX = $jqIdTrimingElm.offset().left;
+			// $("#startX").html(startX);
 		} else { //move
 			if($pinchTimer) clearTimeout($pinchTimer);
 			scaleSize = $jqIdTrimingArea.data("preScale") + (event.scale - $jqIdTrimingArea.data("scale"));
@@ -216,9 +220,22 @@ $hammerObj.on("pinch",function(event) {
 			}, 100);
 
 			$("#scale").html(scaleSize);
-			$("#elmY").html(elmMoveX + slideX);
-			$("#elmX").html(targetX);
+			// $("#elmY").html(startX * scaleSize);
+			// $("#elmX").html(startX);
 		}
+});
+$hammerObj.on("pinchstart",function(event) {
+	pinchTime = event.timeStamp;
+	var preScale = String($jqIdTrimingElm.css("transform")).replace("matrix(", "");
+	preScale = preScale.replace(")", "");
+	preScale = preScale.split(",");
+	preScale = Math.sqrt(preScale[0] * preScale[0] + preScale[1] * preScale[1]);
+	$jqIdTrimingArea
+			.data("preScale", preScale)
+			.data("scale", event.scale);
+
+	var startX = $jqIdTrimingElm.offset().left;
+	$("#startX").html(startX);
 });
 ///ピンチおわり
 $hammerObj.on("pinchend",function(event) {
@@ -229,7 +246,8 @@ $hammerObj.on("pinchend",function(event) {
 	var nowCoordX;
 	var nowCoordY;
 	if( scaleSize > 1 ) {
-		nowCoordX = elmX - ( (elmWidth * scaleSize) / 4 ) - elmWidth /2;
+		//nowCoordX = elmX - ( (elmWidth * scaleSize) / 4 ) - elmWidth /2;
+		nowCoordX = ( elmX * scaleSize );
 		nowCoordY = elmY - ( (elmHeight * scaleSize) / 4 );
 	} else {
 		nowCoordX = elmX + ( (elmWidth * scaleSize) / 4 ) - elmWidth /2;;
@@ -237,7 +255,7 @@ $hammerObj.on("pinchend",function(event) {
 	}
 
 	elmX      = $jqIdTrimingElm.offset().left;
-	$("#elmX").html(elmX);
+	//$("#elmX").html(elmX);
 	//画像の幅と高さ調整
 	// var nowWidth;
 	// var nowHeight;
@@ -270,10 +288,7 @@ $hammerObj.on("pinchend",function(event) {
 		slideY = (targetHeight * scaleSize / 2 );
 		slideX = ( elmWidth * scaleSize ) /2
 	}
-
-
-
-
+	$("#comm").html("fin");
 	getElmSize();
 	//
 	// $("#elmY").html(elmX);
