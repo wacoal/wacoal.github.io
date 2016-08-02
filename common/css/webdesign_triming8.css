@@ -482,6 +482,7 @@ a.bttn:hover,
 }
 .trimming-move__txt.is_small {
   font-size: 9px;
+  line-height: 1em;
 }
 
 .trimming-move-area:before,

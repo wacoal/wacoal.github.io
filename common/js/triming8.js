@@ -159,18 +159,18 @@ $hammerObj.on("pan",function(event){
 		getElmSize();
 		panTime = false;
 		$jqIdTrimingArea.data("down", false);
-		if( elmMoveX + slideX < targetX){
-			$jqIdTrimingElm.css("left", (areaWidth - elmWidth - targetX) + "px");
-		}
-		if( elmMoveX > targetX ){
-			$jqIdTrimingElm.css("left", targetX);
-		}
-		if( elmMoveY + slideY < targetY){
-			$jqIdTrimingElm.css("top", (areaHeight - elmHeight - targetY) + "px");
-		}
-		if( elmMoveY > targetY){
-			$jqIdTrimingElm.css("top", targetY);
-		}
+		// if( elmMoveX + slideX < targetX){
+		// 	$jqIdTrimingElm.css("left", (areaWidth - elmWidth - targetX) + "px");
+		// }
+		// if( elmMoveX > targetX ){
+		// 	$jqIdTrimingElm.css("left", targetX);
+		// }
+		// if( elmMoveY + slideY < targetY){
+		// 	$jqIdTrimingElm.css("top", (areaHeight - elmHeight - targetY) + "px");
+		// }
+		// if( elmMoveY > targetY){
+		// 	$jqIdTrimingElm.css("top", targetY);
+		// }
 		//getElmSize();
 		//console.log(elmX,elmY,areaWidth,elmWidth);
 	} else {
@@ -216,6 +216,7 @@ $hammerObj.on("pinch",function(event) {
 		} else { //move
 			if($pinchTimer) clearTimeout($pinchTimer);
 			scaleSize = $jqIdTrimingArea.data("preScale") + (event.scale - $jqIdTrimingArea.data("scale"));
+			scaleSize = floatFormat( scaleSize, 2 );
 			$jqIdTrimingElm.css({
 				"transform": "scale(" + scaleSize + ")"
 			});
@@ -239,19 +240,21 @@ $hammerObj.on("pinchend",function(event) {
 	///座標の計算
 	var lastX = $jqIdTrimingElm.offset().left;
 	var lastY = $jqIdTrimingElm.offset().top;
+	lastX = floatFormat( lastX, 2 );
+	lastY = floatFormat( lastY, 2 );
 	$("#lastX").html(lastX);
 	$("#lastY").html(lastY);
 	var nowCoordX;
 	var nowCoordY;
+
 	if( scaleSize > 1 ) {
 		//nowCoordX = elmX - ( (elmWidth * scaleSize) / 4 ) - elmWidth /2;
 		nowCoordX = lastX * scaleSize;
 		nowCoordY = lastY * scaleSize;
 		// nowCoordY = elmY - ( (elmHeight * scaleSize) / 4 );
-		$("#comm").html("69666");
 	} else {
-		nowCoordX = elmX + ( (elmWidth * scaleSize) / 4 ) - elmWidth /2;;
-		nowCoordY = elmY + ( (elmHeight * scaleSize) / 4 );
+		nowCoordX = lastX * scaleSize;
+		nowCoordY = lastY * scaleSize;
 	}
 
 	elmX      = $jqIdTrimingElm.offset().left;
@@ -279,6 +282,8 @@ $hammerObj.on("pinchend",function(event) {
 		left  : nowCoordX,
 		transform: "scale(1)"
 	});
+
+	$("#nowCoordX").html(nowCoordX);
 
 	// if( originWidth < originHeight ){
 	// 	slideY = ( elmHeight * scaleSize ) /2;
