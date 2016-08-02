@@ -147,7 +147,8 @@ function getElmSize(){
 	elmHeight = $jqIdTrimingElm.height();
 	elmX      = $jqIdTrimingElm.offset().left;
 	elmY      = $jqIdTrimingElm.offset().top;
-
+	$("#elmWidth").html(elmWidth);
+	$("#elmHeight").html(elmHeight);
 	// elmX      = Number(String($jqIdTrimingElm.css("left")).replace("px", ""));
 	// elmY      = Number(String($jqIdTrimingElm.css("top")).replace("px", ""));
 	//areaHeight= $jqIdTrimingArea.outerHeight();
@@ -159,19 +160,21 @@ $hammerObj.on("pan",function(event){
 		getElmSize();
 		panTime = false;
 		$jqIdTrimingArea.data("down", false);
-		// if( elmMoveX + slideX < targetX){
-		// 	$jqIdTrimingElm.css("left", (areaWidth - elmWidth - targetX) + "px");
-		// }
-		// if( elmMoveX > targetX ){
-		// 	$jqIdTrimingElm.css("left", targetX);
-		// }
-		// if( elmMoveY + slideY < targetY){
-		// 	$jqIdTrimingElm.css("top", (areaHeight - elmHeight - targetY) + "px");
-		// }
-		// if( elmMoveY > targetY){
-		// 	$jqIdTrimingElm.css("top", targetY);
-		// }
-		//getElmSize();
+		if( elmMoveX + slideX < targetX){
+			$jqIdTrimingElm.css("left", (areaWidth - elmWidth - targetX) + "px");
+			elmMoveX = (areaWidth - elmWidth - targetX);
+		}
+		if( elmMoveX > targetX ){
+			$jqIdTrimingElm.css("left", targetX);
+			elmMoveX = targetX;
+		}
+		if( elmMoveY + slideY < targetY){
+			$jqIdTrimingElm.css("top", (areaHeight - elmHeight - targetY) + "px");
+		}
+		if( elmMoveY > targetY){
+			$jqIdTrimingElm.css("top", targetY);
+		}
+		getElmSize();
 		//console.log(elmX,elmY,areaWidth,elmWidth);
 	} else {
 		if(!panTime) { //start
@@ -192,7 +195,8 @@ $hammerObj.on("pan",function(event){
 				});
 			}
 			//console.log(elmMoveX);
-			// $("#elmY").html(elmMoveX + slideX);
+		 $("#elmMoveX").html(elmMoveX);
+		 $("#slideY").html(slideY);
 		}
 	}
 });
@@ -217,6 +221,7 @@ $hammerObj.on("pinch",function(event) {
 			if($pinchTimer) clearTimeout($pinchTimer);
 			scaleSize = $jqIdTrimingArea.data("preScale") + (event.scale - $jqIdTrimingArea.data("scale"));
 			scaleSize = floatFormat( scaleSize, 2 );
+			scaleSize = scaleSize > 2 ? 2 : scaleSize;
 			$jqIdTrimingElm.css({
 				"transform": "scale(" + scaleSize + ")"
 			});
@@ -250,7 +255,9 @@ $hammerObj.on("pinchend",function(event) {
 	if( scaleSize > 1 ) {
 		//nowCoordX = elmX - ( (elmWidth * scaleSize) / 4 ) - elmWidth /2;
 		nowCoordX = lastX * scaleSize;
+		nowCoordX = floatFormat( nowCoordX, 2 );
 		nowCoordY = lastY * scaleSize;
+		nowCoordY = floatFormat( nowCoordY, 2 );
 		// nowCoordY = elmY - ( (elmHeight * scaleSize) / 4 );
 	} else {
 		nowCoordX = lastX * scaleSize;
