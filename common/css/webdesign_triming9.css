@@ -206,6 +206,7 @@ lists
 .triming-area__target {
   box-sizing: border-box;
   position: absolute;
+  z-index: 1200;
   top: 50%;
   left: 50%;
   display: block;
@@ -600,7 +601,7 @@ a.bttn:hover,
 .trimming-move {
   position: absolute;
   z-index: 10;
-  bottom: 90px;
+  bottom: 48px;
   width: 100%;
 }
 

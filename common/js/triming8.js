@@ -194,7 +194,6 @@ $hammerObj.on("pan",function(event){
 						"top" : elmMoveY + "px"
 				});
 			}
-			//console.log(elmMoveX);
 		 $("#elmMoveX").html(elmMoveX);
 		 $("#slideY").html(slideY);
 		}

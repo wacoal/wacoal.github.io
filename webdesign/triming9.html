@@ -31,23 +31,51 @@
 		<div class="trimming-wrap">
 			<div class="trimming-wrap-head"><!-- ファイル選択とアナウンス -->
 					<p class="trimming-move__txt">
-
+						elmWidth<span id="elmWidth"></span> elmHeight<span id="elmHeight"></span><br>
+						scale<span id="scale"></span> startX<span id="startX"></span><br>
+						lastX<span id="lastX"></span> lastY<span id="lastY"></span><br>
+						nowCoordX<span id="nowCoordX"></span> elmMoveX<span id="elmMoveX"></span><br>
+						slideX<span id="slideX"></span> slideY<span id="slideY"></span>
 					</p>
 			</div>
 
+			<!--
 			<div id="js_triming_area" class="triming-area">
 				<img src="/common/img/download2.jpg" id="js_triming_image" class="triming-area__image" alt="" />
-				<canvas id="DrawField" style="border:solid"></canvas>
-		  	<input id= "Rotation" type=button value="回転" onClick="rotate()"　style="position:absolute; left:50px; top:420px; width:50px;">
-		  	<input id= "Shrink" type=button value="縮小" onClick="ShrinkView()" style="position:absolute; left:130px; top:420px; width:50px;">
-		  	<input id= "Expand" type=button value="拡大" onClick="ExpandView()" style="position:absolute; left:210px; top:420px; width:50px;">
-		  	<input id= "Stop" type=button value="停止" onClick="StopRotate()" style="position:absolute; left:290px; top:420px; width:50px;">
+				<div id="js_triming_target" class="triming-area__target"></div>
+			</div>
+			-->
+
+			<div id="js_triming_area" class="triming-area">
+				<canvas id="canvas"></canvas>
+				<canvas id="canvas2"></canvas>
 				<div id="js_triming_target" class="triming-area__target"></div>
 			</div>
 
 			<div id="js_loading" class="loading">
 					<div class="loading__loader">Loading...</div>
 			</div>
+
+
+			<div class="trimming-move">
+					<label class="trimming-move-label">
+							<input id="js_btn_rotate" type="button" class="bttn__input" value="回転">
+					</label>
+			</div>
+
+			<!--
+			<ul class="lists has_2 box trimming-wrap-button">
+					<li class="lists__item ">
+						<label class="bttn" for="open-prof">閉じる</label>
+					</li>
+					<li class="lists__item">
+						<label class="trimming-label bttn">
+							<input type="submit" name="rebutton" value="この位置で切り取る" id="js_btn_upload" class="bttn__input" />
+						</label>
+					</li>
+			</ul>
+			-->
+
 
 		</div>
 	</div>
@@ -60,7 +88,7 @@
 <script>
 $(function(){
 	$(window).on("load",function(){
-		main("/common/img/download1.jpg");
+		main("/common/img/download2.jpg");
 	});
 });
 </script>
