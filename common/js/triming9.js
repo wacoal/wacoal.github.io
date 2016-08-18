@@ -53,8 +53,6 @@ $(window).on("resize load",function(){
 	canvas = document.getElementById('canvas');
 	canvas2 = document.getElementById('canvas2');
 
-	//console.log(originWidth,originHeight,windowWidth,windowHeight,repWidth,repHeight);
-	//console.log(originalY);
 	getTargetInfo();
 });
 
@@ -107,8 +105,8 @@ function restore(){
 		canvas.width = repWidth;
 		canvas.height = repHeight;
 		ctx.restore();
-		ctx.clearRect(0,0,canvas.width,canvas.height);
-		//ctx.drawImage(image, 0, 0, repWidth, repHeight);
+		//ctx.clearRect(0,0,canvas.width,canvas.height);
+		ctx.drawImage(image, 0, 0, repWidth, repHeight);
 		ctx.save();
 }
 
@@ -139,9 +137,6 @@ function rotate(){
 			top  : originalY,
 			left : originalX
 		});
-
-		elmMaxSize = repWidth < repHeight ? repWidth / 240 : repHeight / 240;
-
 }
 
 function getTargetInfo(){
@@ -288,11 +283,10 @@ $hammerObj.on("pinch",function(event) {
 			$jqIdTrimingElm.css({
 				"transform": "scale(" + scaleSize + ")"
 			});
+
 			$pinchTimer = setTimeout(function() { //end
 					pinchTime = false;
 			}, 100);
-
-
 		}
 });
 //ピンチはじまり
@@ -304,51 +298,31 @@ $hammerObj.on("pinchstart",function(event) {
 
 ///ピンチおわり
 $hammerObj.on("pinchend",function(event) {
-	//$jqIdTrimingElm.after();
-	//getElmSize();
-	///TO DO なんかずれる
-	///座標の計算
-	var lastX = $jqIdTrimingElm.offset().left;
-	var lastY = $jqIdTrimingElm.offset().top;
-	lastX = floatFormat( lastX, 2 );
-	lastY = floatFormat( lastY, 2 );
-	var nowCoordX;
-	var nowCoordY;
 
-
-
-	if (!ctx) return;
-	restore();
-	canvas.width = elmWidth * scaleSize;
-	canvas.height = elmHeight * scaleSize;
-
-	ctx.clearRect(0,0,canvas.width,canvas.height);
-
-	//$jqIdTrimingElm.setTransform(1,0,0,1,0,0);
-	ctx.scale(scaleSize,scaleSize);
-	//$jqIdTrimingElm.drawImage(image, 0, 0, repWidth, repHeight);
-
-	$jqIdTrimingElm.css({
-		transform: "scale(1)"
-	});
-
-	$("#elmWidth").html("test");
-
-	if( scaleSize > 1 ) {
-		//nowCoordX = elmX - ( (elmWidth * scaleSize) / 4 ) - elmWidth /2;
-		nowCoordX = lastX * scaleSize;
-		nowCoordX = floatFormat( nowCoordX, 2 );
-		nowCoordY = lastY * scaleSize;
-		nowCoordY = floatFormat( nowCoordY, 2 );
-		// nowCoordY = elmY - ( (elmHeight * scaleSize) / 4 );
-	} else {
-		nowCoordX = lastX * scaleSize;
-		nowCoordY = lastY * scaleSize;
-	}
-
-	elmX      = $jqIdTrimingElm.offset().left;
-	//$("#elmX").html(elmX);
-	//画像の幅と高さ調整
+	// ///座標の計算
+	// var lastX = $jqIdTrimingElm.offset().left;
+	// var lastY = $jqIdTrimingElm.offset().top;
+	// lastX = floatFormat( lastX, 2 );
+	// lastY = floatFormat( lastY, 2 );
+	// var nowCoordX;
+	// var nowCoordY;
+	//
+	// if( scaleSize > 1 ) {
+	// 	//nowCoordX = elmX - ( (elmWidth * scaleSize) / 4 ) - elmWidth /2;
+	// 	nowCoordX = lastX * scaleSize;
+	// 	nowCoordX = floatFormat( nowCoordX, 2 );
+	// 	nowCoordY = lastY * scaleSize;
+	// 	nowCoordY = floatFormat( nowCoordY, 2 );
+	// 	// nowCoordY = elmY - ( (elmHeight * scaleSize) / 4 );
+	// } else {
+	// 	nowCoordX = lastX * scaleSize;
+	// 	nowCoordY = lastY * scaleSize;
+	// }
+	//
+	//
+	// elmX      = $jqIdTrimingElm.offset().left;
+	// $("#elmX").html(elmX);
+	// //画像の幅と高さ調整
 	// var nowWidth;
 	// var nowHeight;
 	// if( (elmWidth * scaleSize) > targetWidth ){
@@ -364,6 +338,25 @@ $hammerObj.on("pinchend",function(event) {
 	// repWidth  = nowWidth < nowHeight ? targetWidth : targetHeight / nowHeight * nowWidth;
 	// repHeight = nowHeight < nowWidth ? targetHeight : targetWidth / nowWidth * nowHeight;
 
+
+	if (!ctx) return;
+	restore();
+
+	ctx.clearRect(0,0,canvas.width,canvas.height);
+
+	canvas.width = repWidth;
+	canvas.height = repHeight;
+	// repWidth = elmWidth * scaleSize;
+	// repHeight = elmHeight * scaleSize;
+	ctx.setTransform(1,0,0,1,0,0);
+	ctx.scale(scaleSize,scaleSize);
+	ctx.drawImage(image, nowCoordY, nowCoordX, repWidth, repHeight);
+
+	$jqIdTrimingElm.css({
+		transform: "scale(1)"
+	});
+
+
 	// $jqIdTrimingElm.css({
 	// 	width : elmWidth * scaleSize,
 	// 	height: elmHeight * scaleSize,
@@ -372,20 +365,6 @@ $hammerObj.on("pinchend",function(event) {
 	// 	transform: "scale(1)"
 	// });
 
-	//$("#nowCoordX").html(nowCoordX);
-
-	// if( originWidth < originHeight ){
-	// 	slideY = ( elmHeight * scaleSize ) /2;
-	// 	slideX = (targetWidth * scaleSize / 2 );
-	//
-	// }else {
-	// 	slideY = (targetHeight * scaleSize / 2 );
-	// 	slideX = ( elmWidth * scaleSize ) /2
-	// }
-	//getElmSize();
-	//
-	// $("#elmY").html(elmX);
-	// $("#elmX").html(nowCoordX);
 });
 
 ///==========================================================================
