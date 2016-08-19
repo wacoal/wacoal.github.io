@@ -147,7 +147,7 @@ $(function(){
 					//repHeight = minWidth / originWidth * originHeight;
 					//repMinHeight = repHeight;
 				}
-				
+
 				originalY = ( windowHeight / 2 ) - ( repHeight / 2 );
 				originalX = ( windowWidth / 2 ) - ( repWidth /2 );
 				$idTrimImg.css({
@@ -155,8 +155,8 @@ $(function(){
 					height   : repHeight,
 					top      : originalY,
 					left     : originalX,
-					minWidth : repMinWidth,
-					minHeight: repMinHeight,
+					// minWidth : repMinWidth,
+					// minHeight: repMinHeight,
 				});
 	    }
 			$idLoading.addClass("hide");
@@ -340,6 +340,7 @@ $hammerObj.on("pinchstart",function(event) {
 	var startX = $jqIdTrimingElm.offset().left;
 	$("#startX").html(startX);
 });
+
 ///ピンチおわり
 $hammerObj.on("pinchend",function(event) {
 	//$jqIdTrimingElm.after();
@@ -354,6 +355,8 @@ $hammerObj.on("pinchend",function(event) {
 	$("#lastY").html(lastY);
 	var nowCoordX;
 	var nowCoordY;
+
+
 
 	if( scaleSize > 1 ) {
 		//nowCoordX = elmX - ( (elmWidth * scaleSize) / 4 ) - elmWidth /2;
