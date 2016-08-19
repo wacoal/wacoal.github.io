@@ -261,7 +261,7 @@ $hammerObj.on("pan",function(event){
 
 				ctx.clearRect(0, 0, windowWidth, windowHeight);
 				ctx.save();
-				ctx.translate(elmMoveX, elmMoveY);
+				ctx.translate(elmMoveX/2, elmMoveY/2);
 				ctx.scale(scaleSize,scaleSize);
 				ctx.drawImage(image, 0, 0, repWidth, repHeight);
 				ctx.restore();
