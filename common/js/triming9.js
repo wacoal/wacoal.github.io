@@ -297,13 +297,16 @@ $hammerObj.on("pinch",function(event) {
 
 			$("#scale").html(scaleSize);
 
-			ctx.clearRect(0, 0, windowWidth, windowHeight);
-			ctx.save();
-			ctx.setTransform(1,0,0,1,0,0);
-			ctx.translate(canvas.width/2, canvas.height/2);
-			ctx.scale(scaleSize,scaleSize);
-			ctx.drawImage(image, -canvas.width/4, -canvas.height/4, repWidth, repHeight);
-			ctx.restore();
+			// ctx.clearRect(0, 0, windowWidth, windowHeight);
+			// ctx.save();
+			// ctx.setTransform(1,0,0,1,0,0);
+			// ctx.translate(canvas.width/2, canvas.height/2);
+			// ctx.scale(scaleSize,scaleSize);
+			// ctx.drawImage(image, -canvas.width/4, -canvas.height/4, repWidth, repHeight);
+			// ctx.restore();
+			$jqIdTrimingElm.css({
+				"transform": "scale(" + scaleSize + ")"
+			});
 
 			$("#lastX").html(canvas.width);
 
@@ -325,12 +328,15 @@ $hammerObj.on("pinchend",function(event) {
 	if(scaleSize < 1){
 		scaleSize = 1
 	}
+	$jqIdTrimingElm.css({
+		transform: "scale(1)"
+	});
 	ctx.clearRect(0, 0, windowWidth, windowHeight);
 	ctx.save();
 	ctx.setTransform(1,0,0,1,0,0);
-	ctx.translate(canvas.width/2, canvas.height/2);
+	ctx.translate(repWidthPos, repHeightPos);
 	ctx.scale(scaleSize,scaleSize);
-	ctx.drawImage(image, -canvas.width/4, -canvas.height/4, repWidth, repHeight);
+	ctx.drawImage(image, 0, 0, repWidth, repHeight);
 	ctx.restore();
 
 	// ctx.clearRect(0, 0, windowWidth, windowHeight);
@@ -382,9 +388,7 @@ $hammerObj.on("pinchend",function(event) {
 
 
 
-	// $jqIdTrimingElm.css({
-	// 	transform: "scale(1)"
-	// });
+
 
 
 	// $jqIdTrimingElm.css({
