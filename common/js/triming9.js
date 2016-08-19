@@ -333,6 +333,8 @@ $hammerObj.on("pinchend",function(event) {
 	repWidthPos = canvas.width/2 - repWidth/2;
 	repHeightPos = canvas.height/2 - repHeight/2;
 
+	$("#scale").html(scaleSize);
+
 	$jqIdTrimingElm.css({
 		transform: "scale(1)"
 	});
