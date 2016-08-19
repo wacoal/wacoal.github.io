@@ -10,8 +10,6 @@ var originWidth;
 var originHeight;
 var originalX;
 var originalY;
-// var originalX = $idTrimImg.offset().left;
-// var originalY = $idTrimImg.offset().top;
 
 var repWidth  = 1;
 var repHeight = false;
@@ -87,10 +85,7 @@ function main(dataUrl) {
 						//trimRestore();
 						originalY = ( windowHeight / 2 ) - ( repHeight / 2 );
 						originalX = ( windowWidth / 2 ) - ( repWidth /2 );
-						$("#canvas").css({
-							// top  : originalY,
-							// left : originalX
-						});
+
 						$idLoading.addClass("hide");
 
 				}, false);
@@ -225,30 +220,26 @@ $hammerObj.on("pan",function(event){
 		panTime = false;
 		$jqIdTrimingArea.data("down", false);
 
-		var overRight = targetX - (repWidth - targetWidth);
+		var overRight = targetX - (repWidth *  scaleSize - targetWidth);
 		if( elmMoveX < overRight){
-			//$jqIdTrimingElm.css("left", (areaWidth - elmWidth - targetX) + "px");
-			//elmMoveX = (areaWidth - elmWidth - targetX);
 			elmMoveX = overRight;
 		}
 		if( elmMoveX > targetX ){
 			elmMoveX = targetX;
 		}
 
-		var overTop = targetY - (repHeight - targetHeight);
+		var overTop = targetY - (repHeight * scaleSize - targetHeight);
 		if( elmMoveY < overTop){
-			//$jqIdTrimingElm.css("top", (areaHeight - elmHeight - targetY) + "px");
 			elmMoveY = overTop;
 		}
-
 		if( elmMoveY > targetY){
-			//$jqIdTrimingElm.css("top", targetY);
 			elmMoveY = targetY;
 		}
 
 		ctx.clearRect(0, 0, windowWidth, windowHeight);
 		ctx.save();
 		ctx.translate(elmMoveX, elmMoveY);
+		ctx.scale(scaleSize,scaleSize);
 		ctx.drawImage(image, 0, 0, repWidth, repHeight);
 		ctx.restore();
 
@@ -267,22 +258,15 @@ $hammerObj.on("pan",function(event){
 			if ($jqIdTrimingArea.data("down") == true) {
 				elmMoveX = widthLong == true ? event.center.x / 2 : event.center.x;
 				elmMoveY = widthLong == true ? event.center.y : event.center.y /2 ;
-				// elmMoveX = ( ( ($jqIdTrimingArea.data("x") - event.center.x)) );
-				// elmMoveY = ( ( ($jqIdTrimingArea.data("y") - event.center.y)) );
 
 				ctx.clearRect(0, 0, windowWidth, windowHeight);
 				ctx.save();
-				//ctx.translate(event.center.x, event.center.y/2);
 				ctx.translate(elmMoveX, elmMoveY);
+				ctx.scale(scaleSize,scaleSize);
 				ctx.drawImage(image, 0, 0, repWidth, repHeight);
 				ctx.restore();
 			}
-			//console.log(elmMoveX);
-		 $("#elmMoveX").html(elmMoveY);
-		 $("#slideX").html(elmMoveY + repHeight);
-		 $("#slideY").html(event.center.y);
-		 $("#lastX").html(targetY);
-		 $("#lastY").html(targetY - (repHeight - targetHeight));
+
 		}
 	}
 });
@@ -311,9 +295,15 @@ $hammerObj.on("pinch",function(event) {
 
 			$("#scale").html(scaleSize);
 
-			$jqIdTrimingElm.css({
-				"transform": "scale(" + scaleSize + ")"
-			});
+			ctx.clearRect(0, 0, windowWidth, windowHeight);
+			ctx.save();
+			ctx.setTransform(1,0,0,1,0,0);
+			ctx.translate(canvas.width/2, canvas.height/2);
+			ctx.scale(scaleSize,scaleSize);
+			ctx.drawImage(image, -canvas.width/4, -canvas.height/4, repWidth, repHeight);
+			ctx.restore();
+
+			$("#lastX").html(canvas.width);
 
 			$pinchTimer = setTimeout(function() { //end
 					pinchTime = false;
@@ -329,6 +319,24 @@ $hammerObj.on("pinchstart",function(event) {
 
 ///ピンチおわり
 $hammerObj.on("pinchend",function(event) {
+
+	if(scaleSize < 1){
+		scaleSize = 1
+	}
+	ctx.clearRect(0, 0, windowWidth, windowHeight);
+	ctx.save();
+	ctx.setTransform(1,0,0,1,0,0);
+	ctx.translate(canvas.width/2, canvas.height/2);
+	ctx.scale(scaleSize,scaleSize);
+	ctx.drawImage(image, -canvas.width/4, -canvas.height/4, repWidth, repHeight);
+	ctx.restore();
+
+	// ctx.clearRect(0, 0, windowWidth, windowHeight);
+	// ctx.save();
+	// ctx.setTransform(1,0,0,1,0,0);
+	// ctx.scale(scaleSize,scaleSize);
+	// ctx.drawImage(image, 0, 0, repWidth, repHeight);
+	// ctx.restore();
 
 	// ///座標の計算
 	// var lastX = $jqIdTrimingElm.offset().left;
@@ -370,22 +378,11 @@ $hammerObj.on("pinchend",function(event) {
 	// repHeight = nowHeight < nowWidth ? targetHeight : targetWidth / nowWidth * nowHeight;
 
 
-	if (!ctx) return;
-	restore();
 
-	ctx.clearRect(0,0,canvas.width,canvas.height);
 
-	canvas.width = repWidth;
-	canvas.height = repHeight;
-	// repWidth = elmWidth * scaleSize;
-	// repHeight = elmHeight * scaleSize;
-	ctx.setTransform(1,0,0,1,0,0);
-	ctx.scale(scaleSize,scaleSize);
-	ctx.drawImage(image, 0, 0, repWidth, repHeight);
-
-	$jqIdTrimingElm.css({
-		transform: "scale(1)"
-	});
+	// $jqIdTrimingElm.css({
+	// 	transform: "scale(1)"
+	// });
 
 
 	// $jqIdTrimingElm.css({
