@@ -225,22 +225,20 @@ $hammerObj.on("pan",function(event){
 		panTime = false;
 		$jqIdTrimingArea.data("down", false);
 
-		console.log($jqIdTrimingArea.data("y"));
-		console.log(event.center.y);
-
-		if( elmMoveX < targetX){
+		var overRight = targetX - (repWidth - targetWidth);
+		if( elmMoveX < overRight){
 			//$jqIdTrimingElm.css("left", (areaWidth - elmWidth - targetX) + "px");
 			//elmMoveX = (areaWidth - elmWidth - targetX);
-			elmMoveX = targetX;
+			elmMoveX = overRight;
 		}
 		if( elmMoveX > targetX ){
 			elmMoveX = targetX;
 		}
 
-		var test = targetY - (repHeight - targetHeight);
-		if( elmMoveY < test){
+		var overTop = targetY - (repHeight - targetHeight);
+		if( elmMoveY < overTop){
 			//$jqIdTrimingElm.css("top", (areaHeight - elmHeight - targetY) + "px");
-			elmMoveY = test;
+			elmMoveY = overTop;
 		}
 
 		if( elmMoveY > targetY){
