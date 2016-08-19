@@ -15,15 +15,15 @@ var originalY;
 
 var repWidth  = 1;
 var repHeight = false;
+var repWidthPos  = 1;
+var repHeightPos = 1;
 var minWidth  = 240;
 var minHeight = 240;
-var repMinWidth = minWidth;
-var repMinHeight = minHeight;
+var widthLong = true;
 
 //canvas
 var dataUrl="";
 var ctx;
-var ctx2;
 var image = new Image();
 var canvas;
 var canvas2;
@@ -60,28 +60,36 @@ $(window).on("resize load",function(){
 function main(dataUrl) {
 		if (canvas.getContext) {
 				ctx = canvas.getContext('2d');
-				ctx2 = canvas2.getContext('2d');
 				image.src = dataUrl;
 				image.addEventListener('load', function(){
+
+						canvas.width = windowWidth;
+						canvas.height = windowHeight;
 
 						imageWidth = image.width;
 						imageHeight = image.height;
 						repWidth = imageWidth < imageHeight ? minWidth : minHeight / imageHeight * imageWidth;
 						repHeight = imageHeight < imageWidth ? minHeight : minWidth / imageWidth * imageHeight;
 
+						widthLong = image.width > image.height ? true :false;
+
+						repWidthPos = canvas.width/2 - repWidth/2;
+						repHeightPos = canvas.height/2 - repHeight/2;
+
 						slideY = imageWidth < imageHeight ? targetHeight / 2 : 0 ;
 						slideX = imageHeight < imageWidth ? targetWidth / 2 : 0 ;
 
-						canvas.width = repWidth;
-						canvas.height = repHeight;
-						ctx.drawImage(image, 0, 0, repWidth, repHeight);
+						ctx.clearRect(0, 0, canvas.width, canvas.height);
 						ctx.save();
+						ctx.translate(repWidthPos, repHeightPos);
+						ctx.drawImage(image, 0, 0, repWidth, repHeight);
+						ctx.restore();
 						//trimRestore();
 						originalY = ( windowHeight / 2 ) - ( repHeight / 2 );
 						originalX = ( windowWidth / 2 ) - ( repWidth /2 );
 						$("#canvas").css({
-							top  : originalY,
-							left : originalX
+							// top  : originalY,
+							// left : originalX
 						});
 						$idLoading.addClass("hide");
 
@@ -213,24 +221,41 @@ function getElmSize(){
 ///上下左右の動き
 $hammerObj.on("pan",function(event){
 	if(event.isFinal) { //end
-		getElmSize();
+
 		panTime = false;
 		$jqIdTrimingArea.data("down", false);
-		if( elmMoveX + slideX < targetX){
-			$jqIdTrimingElm.css("left", (areaWidth - elmWidth - targetX) + "px");
-			elmMoveX = (areaWidth - elmWidth - targetX);
-		}
-		if( elmMoveX > targetX ){
-			$jqIdTrimingElm.css("left", targetX);
+
+		console.log($jqIdTrimingArea.data("y"));
+		console.log(event.center.y);
+
+		if( elmMoveX < targetX){
+			//$jqIdTrimingElm.css("left", (areaWidth - elmWidth - targetX) + "px");
+			//elmMoveX = (areaWidth - elmWidth - targetX);
 			elmMoveX = targetX;
 		}
-		if( elmMoveY + slideY < targetY){
-			$jqIdTrimingElm.css("top", (areaHeight - elmHeight - targetY) + "px");
+		if( elmMoveX > targetX ){
+			elmMoveX = targetX;
 		}
+
+		var test = targetY - (repHeight - targetHeight);
+		if( elmMoveY < test){
+			//$jqIdTrimingElm.css("top", (areaHeight - elmHeight - targetY) + "px");
+			elmMoveY = test;
+		}
+
 		if( elmMoveY > targetY){
-			$jqIdTrimingElm.css("top", targetY);
+			//$jqIdTrimingElm.css("top", targetY);
+			elmMoveY = targetY;
 		}
-		getElmSize();
+
+		ctx.clearRect(0, 0, windowWidth, windowHeight);
+		ctx.save();
+		ctx.translate(elmMoveX, elmMoveY);
+		ctx.drawImage(image, 0, 0, repWidth, repHeight);
+		ctx.restore();
+
+		// getElmSize();
+		// console.log(repHeightPos);
 	} else {
 		if(!panTime) { //start
 			panTime = event.timeStamp;
@@ -242,16 +267,24 @@ $hammerObj.on("pan",function(event){
 					.data("elmPosY", Number(String($jqIdTrimingElm.css("top")).replace("px", "")));
 		} else { //move
 			if ($jqIdTrimingArea.data("down") == true) {
-				elmMoveX = ( ($jqIdTrimingArea.data("elmPosX") - ($jqIdTrimingArea.data("x") - event.center.x)) );
-				elmMoveY = ( ($jqIdTrimingArea.data("elmPosY") - ($jqIdTrimingArea.data("y") - event.center.y)) );
-				$jqIdTrimingElm.css({
-						"left": elmMoveX + "px",
-						"top" : elmMoveY + "px"
-				});
+				elmMoveX = widthLong == true ? event.center.x / 2 : event.center.x;
+				elmMoveY = widthLong == true ? event.center.y : event.center.y /2 ;
+				// elmMoveX = ( ( ($jqIdTrimingArea.data("x") - event.center.x)) );
+				// elmMoveY = ( ( ($jqIdTrimingArea.data("y") - event.center.y)) );
+
+				ctx.clearRect(0, 0, windowWidth, windowHeight);
+				ctx.save();
+				//ctx.translate(event.center.x, event.center.y/2);
+				ctx.translate(elmMoveX, elmMoveY);
+				ctx.drawImage(image, 0, 0, repWidth, repHeight);
+				ctx.restore();
 			}
 			//console.log(elmMoveX);
-		 $("#elmMoveX").html(elmMoveX);
-		 $("#slideY").html(slideY);
+		 $("#elmMoveX").html(elmMoveY);
+		 $("#slideX").html(elmMoveY + repHeight);
+		 $("#slideY").html(event.center.y);
+		 $("#lastX").html(targetY);
+		 $("#lastY").html(targetY - (repHeight - targetHeight));
 		}
 	}
 });
@@ -350,7 +383,7 @@ $hammerObj.on("pinchend",function(event) {
 	// repHeight = elmHeight * scaleSize;
 	ctx.setTransform(1,0,0,1,0,0);
 	ctx.scale(scaleSize,scaleSize);
-	ctx.drawImage(image, nowCoordY, nowCoordX, repWidth, repHeight);
+	ctx.drawImage(image, 0, 0, repWidth, repHeight);
 
 	$jqIdTrimingElm.css({
 		transform: "scale(1)"

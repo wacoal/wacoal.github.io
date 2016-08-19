@@ -81,41 +81,27 @@ $(function(){
 
 	});
 
+	$("#js_btn_upload").on("click",function(){
+		var enlargementFactor = imageWidth / imgResizeWidth;//拡大率
+
+		var rad = document.getElementById("rad").value - 0; //回転のinputのvalueの値の取得
+		var postRotate = (rad * Math.PI / 180) * 100;
+		postRotate = floatFormat(postRotate,0);//回転の度数
+
+		var left_pos = canvas.width/2 - capWidth/2;//targetのx座標
+		var top_pos = canvas.height/2 - capHeight/2;//targetのy座標
+		var postX = (left_pos - imgResizeWidthPos) * enlargementFactor;//元画像サイズの切り取り位置のx座標
+		var postY = (top_pos - imgResizeHeightPos) * enlargementFactor;//元画像サイズの切り取り位置のy座標
+
+
+		console.log(enlargementFactor);
+		console.log(imgResizeHeightPos);
+		console.log(postRotate);
+		console.log(postY)
+
+	});
+
 });
-
-function canvasTo(dataUrl){
-	if (canvas.getContext) {
-		ctx = canvas.getContext('2d');
-		image.src = dataUrl;
-		image.addEventListener('load', function(){
-
-			moveX = 0;
-			moveY = 0;
-
-			document.getElementById('canvasCtrl').reset();
-
-			widthLong = image.width > image.height ? true :false;
-
-			imageWidth = image.width;
-			imageHeight = image.height;
-			imgResizeWidth = imageWidth < imageHeight ? capWidth : capHeight / imageHeight * imageWidth;
-			imgResizeHeight = imageHeight < imageWidth ? capHeight : capWidth / imageWidth * imageHeight;
-
-			imgResizeWidthPos = canvas.width/2 - imgResizeWidth/2;
-			imgResizeHeightPos = canvas.height/2 - imgResizeHeight/2;
-
-			ctx.clearRect(0, 0, canvas.width, canvas.height);
-			ctx.save();
-			ctx.translate(imgResizeWidthPos, imgResizeHeightPos);
-			ctx.drawImage(image, 0, 0, imgResizeWidth, imgResizeHeight);
-			ctx.restore();
-			canvasCapBoxArea();
-
-			$idLoading.addClass("hide");
-
-		}, false);
-	}
-}
 
 function canvasRotate(updown){
 	var rad = document.getElementById("rad").value - 0;
@@ -130,6 +116,8 @@ function canvasRotate(updown){
 	ctx.restore();
 	canvasCapBoxArea();
 	if(updown == 9 || rotateLock) return;
+
+	$("#elmWidth").html(imgResizeWidth);
 
 	//ďż˝pďż˝xďż˝Ěďż˝ďż˝đ˛×ďż˝
 	//var sub = rad - bufRad;
@@ -168,6 +156,7 @@ function canvasRotate(updown){
 	}
 }
 
+//target引くやつ
 function canvasCapBoxArea(){
 
 	var left_pos = canvas.width/2 - capWidth/2;
@@ -189,4 +178,44 @@ function canvasCapBoxArea(){
 		zIndex: '9999'
 	});
 
+}
+
+// 小数点n位までを残す関数 (四捨五入)
+function floatFormat( number, n ) {
+	var _pow = Math.pow( 10 , n ) ;
+	return Math.round( number * _pow ) / _pow ;
+}
+
+function canvasTo(dataUrl){
+	if (canvas.getContext) {
+		ctx = canvas.getContext('2d');
+		image.src = dataUrl;
+		image.addEventListener('load', function(){
+
+			moveX = 0;
+			moveY = 0;
+
+			document.getElementById('canvasCtrl').reset();
+
+			widthLong = image.width > image.height ? true :false;
+
+			imageWidth = image.width;
+			imageHeight = image.height;
+			imgResizeWidth = imageWidth < imageHeight ? capWidth : capHeight / imageHeight * imageWidth;
+			imgResizeHeight = imageHeight < imageWidth ? capHeight : capWidth / imageWidth * imageHeight;
+
+			imgResizeWidthPos = canvas.width/2 - imgResizeWidth/2;
+			imgResizeHeightPos = canvas.height/2 - imgResizeHeight/2;
+
+			ctx.clearRect(0, 0, canvas.width, canvas.height);
+			ctx.save();
+			ctx.translate(imgResizeWidthPos, imgResizeHeightPos);
+			ctx.drawImage(image, 0, 0, imgResizeWidth, imgResizeHeight);
+			ctx.restore();
+			canvasCapBoxArea();
+
+			$idLoading.addClass("hide");
+
+		}, false);
+	}
 }
