@@ -256,8 +256,8 @@ $hammerObj.on("pan",function(event){
 					.data("elmPosY", Number(String($jqIdTrimingElm.css("top")).replace("px", "")));
 		} else { //move
 			if ($jqIdTrimingArea.data("down") == true) {
-				elmMoveX = widthLong == true ? event.center.x / 2 : event.center.x;
-				elmMoveY = widthLong == true ? event.center.y : event.center.y /2 ;
+				elmMoveX = widthLong == true ? (event.center.x * scaleSize ) / 2 : (event.center.x * scaleSize );
+				elmMoveY = widthLong == true ? (event.center.y * scaleSize ) : (event.center.y * scaleSize ) /2 ;
 
 				ctx.clearRect(0, 0, windowWidth, windowHeight);
 				ctx.save();
@@ -266,6 +266,8 @@ $hammerObj.on("pan",function(event){
 				ctx.drawImage(image, 0, 0, repWidth, repHeight);
 				ctx.restore();
 			}
+
+			$("#lastY").html(elmMoveX);
 
 		}
 	}
