@@ -44,79 +44,144 @@ var targetHeight = 240;
 var slideY = 0;
 var slideX = 0;
 
-$(window).on("resize load",function(){
-	windowWidth  = $(window).width();
-	windowHeight = $(window).height();
-	canvas = document.getElementById('js_triming_image');
-	getTargetInfo();
+$(function(){
+	$(window).on("resize load",function(){
+		windowWidth  = $(window).width();
+		windowHeight = $(window).height();
+		canvas = document.getElementById('js_triming_image');
+		getTargetInfo();
+	});
+
+	///canvasに画像を描写
+	// function main(dataUrl) {
+	// 		if (canvas.getContext) {
+	// 				ctx = canvas.getContext('2d');
+	// 				image.src = dataUrl;
+	// 				image.addEventListener('load', function(){
+	//
+	// 						imageWidth = image.width;
+	// 						imageHeight = image.height;
+	// 						repWidth = imageWidth < imageHeight ? minWidth : minHeight / imageHeight * imageWidth;
+	// 						repHeight = imageHeight < imageWidth ? minHeight : minWidth / imageWidth * imageHeight;
+	//
+	// 						canvas.width = repWidth;
+	// 						canvas.height = repHeight;
+	//
+	// 						widthLong = image.width > image.height ? true :false;
+	//
+	// 						repWidthPos = canvas.width/2 - repWidth/2;
+	// 						repHeightPos = canvas.height/2 - repHeight/2;
+	//
+	// 						slideY = imageWidth < imageHeight ? targetHeight / 2 : 0 ;
+	// 						slideX = imageHeight < imageWidth ? targetWidth / 2 : 0 ;
+	//
+	// 						ctx.clearRect(0, 0, canvas.width, canvas.height);
+	// 						ctx.save();
+	// 						ctx.translate(repWidthPos, repHeightPos);
+	// 						ctx.drawImage(image, 0, 0, repWidth, repHeight);
+	// 						ctx.restore();
+	// 						//trimRestore();
+	// 						originalY = ( windowHeight / 2 ) - ( repHeight / 2 );
+	// 						originalX = ( windowWidth / 2 ) - ( repWidth /2 );
+	//
+	// 						$idLoading.addClass("hide");
+	//
+	// 				    if(imageWidth != 0 || imageHeight != 0){
+	// 							if( imageWidth < imageHeight ){
+	// 								//repWidth = minWidth;
+	// 								repMinWidth = minWidth;
+	// 								slideY =  (targetHeight / 2 );
+	// 							} else {
+	// 								//repWidth = minHeight / imageHeight * imageWidth;
+	// 								repMinWidth = repWidth;
+	// 							}
+	// 							if( imageHeight < imageWidth ){
+	// 								//repHeight = minHeight;
+	// 								repMinHeight = minHeight;
+	// 								slideX =  (targetWidth / 2 );
+	// 							} else {
+	// 								//repHeight = minWidth / imageWidth * imageHeight;
+	// 								repMinHeight = repHeight;
+	// 							}
+	// 							originalY = ( windowHeight / 2 ) - ( repHeight / 2 );
+	// 							originalX = ( windowWidth / 2 ) - ( repWidth /2 );
+	// 							$idTrimImg.css({
+	// 								width    : repWidth,
+	// 								height   : repHeight,
+	// 								top      : originalY,
+	// 								left     : originalX,
+	// 								minWidth : repMinWidth,
+	// 								minHeight: repMinHeight,
+	// 							});
+	// 						}
+	//
+	// 				}, false);
+	// 		}
+	// }
+	///画像のオリジナルサイズ取得 & $idTrimImgを端末サイズに
+	$idTrimImg.on('load',function(){
+			windowWidth  = $(window).width();
+			windowHeight = $(window).height();
+	    var img = new Image();
+	    img.src = $idTrimImg.attr('src');
+	    originWidth = img.width;
+	    originHeight = img.height;
+
+			repWidth = originWidth < originHeight ? minWidth : minHeight / originHeight * originWidth;
+			repHeight = originHeight < originWidth ? minHeight : minWidth / originWidth * originHeight;
+
+	    if(originWidth != 0 || originHeight != 0){
+				if( originWidth < originHeight ){
+					//repWidth = minWidth;
+					//repMinWidth = minWidth;
+					slideY =  (targetHeight / 2 );
+				} else {
+					//repWidth = minHeight / originHeight * originWidth;
+					//repMinWidth = repWidth;
+				}
+				if( originHeight < originWidth ){
+					//repHeight = minHeight;
+					//repMinHeight = minHeight;
+					slideX =  (targetWidth / 2 );
+				} else {
+					//repHeight = minWidth / originWidth * originHeight;
+					//repMinHeight = repHeight;
+				}
+				
+				originalY = ( windowHeight / 2 ) - ( repHeight / 2 );
+				originalX = ( windowWidth / 2 ) - ( repWidth /2 );
+				$idTrimImg.css({
+					width    : repWidth,
+					height   : repHeight,
+					top      : originalY,
+					left     : originalX,
+					minWidth : repMinWidth,
+					minHeight: repMinHeight,
+				});
+	    }
+			$idLoading.addClass("hide");
+	});
+
+	$("#js_btn_upload").on("click",function(){
+		var enlargementFactor = originWidth / repWidth;//拡大率
+
+		// var rad = document.getElementById("rad").value - 0; //回転のinputのvalueの値の取得
+		// var postRotate = (rad * Math.PI / 180) * 100;
+		// postRotate = floatFormat(postRotate,0);//回転の度数
+
+		var left_pos = canvas.width/2 - targetWidth/2;//targetのx座標
+		var top_pos = canvas.height/2 - targetHeight/2;//targetのy座標
+		var postX = (targetX - imgResizeWidthPos) * enlargementFactor;//元画像サイズの切り取り位置のx座標
+		var postY = (targetY - imgResizeHeightPos) * enlargementFactor;//元画像サイズの切り取り位置のy座標
+
+		console.log(enlargementFactor);
+		console.log(imgResizeHeightPos);
+		console.log(postRotate);
+		console.log(postY)
+
+	});
+
 });
-
-///canvasに画像を描写
-function main(dataUrl) {
-		if (canvas.getContext) {
-				ctx = canvas.getContext('2d');
-				image.src = dataUrl;
-				image.addEventListener('load', function(){
-
-						imageWidth = image.width;
-						imageHeight = image.height;
-						repWidth = imageWidth < imageHeight ? minWidth : minHeight / imageHeight * imageWidth;
-						repHeight = imageHeight < imageWidth ? minHeight : minWidth / imageWidth * imageHeight;
-
-						canvas.width = repWidth;
-						canvas.height = repHeight;
-
-						widthLong = image.width > image.height ? true :false;
-
-						repWidthPos = canvas.width/2 - repWidth/2;
-						repHeightPos = canvas.height/2 - repHeight/2;
-
-						slideY = imageWidth < imageHeight ? targetHeight / 2 : 0 ;
-						slideX = imageHeight < imageWidth ? targetWidth / 2 : 0 ;
-
-						ctx.clearRect(0, 0, canvas.width, canvas.height);
-						ctx.save();
-						ctx.translate(repWidthPos, repHeightPos);
-						ctx.drawImage(image, 0, 0, repWidth, repHeight);
-						ctx.restore();
-						//trimRestore();
-						originalY = ( windowHeight / 2 ) - ( repHeight / 2 );
-						originalX = ( windowWidth / 2 ) - ( repWidth /2 );
-
-						$idLoading.addClass("hide");
-
-				    if(imageWidth != 0 || imageHeight != 0){
-							if( imageWidth < imageHeight ){
-								//repWidth = minWidth;
-								repMinWidth = minWidth;
-								slideY =  (targetHeight / 2 );
-							} else {
-								//repWidth = minHeight / imageHeight * imageWidth;
-								repMinWidth = repWidth;
-							}
-							if( imageHeight < imageWidth ){
-								//repHeight = minHeight;
-								repMinHeight = minHeight;
-								slideX =  (targetWidth / 2 );
-							} else {
-								//repHeight = minWidth / imageWidth * imageHeight;
-								repMinHeight = repHeight;
-							}
-							originalY = ( windowHeight / 2 ) - ( repHeight / 2 );
-							originalX = ( windowWidth / 2 ) - ( repWidth /2 );
-							$idTrimImg.css({
-								width    : repWidth,
-								height   : repHeight,
-								top      : originalY,
-								left     : originalX,
-								minWidth : repMinWidth,
-								minHeight: repMinHeight,
-							});
-						}
-
-				}, false);
-		}
-}
 
 function getTargetInfo(){
 	targetY = $idTarget.offset().top;
@@ -258,7 +323,7 @@ $hammerObj.on("pinch",function(event) {
 		} else { //move
 			if($pinchTimer) clearTimeout($pinchTimer);
 			scaleSize = $jqIdTrimingArea.data("preScale") + (event.scale - $jqIdTrimingArea.data("scale"));
-			scaleSize = floatFormat( scaleSize, 2 );
+			scaleSize = floatFormat( scaleSize, 1 );
 			scaleSize = scaleSize > 2 ? 2 : scaleSize;
 			$jqIdTrimingElm.css({
 				"transform": "scale(" + scaleSize + ")"
@@ -293,9 +358,9 @@ $hammerObj.on("pinchend",function(event) {
 	if( scaleSize > 1 ) {
 		//nowCoordX = elmX - ( (elmWidth * scaleSize) / 4 ) - elmWidth /2;
 		nowCoordX = lastX * scaleSize;
-		nowCoordX = floatFormat( nowCoordX, 2 );
+		nowCoordX = floatFormat( nowCoordX, 1 );
 		nowCoordY = lastY * scaleSize;
-		nowCoordY = floatFormat( nowCoordY, 2 );
+		nowCoordY = floatFormat( nowCoordY, 1 );
 		// nowCoordY = elmY - ( (elmHeight * scaleSize) / 4 );
 	} else {
 		nowCoordX = lastX * scaleSize;
