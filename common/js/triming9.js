@@ -220,7 +220,7 @@ $hammerObj.on("pan",function(event){
 		panTime = false;
 		$jqIdTrimingArea.data("down", false);
 
-		var overRight = targetX - (repWidth *  scaleSize - targetWidth);
+		var overRight = targetX - (repWidth * scaleSize - targetWidth);
 		if( elmMoveX < overRight){
 			elmMoveX = overRight;
 		}
@@ -290,8 +290,8 @@ $hammerObj.on("pinch",function(event) {
 		} else { //move
 			if($pinchTimer) clearTimeout($pinchTimer);
 			scaleSize = $jqIdTrimingArea.data("preScale") + (event.scale - $jqIdTrimingArea.data("scale"));
-			scaleSize = floatFormat( scaleSize, 2 );
-			scaleSize = scaleSize > 2 ? 2 : scaleSize;
+			scaleSize = floatFormat( scaleSize, 1 );
+			scaleSize = scaleSize > 3 ? 3 : scaleSize;
 
 			$("#scale").html(scaleSize);
 
