@@ -6,8 +6,8 @@ var $idTarget   = $("#js_triming_target");
 
 var windowWidth  = $(window).width();
 var windowHeight = $(window).height();
-var imageWidth;
-var imageHeight;
+var originWidth;
+var originHeight;
 var originalX;
 var originalY;
 // var originalX = $idTrimImg.offset().left;
@@ -15,10 +15,13 @@ var originalY;
 
 var repWidth  = 1;
 var repHeight = false;
+var repWidthPos  = 1;
+var repHeightPos = 1;
 var minWidth  = 240;
 var minHeight = 240;
 var repMinWidth = minWidth;
 var repMinHeight = minHeight;
+var widthLong = true;
 
 //canvas
 var dataUrl="";
@@ -55,7 +58,6 @@ function main(dataUrl) {
 				image.src = dataUrl;
 				image.addEventListener('load', function(){
 
-
 						imageWidth = image.width;
 						imageHeight = image.height;
 						repWidth = imageWidth < imageHeight ? minWidth : minHeight / imageHeight * imageWidth;
@@ -83,30 +85,28 @@ function main(dataUrl) {
 
 						$idLoading.addClass("hide");
 
-
-
 				    if(imageWidth != 0 || imageHeight != 0){
-							// if( imageWidth < imageHeight ){
-							// 	repWidth = minWidth;
-							// 	repMinWidth = minWidth;
-							// 	slideY =  (targetHeight / 2 );
-							// } else {
-							// 	repWidth = minHeight / imageHeight * imageWidth;
-							// 	repMinWidth = repWidth;
-							// }
-							// if( imageHeight < imageWidth ){
-							// 	repHeight = minHeight;
-							// 	repMinHeight = minHeight;
-							// 	slideX =  (targetWidth / 2 );
-							// } else {
-							// 	repHeight = minWidth / imageWidth * imageHeight;
-							// 	repMinHeight = repHeight;
-							// }
+							if( imageWidth < imageHeight ){
+								//repWidth = minWidth;
+								repMinWidth = minWidth;
+								slideY =  (targetHeight / 2 );
+							} else {
+								//repWidth = minHeight / imageHeight * imageWidth;
+								repMinWidth = repWidth;
+							}
+							if( imageHeight < imageWidth ){
+								//repHeight = minHeight;
+								repMinHeight = minHeight;
+								slideX =  (targetWidth / 2 );
+							} else {
+								//repHeight = minWidth / imageWidth * imageHeight;
+								repMinHeight = repHeight;
+							}
 							originalY = ( windowHeight / 2 ) - ( repHeight / 2 );
 							originalX = ( windowWidth / 2 ) - ( repWidth /2 );
 							$idTrimImg.css({
-								// width    : repWidth,
-								// height   : repHeight,
+								width    : repWidth,
+								height   : repHeight,
 								top      : originalY,
 								left     : originalX,
 								minWidth : repMinWidth,
@@ -194,7 +194,9 @@ $hammerObj.on("pan",function(event){
 		getElmSize();
 		panTime = false;
 		$jqIdTrimingArea.data("down", false);
-		if( elmMoveX + slideX < targetX){
+
+		var overRight = targetX - (repWidth * scaleSize - targetWidth);
+		if( elmMoveX < overRight){
 			$jqIdTrimingElm.css("left", (areaWidth - elmWidth - targetX) + "px");
 			elmMoveX = (areaWidth - elmWidth - targetX);
 		}
@@ -202,12 +204,15 @@ $hammerObj.on("pan",function(event){
 			$jqIdTrimingElm.css("left", targetX);
 			elmMoveX = targetX;
 		}
-		if( elmMoveY + slideY < targetY){
+
+		var overTop = targetY - (repHeight * scaleSize - targetHeight);
+		if( elmMoveY < overTop){
 			$jqIdTrimingElm.css("top", (areaHeight - elmHeight - targetY) + "px");
 		}
 		if( elmMoveY > targetY){
 			$jqIdTrimingElm.css("top", targetY);
 		}
+
 		getElmSize();
 		//console.log(elmX,elmY,areaWidth,elmWidth);
 	} else {
