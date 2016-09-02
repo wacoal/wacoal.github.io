@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1">
+<title>trimming</title>
+<link type="text/css" rel="stylesheet" href="css/trimming.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="js/hammer.min.js"></script>
+<script src="js/trimming.js"></script>
+</head>
+<body>
+<!-- <input id="file" type="file"> -->
+<div>
+  <p><span>width: </span><span class="value" id="oWidth">0</span></p>
+  <p><span>height: </span><span class="value" id="oHeight">0</span></p>
+</div>
+<div id="work_space">
+  <div id="trimming_area">
+    <img id="image" src="images/653265.png">
+    <!-- <img id="image" src="images/2188567i.jpeg"> -->
+    <!-- <img id="image" src="images/407f5afe.jpg"> -->
+    <div id="frame"></div>
+  </div>
+</div>
+<div class="button_area">
+  <div class="right">
+    <button id="left_rotation">左</button>
+    <button id="right_rotation">右</button>
+  </div>
+  <div>
+    <button id="reset">reset</button>
+    <button id="trimming">trimming</button>
+  </div>
+</div>
+<!-- <button id="zoomIn">拡大</button><button id="zoomOut">縮小</button> -->
+<div>
+  <p><span>width: </span><span class="value" id="width">0</span></p>
+  <p><span>height: </span><span class="value" id="height">0</span></p>
+</div>
+<div>
+  <p><span>left: </span><span class="value" id="left">0</span></p>
+  <p><span>top: </span><span class="value" id="top">0</span></p>
+</div>
+<div>
+  <p><span>x: </span><span class="value" id="x">0</span></p>
+  <p><span>y: </span><span class="value" id="y">0</span></p>
+</div>
+<div>
+  <p><span>x2: </span><span class="value" id="x2">0</span></p>
+  <p><span>y2: </span><span class="value" id="y2">0</span></p>
+</div>
+</body>
+</html>

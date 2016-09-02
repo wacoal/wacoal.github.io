@@ -1,0 +1,55 @@
+body {
+}
+p {
+  display: inline-block;
+  width: 49%;
+  margin: 0;
+}
+p span {
+  display: inline-block;
+  width: 40%;
+}
+p span.value {
+  width: 60%;
+  font-weight: bold;
+}
+#file {
+  margin-bottom: 10px;
+}
+#work_space {
+  padding: 100px 0;
+  background-color: #000;
+  color: #fff;
+  overflow: hidden;
+}
+#trimming_area {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  margin: 0 auto;
+}
+#image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: auto;
+  height: auto;
+}
+#frame {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 198px;
+  height: 198px;
+  border: 1px solid red;
+}
+.button_area {
+  margin-top: 10px;
+  text-align: center;
+}
+.right {
+  text-align: right;
+}
+#reset {
+  margin-right: 10px;
+}
