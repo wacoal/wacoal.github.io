@@ -100,9 +100,12 @@ $(function() {
   
   // --- /pan ------>
   
-  // --- pinch ------>
+   // --- pinch ------>
+  
+  var isPinch = false;
   
   mc.on('pinchstart', function(e) {
+    isPinch = true;
     scale = 1;
     setStyle();
   });
@@ -113,12 +116,18 @@ $(function() {
   });
 
   mc.on('pinchend', function(e) {
-    pinchend();
+    if (isPinch) {
+      isPinch = false;
+      pinchend();
+    }
   });
 
-  // mc.on('pinchcancel', function(e) {
-  //   pinchend();
-  // });
+  mc.on('pinchcancel', function(e) {
+    if (isPinch) {
+      isPinch = false;
+      pinchend();
+    }
+  });
   
   function pinchend() {
     var width_ = width * scale;
