@@ -6,6 +6,7 @@ $(function() {
   var $img = $('#image');
   var originalImgWidth;
   var originalImgHeight;
+  var isSquare = false;
   
   var width = 0;
   var height = 0;
@@ -19,6 +20,7 @@ $(function() {
   function initialize() {
     originalImgWidth = $img.width();
     originalImgHeight = $img.height();
+    isSquare = originalImgWidth == originalImgHeight;
     $('#oWidth').text(originalImgWidth + 'px');
     $('#oHeight').text(originalImgHeight + 'px');
     
@@ -28,12 +30,14 @@ $(function() {
     left = 0;
     top = 0;
     
-    if (originalImgHeight < originalImgWidth) {
-      width = originalImgWidth * (targetHeight / originalImgHeight);
-      left = (targetWidth - width) / 2;
-    } else if (originalImgWidth < originalImgHeight) {
-      height = originalImgHeight * (targetWidth / originalImgWidth);
-      top = (targetHeight - height) / 2;
+    if (!isSquare) {
+      if (originalImgHeight < originalImgWidth) {
+        width = originalImgWidth * (targetHeight / originalImgHeight);
+        left = (targetWidth - width) / 2;
+      } else if (originalImgWidth < originalImgHeight) {
+        height = originalImgHeight * (targetWidth / originalImgWidth);
+        top = (targetHeight - height) / 2;
+      }
     }
     
     scale = 1;
@@ -100,7 +104,7 @@ $(function() {
   
   // --- /pan ------>
   
-   // --- pinch ------>
+  // --- pinch ------>
   
   var isPinch = false;
   
@@ -137,15 +141,24 @@ $(function() {
     width = width_;
     height = height_;
     
-    if (width < targetWidth) {
-      left = 0;
-      width = targetWidth;
-      height = originalImgHeight * (targetWidth / originalImgWidth);
-    }
-    if (height < targetHeight) {
-      top = 0;
-      width = originalImgWidth * (targetHeight / originalImgHeight);
-      height = targetHeight;
+    if (isSquare) {
+      if (width < targetWidth) {
+        left = 0;
+        top = 0;
+        width = targetWidth;
+        height = targetHeight;
+      }
+    } else {
+      if (width < targetWidth) {
+        left = 0;
+        width = targetWidth;
+        height = originalImgHeight * (targetWidth / originalImgWidth);
+      }
+      if (height < targetHeight) {
+        top = 0;
+        width = originalImgWidth * (targetHeight / originalImgHeight);
+        height = targetHeight;
+      }
     }
     
     scale = 1;
