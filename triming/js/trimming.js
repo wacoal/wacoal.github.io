@@ -116,9 +116,9 @@ $(function() {
     pinchend();
   });
 
-  mc.on('pinchcancel', function(e) {
-    pinchend();
-  });
+  // mc.on('pinchcancel', function(e) {
+  //   pinchend();
+  // });
   
   function pinchend() {
     var width_ = width * scale;
