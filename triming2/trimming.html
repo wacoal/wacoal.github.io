@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1">
+<title>trimming</title>
+<link type="text/css" rel="stylesheet" href="css/trimming.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="js/hammer.min.js"></script>
+<script src="js/trimming.js"></script>
+</head>
+<body>
+
+  <div class="trimming-wrap-content">
+    <div class="trimming-wrap">
+      <div id="work_space" class="triming-area-wrap">
+        <div id="trimming_area" class="triming-area">
+          <img id="image" class="triming-area__image" src="/wo/pinfo/galleryDetail.phtml?p=<?=$picname?>&icnt=0&<?=SID?>">
+          <div id="frame" class="triming-area__frame"></div>
+        </div>
+      </div>
+      <div class="trimming-rotate">
+        <button id="left_rotation" class="trimming-rotate__btn is_left">śń]</button>
+        <button id="right_rotation" class="trimming-rotate__btn is_right">Eń]</button>
+      </div>
+
+      <ul class="lists has_2 box trimming-wrap-button">
+          <li class="lists__item ">
+            <? /* ?><label class="bttn" for="open-prof">Âśé</label><? */ ?>
+            <a href="javascript:history.back();" class="bttn" >Âśé</a>
+          </li>
+          <li class="lists__item">
+            <label class="trimming-label bttn">
+              <input type="submit" name="rebutton" value="ąĚĘuĹŘčćé" id="js_btn_upload" class="bttn__input" />
+            </label>
+          </li>
+      </ul>
+    </div>
+  </div>
+
+</body>
+</html>
