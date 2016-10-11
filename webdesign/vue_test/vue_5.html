@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<!--[if lt IE 9]>
+<script src="../common/js/html5shiv.js"></script>
+<![endif]-->
+<meta name="viewport" content="width=device-width, maximum-scale=1, minimum-scale=1, user-scalable=no" />
+<meta name="format-detection" content="telephone=no">
+
+<title>vue_1
+</title>
+<!--<link type="text/css" rel="stylesheet" href="common/css/common.css" media="screen" />-->
+<!--<link type="text/css" rel="stylesheet" href="/common/css/vue_1.css" media="screen" />-->
+
+<style>
+.tag-editor-field {
+  border: #000 1px solid;
+  display: inline-block;
+  *display: inline; /* IE7 */
+  *zoom: 1; /* IE7 */
+}
+.tag-editor-tag {
+  background: #cde69c;
+  margin: 4px;
+  padding: 2px 4px;
+  display: inline-block;
+  *display: inline; /* IE7 */
+  *zoom: 1; /* IE7 */
+}
+.tag-editor-text {
+  font-family: Verdana, "游ゴシック", YuGothic, "ヒラギノ角ゴ ProN W3", "Hiragino Kaku Gothic ProN", "メイリオ", Meiryo, sans-serif;
+  font-size: 14px;
+  display: inline-block;
+  *display: inline; /* IE7 */
+  *zoom: 1; /* IE7 */
+}
+.tag-editor-delete {
+  color: #82ad2b;
+  font-weight: bold;
+  text-decoration: none;
+  cursor: pointer;
+  margin-left: 6px;
+  display: inline-block;
+  *display: inline; /* IE7 */
+  *zoom: 1; /* IE7 */
+}
+.tag-editor-input {
+  font-family: Verdana, "游ゴシック", YuGothic, "ヒラギノ角ゴ ProN W3", "Hiragino Kaku Gothic ProN", "メイリオ", Meiryo, sans-serif;
+  font-size: 14px;
+  padding: 2px 4px;
+  border: none;
+  outline: none;
+}
+.tag-editor-measure {
+  position: absolute;
+  left: -999px;
+}
+#demo {
+  width: 200px;
+}
+</style>
+</head>
+
+<body>
+
+
+
+
+
+
+<div id="demo">
+  <div v-component="tag-editor-field" v-with="tagEditorOptions"></div>
+  <!--
+  <tag-editor-field v-with="tagEditorOptions"></tag-editor-field>
+  -->
+</div>
+
+<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/vue/0.9.3/vue.min.js"></script>
+<script src="/common/js/vue/vue_5_tag-editor.js"></script>
+<script src="/common/js/vue/vue_5_app.js"></script>
+
+<!-- Scripts -->
+
+
+
+
+</body>
+</html>

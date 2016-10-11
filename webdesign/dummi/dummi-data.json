@@ -1,0 +1,44 @@
+{
+  "dummi-data": [
+    {
+      "id": 0,
+      "fullName": "Louis Ingram",
+      "age": 12
+    },
+    {
+      "id": 1,
+      "fullName": "Rosetta Meyer",
+      "age": 11
+    },
+    {
+      "id": 2,
+      "fullName": "Nell Perry",
+      "age": 8
+    },
+    {
+      "id": 3,
+      "fullName": "Leon Copeland",
+      "age": 1
+    },
+    {
+      "id": 4,
+      "fullName": "Louise Marsh",
+      "age": 11
+    },
+    {
+      "id": 5,
+      "fullName": "Ella Carroll",
+      "age": 3
+    },
+    {
+      "id": 6,
+      "fullName": "Belle Mendoza",
+      "age": 9
+    },
+    {
+      "id": 7,
+      "fullName": "Belle Collins",
+      "age": 7
+    }
+  ]
+}

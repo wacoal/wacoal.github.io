@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<!--[if lt IE 9]>
+<script src="../common/js/html5shiv.js"></script>
+<![endif]-->
+<meta name="viewport" content="width=device-width, maximum-scale=1, minimum-scale=1, user-scalable=no" />
+<meta name="format-detection" content="telephone=no">
+
+<title>vue_1
+</title>
+<!--<link type="text/css" rel="stylesheet" href="common/css/common.css" media="screen" />-->
+<!--<link type="text/css" rel="stylesheet" href="/common/css/vue_1.css" media="screen" />-->
+<script type="text/javascript" src="/common/js/lib/vue.min.js"></script>
+<script type="text/javascript" src="/common/js/lib/vue-resource.js"></script>
+<script type="text/javascript" src="/common/js/jquery-2.1.3.min.js"></script>
+</head>
+
+<body>
+
+
+
+
+
+
+<div id="home">
+    <h1>My Todos</h1>
+    <hr>
+    <div v-repeat="t : events">
+        {{$index}}
+        <h2>{{t.title}}</h2>
+        <p>{{t.description}}</p>
+        <p>{{t.date}}</p>
+        <p>{{t.location}}</p>
+        <hr>
+    </div>
+    <div>
+        left {{lefts}} tasks.
+    </div>
+</div>
+
+<div id="images"></div>
+
+<script type="text/javascript">
+  var app = new Vue({
+    //select html element
+    el: '#home',
+    //init data
+    data: {
+      //ここに渡す必要があるか
+        events: [],
+        someData: [],
+        input: ""
+    },
+    //automatically value will be computed
+    computed: {
+        lefts: function(){
+            return this.events.filter(function(t){ return !t.isDone }).length;
+        }
+    },
+    //called when loaded
+    created: function(){
+        this.title = "My Todos";
+
+				$.getJSON("http://api.flickr.com/services/feeds/photos_public.gne?tags=cat&tagmode=any&format=json&jsoncallback=?",
+        function(data){
+          $.each(data.items, function(i,item){
+            $("<img/>").attr("src", item.media.m).appendTo("#images");
+            if ( i == 3 ) return false;
+          });
+        });
+        
+				/*
+        // GET request
+        var self = this
+          this.$http.get('/webdesign/dummi/dummi-data.json', function (id, fullName, age) {
+                for(var i = 0; i < data.length; i++){
+                    this.events.push(data[i]);
+                }
+            }).error(function (id, fullName, age) {
+                // handle error
+            })
+				*/
+    },
+    methods:{
+        //some methods
+    }
+  })
+</script>
+
+<!-- Scripts -->
+
+
+
+
+</body>
+</html>
