@@ -16,9 +16,9 @@ Vue.component('tag-editor-field', {
   props: ['modalData'],
   replace: true,
   template:
-    '<div id="{{id}}" class="tag-editor-field" v-on="click: onClick">' +
+    '<div id="{{id}}" class="tag-editor-field" v-on:click="onClick">' +
     '<div v-component="tag-editer-tag-measure"></div>' +
-    '<div v-for="tags" class="tag-editor-tag"><div class="tag-editor-text">{{$value}}</div><a class="tag-editor-delete" v-on="click: onClickDelete">x</a></div>' +
+    '<div v-for="tags" class="tag-editor-tag"><div class="tag-editor-text">{{$value}}</div><a class="tag-editor-delete" v-on:click="onClickDelete">x</a></div>' +
     '<input class="tag-editor-input" id="{{inputID}}" v-model="inputVal" v-on:blur="onBlur" v-on:keydown="mayDeleteLastTag | key 8" v-on:keyup="onKeyup"></input>' +
     '</div>',
   data: {

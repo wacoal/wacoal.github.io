@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<!--[if lt IE 9]>
+<script src="../common/js/html5shiv.js"></script>
+<![endif]-->
+<meta name="viewport" content="width=device-width, maximum-scale=1, minimum-scale=1, user-scalable=no" />
+<meta name="format-detection" content="telephone=no">
+
+<title>vue_1
+</title>
+<!--<link type="text/css" rel="stylesheet" href="common/css/common.css" media="screen" />-->
+<!--<link type="text/css" rel="stylesheet" href="/common/css/vue_1.css" media="screen" />-->
+
+<style>
+
+</style>
+</head>
+
+<body>
+
+
+
+
+
+
+<div id="app">
+    <pattern-component v-for="pattern in partterns" :pattern="pattern" track-by="$index"/>
+</div>
+
+<script type="text/javascript" src="/common/js/lib/vue/1.0.26/vue.min.js"></script>
+<script>
+    var patternComponent = Vue.extend({
+        data: function(){
+            return {
+                list: ["◯", "△", "×", "□"]
+            }
+        },
+        props: [ 'pattern' ],
+        methods: {
+            change: function(){
+                this.pattern++;
+                if(this.pattern >= this.list.length){
+                    this.pattern = 0;
+                }
+            },
+        },
+        computed: {
+            mark : function(){
+                return this.list[this.pattern];
+            },
+        },
+        template: '<li @click="change">{{mark}}</li>'
+    });
+
+    var app = new Vue({
+        el: '#app',
+        data: {
+            partterns: [ 0, 0, 0, 0 ]
+        },
+        components: {
+            'pattern-component': patternComponent
+        }
+    })
+</script>
+
+<!-- Scripts -->
+
+
+
+
+</body>
+</html>

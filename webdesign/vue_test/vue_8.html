@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<!--[if lt IE 9]>
+<script src="../common/js/html5shiv.js"></script>
+<![endif]-->
+<meta name="viewport" content="width=device-width, maximum-scale=1, minimum-scale=1, user-scalable=no" />
+<meta name="format-detection" content="telephone=no">
+
+<title>vue_1
+</title>
+<!--<link type="text/css" rel="stylesheet" href="common/css/common.css" media="screen" />-->
+<!--<link type="text/css" rel="stylesheet" href="/common/css/vue_1.css" media="screen" />-->
+
+<style>
+
+</style>
+</head>
+
+<body>
+
+
+
+
+
+
+<div id="app">
+    <color-component color="#aabbcc">
+    <div>
+        <p style="background-color:{{getBase('color')}}">baseData:{{getBase('color')}}</p>
+        <p style="background-color:{{color}}">currentData:{{color}}</p>
+        <p><input type=text v-model="color"></p>
+        changed: {{changed("color")}} <br>
+        <input type=button value="Reset" v-on:click="reset">
+        <input type=button value="Update"v-on:click="update()">
+    </div>
+    </color-component>
+</div>
+
+
+
+<script type="text/javascript" src="/common/js/lib/vue/1.0.26/vue.min.js"></script>
+<script language="javascript" src="/common/js/lib/vue-resettable.js"></script>
+
+<script type="x-template" id="color-component">
+    <div>
+        <p style="background-color:{{getBase('color')}}">baseData:{{getBase('color')}}</p>
+        <p style="background-color:{{color}}">currentData:{{color}}</p>
+        <p><input type=text v-model="color"></p>
+        changed: {{changed("color")}} <br>
+        <input type=button value="Reset" v-on:click="reset">
+        <input type=button value="Update"v-on:click="update()">
+    </div>
+</script>
+
+<script>
+    var colorComponent = Vue.extend({
+        props: ["color"],
+        template: "#color-component",
+        mixins: [resettable]
+    });
+
+    var app = new Vue({
+        el: '#app',
+        components:{
+            'color-component': colorComponent
+        }
+    })
+</script>
+
+<!-- Scripts -->
+
+
+
+
+</body>
+</html>
