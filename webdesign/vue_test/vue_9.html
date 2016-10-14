@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<!--[if lt IE 9]>
+<script src="../common/js/html5shiv.js"></script>
+<![endif]-->
+<meta name="viewport" content="width=device-width, maximum-scale=1, minimum-scale=1, user-scalable=no" />
+<meta name="format-detection" content="telephone=no">
+
+<title>vue_9
+</title>
+<!--<link type="text/css" rel="stylesheet" href="common/css/common.css" media="screen" />-->
+<!--<link type="text/css" rel="stylesheet" href="/common/css/vue_1.css" media="screen" />-->
+<style>
+
+</style>
+<script type="text/javascript" src="/common/js/jquery-2.1.3.min.js"></script>
+</head>
+
+<body>
+
+
+
+
+
+
+
+
+
+<div id="prof">
+  <input type="text" v-model="newEvent.name" name="name" @blur="onBlur" @keyup="onKeyup" size="40" data-maxlength="10" value="" placeholder="名前を入力してください" class="form-control__item js_input">
+</div>
+
+
+
+<div id="app">
+  <div is="pattern-component"></div>
+  <div is="text-test"></div>
+</div>
+
+
+  <!--
+
+
+  <div id="app">
+    <pattern-component v-for="pattern in partterns" :pattern="pattern" track-by="$index"/>
+  </div>
+
+
+  <div id="example">
+    <text-test></text-test>
+    <div is="text-test"></div>
+  </div>
+  -->
+
+<script src="/common/js/lib/vue/1.0.26/vue.min.js"></script>
+<script src="/common/js/vue/vue_9_definition.js"></script>
+<script src="/common/js/vue/vue_9_app.js"></script>
+
+<!-- Scripts -->
+
+
+
+
+</body>
+</html>
