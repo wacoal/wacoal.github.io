@@ -16,7 +16,7 @@ var textTest = Vue.extend({
 
 
 var profText64Component = Vue.extend({
-  data: {
+    data: {
       newEvent: {
         name: '',
       },
