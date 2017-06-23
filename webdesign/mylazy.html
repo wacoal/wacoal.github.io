@@ -89,12 +89,14 @@ $(function(){
 		}
 
 	});
+
+	const test="test"
+	alert(test sentry)
 });
 
 
 $(function(){
 	Raven.config('https://d70d7650a4924f15a607434943482f0a@sentry.io/182967').install()
-
 	try {
 	// エラー発生 
 	doSomething(a[0])
