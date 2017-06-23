@@ -15,7 +15,6 @@
 <link type="text/css" rel="stylesheet" href="/common/css/webdesign_mylazy.css" media="screen" />
 <script type="text/javascript" src="../common/js/zepto-2.1.min.js"></script>
 
-<script  src = "https://cdn.ravenjs.com/3.16.0/raven.min.js"  crossorigin = "anonymous"> </script>
 </head>
 
 <body>
@@ -89,36 +88,6 @@ $(function(){
 		}
 
 	});
-
-	$("#js_alert").on("click",function(){
-		a();
-	});
-});
-
-
-$(function(){
-	Raven.config('https://d70d7650a4924f15a607434943482f0a@sentry.io/182967').install()
-	// try {
-	// // エラー発生 
-	// doSomething(a[0])
-	// } catch(e) {
-	// // Sentryへ送信
-	// Raven.captureException(e)
-	// }
-
-
-	// 想定外のエラー捕捉
-	window.onerror = function(message, file, line, col, error){
-	Raven.captureException(error);
-	}
-
-	// Promise(bluebird)でcatchからもれたエラーをまとめて捕捉
-	// bluebirdは予め読み込んでおく
-	// bluebird以外のPromiseは頑張ってcatchする
-	// Promise.onPossiblyUnhandledRejection(function(error){
-	// 	throw error;
-	// });
-
 });
 </script>
 
