@@ -114,9 +114,9 @@ $(function(){
 	// Promise(bluebird)でcatchからもれたエラーをまとめて捕捉
 	// bluebirdは予め読み込んでおく
 	// bluebird以外のPromiseは頑張ってcatchする
-	Promise.onPossiblyUnhandledRejection(function(error){
-		throw error;
-	});
+	// Promise.onPossiblyUnhandledRejection(function(error){
+	// 	throw error;
+	// });
 
 });
 </script>
