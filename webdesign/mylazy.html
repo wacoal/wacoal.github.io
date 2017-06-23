@@ -14,6 +14,8 @@
 <!--<link type="text/css" rel="stylesheet" href="common/css/common.css" media="screen" />-->
 <link type="text/css" rel="stylesheet" href="/common/css/webdesign_mylazy.css" media="screen" />
 <script type="text/javascript" src="../common/js/zepto-2.1.min.js"></script>
+
+<script  src = "https://cdn.ravenjs.com/3.16.0/raven.min.js"  crossorigin = "anonymous"> </script>
 </head>
 
 <body>
@@ -89,6 +91,18 @@ $(function(){
 	});
 });
 
+
+$(function(){
+	Raven.config('https://d70d7650a4924f15a607434943482f0a@sentry.io/182967').install()
+
+	try {
+	// エラー発生 
+	doSomething(a[0])
+	} catch(e) {
+	// Sentryへ送信
+	Raven.captureException(e)
+	}
+});
 </script>
 
 <!-- Scripts -->
