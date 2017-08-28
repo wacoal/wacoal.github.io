@@ -18,10 +18,6 @@
 
 <body>
 
-
-
-
-
 <div id="js-load" class="main">
 	<ul class="lists">
 		<li class="lists__item js-load">11111</li>
@@ -79,16 +75,16 @@ $(window).on('load', function(){
 		})
 	});
 	function load(id,cnt,btn){
-		var girls_list   = id + " .js-load:not(.active)";
-		var girls_length = $(girls_list).length;
-		var girls_total_cnt;
-		if( cnt < girls_length ){
-			girls_total_cnt = cnt;
+		var items_list   = id + " .js-load:not(.active)";
+		var items_length = $(items_list).length;
+		var items_total_cnt;
+		if( cnt < items_length ){
+			items_total_cnt = cnt;
 		} else {
-			girls_total_cnt = girls_length;
+			items_total_cnt = items_length;
 			$(btn).hide();
 		}
-		$(girls_list + ":lt(" + girls_total_cnt +")").addClass("active");
+		$(items_list + ":lt(" + items_total_cnt +")").addClass("active");
 	}
 
 </script>
